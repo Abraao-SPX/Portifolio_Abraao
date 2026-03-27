@@ -5,7 +5,7 @@ window.portfolioData = {
     role: "Desenvolvedor Full Stack Pleno",
     summary: "Engenheiro de software focado em construir aplicações web escaláveis e de alta performance. Experiência na criação e manutenção de sistemas complexos, desde a concepção da arquitetura até o deploy em produção.",
     city: "Aracaju",
-    experience: "+3 anos de experiência",
+    experience: "+1 ano de experiência",
     specialty: "Java, SpringBoot, React, Python, Node.js, Git , Banco de dados e Arquitetura de Software",
     availability: "Aberto a propostas (CLT/PJ)",
     about: "Sou um desenvolvedor Full Stack com sólida vivência na criação de soluções tecnológicas robustas. Iniciei minha carreira desenvolvendo sistemas monolíticos e evoluí para arquiteturas baseadas em microsserviços. Minha paixão é otimizar processos, melhorar a performance de aplicações e garantir a qualidade do código através de boas práticas, testes e revisões criteriosas.",
