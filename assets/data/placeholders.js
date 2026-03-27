@@ -2,7 +2,7 @@ window.portfolioData = {
   profile: {
     initials: "AP",
     fullName: "Abraão Paixão",
-    role: "Desenvolvedor Full Stack Pleno",
+    role: "Desenvolvedor Full Stack",
     summary: "Engenheiro de software focado em construir aplicações web escaláveis e de alta performance. Experiência na criação e manutenção de sistemas complexos, desde a concepção da arquitetura até o deploy em produção.",
     city: "Aracaju",
     experience: "+1 ano de experiência",
