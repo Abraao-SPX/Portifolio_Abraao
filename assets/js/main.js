@@ -55,8 +55,6 @@
           (project) =>
             '<article class="project-card reveal">' +
             "<h3>" + project.title + "</h3>" +
-            "<p>" + project.description + "</p>" +
-            "<small><strong>Stack:</strong> " + project.stack + "</small>" +
             '<div class="project-links">' +
             '<a href="' + project.demoUrl + '" target="_blank" rel="noreferrer">Demo</a>' +
             '<a href="' + project.repoUrl + '" target="_blank" rel="noreferrer">Codigo</a>' +
@@ -121,6 +119,10 @@
           menuToggle.setAttribute("aria-expanded", "false");
         });
       });
+    }
+
+    if (window.portfolioAnimations && typeof window.portfolioAnimations.refresh === "function") {
+      window.portfolioAnimations.refresh();
     }
 
     console.log("✓ Portfolio inicializado com sucesso!");

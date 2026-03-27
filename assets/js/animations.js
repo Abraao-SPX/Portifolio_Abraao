@@ -22,8 +22,18 @@
     }
   );
 
-  animatedElements.forEach(function (element) {
-    observer.observe(element);
-  });
-})();
+  function observeElements() {
+    const newElements = document.querySelectorAll(".reveal:not(.in-view), .reveal-delay:not(.in-view)");
+    newElements.forEach(function (element) {
+      observer.observe(element);
+    });
+  }
 
+  // Observe immediately for static elements
+  observeElements();
+
+  // Export so dynamically created items can be observed
+  window.portfolioAnimations = {
+    refresh: observeElements
+  };
+})();

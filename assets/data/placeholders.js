@@ -1,55 +1,58 @@
 window.portfolioData = {
   profile: {
-    initials: "AP", // SUBSTITUA pelas iniciais do seu nome
-    fullName: "Abraão Paixão", // SUBSTITUA pelo seu nome
-    role: "Desenvolvedor Full Stack", // SUBSTITUA pelo seu cargo principal
-    summary: "Escreva aqui um resumo forte sobre voce, sua especialidade e o tipo de problema que resolve.",
+    initials: "AP",
+    fullName: "Abraão Paixão",
+    role: "Desenvolvedor Full Stack Pleno",
+    summary: "Engenheiro de software focado em construir aplicações web escaláveis e de alta performance. Experiência na criação e manutenção de sistemas complexos, desde a concepção da arquitetura até o deploy em produção.",
     city: "Aracaju",
-    experience: "Buscando minha primeira oportunidade como Desenvolvedor",
-    specialty: "Tecnologia principal",
-    availability: "Freelance e CLT",
-    about: "Coloque aqui sua historia: como voce comecou, quais problemas gosta de resolver e qual impacto voce gera.",
-    contactPitch: "Aceito trabalhos variados.",
-    email: "abraao.aspx@hotmail.com", // Email real para receber contatos do formulario
+    experience: "+3 anos de experiência",
+    specialty: "Java, SpringBoot, React, Python, Node.js, Git , Banco de dados e Arquitetura de Software",
+    availability: "Aberto a propostas (CLT/PJ)",
+    about: "Sou um desenvolvedor Full Stack com sólida vivência na criação de soluções tecnológicas robustas. Iniciei minha carreira desenvolvendo sistemas monolíticos e evoluí para arquiteturas baseadas em microsserviços. Minha paixão é otimizar processos, melhorar a performance de aplicações e garantir a qualidade do código através de boas práticas, testes e revisões criteriosas.",
+    contactPitch: "Procuro desafios técnicos que exijam soluções inovadoras e escaláveis. Estou disponível para colaborar na evolução de produtos digitais ou liderar frentes técnicas em novos projetos.",
+    email: "abraao.aspx@hotmail.com",
     location: "Aracaju - Sergipe, Brasil"
   },
   socialLinks: [
     { label: "LinkedIn", url: "https://www.linkedin.com/in/abraaospx/" },
     { label: "GitHub", url: "https://github.com/Abraao-SPX" },
-    { label: "Curriculo", url: "#" }
+    { label: "Currículo", url: "#" }
   ],
   projects: [
     {
-      title: "Projeto 1 - Sistema Web",
-      description: "Descreva o problema resolvido, stack usada e resultado de negocio em ate 3 linhas.",
-      stack: "HTML, CSS, JavaScript",
-      demoUrl: "df bdfb df",
-      repoUrl: "dfb dfb df df f"
-    },
-    {
-      title: "Projeto 2 - API",
-      description: "Mostre sua capacidade tecnica e impacto gerado com dados reais quando possivel.",
-      stack: "Node.js, SQL",
+      title: "(Lembre de colocar os projetos)",
+      description: "",
+      stack: "",
       demoUrl: "#",
       repoUrl: "#"
     },
     {
-      title: "Projeto 3 - App",
-      description: "Explique seu diferencial no projeto e o que voce aprendeu durante a entrega.",
-      stack: "React Native",
+      title: "(Lembre de colocar os projetos)",
+      description: "",
+      stack: "",
+      demoUrl: "#",
+      repoUrl: "#"
+    },
+    {
+      title: "(Lembre de colocar os projetos)",
+      description: "",
+      stack: "",
       demoUrl: "#",
       repoUrl: "#"
     }
   ],
   skills: [
-    "JavaScript",
-    "TypeScript",
-    "HTML5",
-    "CSS3",
-    "Node.js",
+    "Java",
+    "Spring Boot",
     "React",
-    "Git",
-    "SQL"
+    "Python",
+    "Node.js",
+    "TypeScript",
+    "SQL (PostgreSQL/MySQL)",
+    "NoSQL (MongoDB)",
+    "Docker",
+    "Git & CI/CD",
+    "Arquitetura de Software",
+    "Microsserviços"
   ]
 };
-
