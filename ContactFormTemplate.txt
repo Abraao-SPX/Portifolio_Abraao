@@ -1,0 +1,5 @@
+Nome: {{from_name}}
+Email: {{from_email}}
+
+Mensagem:
+{{message}}
