@@ -1,0 +1,17 @@
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: abraao_portfolio_dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # Espelha a pasta local no container (hot reload)
+      - .:/app
+      # Protege os modulos criados dentro do container no processo do linux da interferência do host Windows
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+
