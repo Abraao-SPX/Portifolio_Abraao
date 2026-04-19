@@ -27,7 +27,7 @@ export default function Navbar() {
         <div className={`max-w-7xl mx-auto flex justify-between items-center ${scrolled ? 'px-6 md:px-12' : ''}`}>
           {/* Logo Name */}
           <div className="text-xl font-display font-bold tracking-tight text-white cursor-pointer" onClick={() => window.scrollTo(0,0)}>
-            {siteConfig.personal.name}.
+            {siteConfig.personal.name}
           </div>
 
           {/* Desktop Nav */}
