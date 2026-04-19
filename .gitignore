@@ -1,0 +1,19 @@
+# Dependências
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Variáveis de ambiente sensíveis
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDEs e OS
+.idea/
+.DS_Store
+*.pem
+
