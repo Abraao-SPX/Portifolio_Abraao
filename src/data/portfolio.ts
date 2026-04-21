@@ -7,15 +7,15 @@
 
 export const siteConfig = {
   // SEO e Metadados do site
-  siteName: "Abraão | Desenvolvedor & Designer",
-  siteDescription: "Portfólio de engenharia e design de Abraão.",
+  siteName: "Abraão | Desenvolvedor Back-End",
+  siteDescription: "Portfólio de engenharia e backend de Abraão.",
 
   // Informações Pessoais
   personal: {
     name: "Abraão",
     surname: "Silva", // Sobrenome opcional pra display tipográfico
-    role: "Engenheiro Frontend & UI Designer",
-    shortBio: "Desenvolvedor especializado em intersecções impecáveis entre código eficiente e estética de alta performance.",
+    role: "Desenvolvedor Back-End",
+    shortBio: "Desenvolvedor especializado em arquitetura robusta e construção de sistemas escaláveis de alta performance.",
     email: "contato@abraao.dev", // Troque para o seu
     socials: {
       github: "https://github.com/Abraao", // Seu github
@@ -26,48 +26,48 @@ export const siteConfig = {
 
   // Conteúdo da Hero Section
   hero: {
-    badge: "Criador de experiências visuais e digitais",
+    badge: "Criador de arquiteturas e sistemas escaláveis",
     heading1: "Construindo o",
-    heading2: "futuro interativo.",
-    paragraph: "Focado em tipografia marcante, transições suaves e engenharia escalável. Do design de interface à arquitetura de React complexa, criando identidades memoráveis.",
+    heading2: "futuro no back-end.",
+    paragraph: "Focado em código limpo, arquitetura escalável e sistemas resilientes. Da modelagem de banco de dados à entrega de APIs complexas, criando soluções robustas e de alto nível.",
   },
 
   // Conteúdo da Seção Sobre
   about: {
-    title: "O código limpo é inútil se a experiência for fria.",
+    title: "A beleza está em uma arquitetura limpa e performática.",
     paragraphs: [
-      "Eu crio produtos digitais que prezam tanto pela eficiência da engenharia de software quanto pela beleza do design. Cada detalhe importa: da curva de uma animação CSS à refatoração limpa de um Hook em React.",
-      "Com anos de foco em usabilidade e performance, abandonei as abordagens genéricas e superficiais para entregar interfaces com verdadeira personalidade. Onde o minimalismo não é ausência de conteúdo, mas a perfeita harmonia entre presença, tipografia e os espaços vazios.",
+      "Eu crio sistemas e infraestruturas que prezam pela máxima eficiência e segurança no servidor. Cada detalhe importa: de uma query otimizada em banco de dados a uma estrutura de microsserviços sólida.",
+      "Com foco em escalabilidade e estabilidade, abandonei as abordagens genéricas para entregar back-ends que suportam milhares de requisições de forma resiliente, limpa e estruturada.",
     ],
-    highlights: ["Especialista em React/Next.js", "Fluência em Framer Motion & GSAP", "Design de Componentes UI", "Foco em Performance & LCP"]
+    highlights: ["Especialista em Node.js/APIs REST", "Arquitetura de Banco de Dados", "Microsserviços & Cloud", "Foco em Performance & Escalabilidade"]
   },
 
   // Meus Trabalhos / Projetos
   projects: [
     {
       id: "01",
-      category: "E-Commerce",
-      title: "Aura Premium",
-      description: "Plataforma de luxo com arquitetura de navegação minimalista e checkout sem atritos.",
-      techs: ["Next.js", "Tailwind CSS", "Framer Motion"],
+      category: "Sistema de Pagamentos",
+      title: "PayGateway",
+      description: "Gateway de pagamentos com arquitetura de microsserviços, garantindo disponibilidade de 99.9% e processamento assíncrono.",
+      techs: ["Node.js", "RabbitMQ", "PostgreSQL"],
       demoLink: "https://seulink.demo",
       repoLink: "https://github.com/seuRepo",
     },
     {
       id: "02",
       category: "SaaS / FinTech",
-      title: "Vault Finance",
-      description: "Dashboard inovador para gestão de patrimônio. Complexidade de dados operacionais condensados em gráficos elegantes e navegação intuitiva.",
-      techs: ["React", "TypeScript", "D3.js", "Zustand"],
+      title: "Vault Finance API",
+      description: "API robusta para gestão de patrimônio. Complexidade de dados operacionais condensados em endpoints rápidos e seguros.",
+      techs: ["NestJS", "TypeScript", "Redis", "Docker"],
       demoLink: "https://seulink.demo",
       repoLink: "https://github.com/seuRepo",
     },
     {
       id: "03",
-      category: "Institucional",
-      title: "Lumina Studio",
-      description: "Página de conversão de alta performance desenhada com conceito de grid rigoroso e WebGL interativo.",
-      techs: ["Next.js", "Three.js", "GSAP"],
+      category: "Arquitetura de Dados",
+      title: "Data Core",
+      description: "Sistema de processamento de alto volume construído para lidar com milhares de workers simultâneos consumindo filas.",
+      techs: ["Golang", "Kafka", "AWS"],
       demoLink: "https://seulink.demo",
       repoLink: "https://github.com/seuRepo",
     }
@@ -75,25 +75,25 @@ export const siteConfig = {
 
   // Ferramentas e Habilidades
   skills: [
-    { category: "Core", items: ["JavaScript (ES6+)", "TypeScript", "HTML5 & CSS3"] },
-    { category: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Zustand"] },
-    { category: "Motion & UI", items: ["Framer Motion", "GSAP", "Figma", "Shadcn/UI"] },
-    { category: "Backend & Ferramentas", items: ["Node.js", "Git", "Docker", "Vercel"] },
+    { category: "Linguagens", items: ["Node.js", "TypeScript", "Python", "Java"] },
+    { category: "Bancos de Dados", items: ["PostgreSQL", "MongoDB", "Redis", "MySQL"] },
+    { category: "Arquitetura", items: ["APIs REST", "GraphQL", "Microsserviços", "Mensageria (RabbitMQ/Kafka)"] },
+    { category: "DevOps & Cloud", items: ["Docker", "AWS", "Git", "CI/CD"] },
   ],
 
   // Experiência / Trajetória
   experiences: [
     {
       period: "2024 - Presente",
-      role: "Engenheiro Frontend Sênior",
+      role: "Engenheiro Back-End Sênior",
       company: "Tech Premium Solutions", // Opcional
-      description: "Liderando a arquitetura Frontend para aplicações de grande escala, reduzindo o tempo de carregamento em 40% e refinando as microinterações globais em Tailwind e Framer Motion."
+      description: "Liderando a arquitetura Back-End para aplicações de grande escala, reduzindo o tempo de resposta em 40% e refinando as conexões de banco de dados."
     },
     {
       period: "2021 - 2024",
-      role: "UI Designer & Fullstack Dev",
+      role: "Desenvolvedor Back-End Pleno",
       company: "Agência Lumina", // Opcional
-      description: "Criação colaborativa de experiências inteiras do zero no Figma com entrega de código pronto rodando em Next.js para clientes de luxo internacionais."
+      description: "Construção de APIs Restful e arquitetura inteira do zero com entrega de código pronto rodando em microsserviços para clientes internacionais."
     },
   ],
 
@@ -103,4 +103,3 @@ export const siteConfig = {
     note: "Desenvolvido artesanalmente com rigor e disciplina.",
   }
 };
-

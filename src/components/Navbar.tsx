@@ -99,8 +99,8 @@ export default function Navbar() {
                   className="absolute bottom-1/4 left-[-20%] w-[250px] h-[250px] bg-white/10 rounded-full blur-[80px]"
                 />
 
-                {/* Noise (Granulação) Estético Típico de Design Premium */}
-                <div className="absolute inset-0 opacity-[0.06] bg-noisy mix-blend-overlay"></div>
+                {/* Noise (Granulação) Estético Típico de Arquitetura Premium */}
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url('/noise.png')" }}></div>
               </div>
 
               <button
