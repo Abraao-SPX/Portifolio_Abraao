@@ -16,7 +16,7 @@ export default function Experience() {
            viewport={{ once: true, margin: "-100px" }}
            className="mb-20 text-center"
         >
-          <h2 className="font-display text-5xl md:text-6xl font-semibold tracking-tighter">Trajetória Real.</h2>
+          <h2 className="font-display text-5xl md:text-6xl font-semibold tracking-tighter">Minha Jornada.</h2>
         </motion.div>
 
         <div className="space-y-16 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-[1px] before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent">

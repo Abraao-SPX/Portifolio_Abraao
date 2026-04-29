@@ -16,11 +16,10 @@ export const siteConfig = {
     surname: "Silva", // Sobrenome opcional pra display tipográfico
     role: "Desenvolvedor Back-End",
     shortBio: "Desenvolvedor especializado em arquitetura robusta e construção de sistemas escaláveis de alta performance.",
-    email: "contato@abraao.dev", // Troque para o seu
+    email: "abraao.aspx@hotmail.com", // Troque para o seu
     socials: {
-      github: "https://github.com/Abraao", // Seu github
-      linkedin: "https://linkedin.com/in/abraao", // Seu linkedin
-      twitter: "https://twitter.com/abraao",
+      github: "https://github.com/Abraao-SPX", // Seu github
+      linkedin: "https://linkedin.com/in/abraaospx", // Seu linkedin
     },
   },
 
@@ -81,19 +80,19 @@ export const siteConfig = {
     { category: "DevOps & Cloud", items: ["Docker", "AWS", "Git", "CI/CD"] },
   ],
 
-  // Experiência / Trajetória
+  // Experiência / Trajetória (Busca da 1ª Oportunidade)
   experiences: [
     {
-      period: "2024 - Presente",
-      role: "Engenheiro Back-End Sênior",
-      company: "Tech Premium Solutions", // Opcional
-      description: "Liderando a arquitetura Back-End para aplicações de grande escala, reduzindo o tempo de resposta em 40% e refinando as conexões de banco de dados."
+      period: "Momento Atual",
+      role: "Em Aberto para Primeira Oportunidade",
+      company: "Disponível para o Mercado",
+      description: "Focado em aplicar meus conhecimentos teóricos em desafios reais. Construindo uma base sólida através de projetos práticos, estudos aprofundados e paixão por resolver problemas complexos no back-end."
     },
     {
-      period: "2021 - 2024",
-      role: "Desenvolvedor Back-End Pleno",
-      company: "Agência Lumina", // Opcional
-      description: "Construção de APIs Restful e arquitetura inteira do zero com entrega de código pronto rodando em microsserviços para clientes internacionais."
+      period: "Jornada de Aprendizado",
+      role: "Desenvolvedor Back-End em Formação",
+      company: "Projetos Pessoais & Estudos",
+      description: "Dedicando-me diariamente à criação de APIs, modelagem de dados e arquitetura limpa. Motivado, proativo e pronto para agregar valor imediato e crescer junto com uma equipe experiente."
     },
   ],
 

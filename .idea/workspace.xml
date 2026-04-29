@@ -8,11 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2e5f6eb-c45d-439f-877e-c2009d9ac40a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DynamicFavicon.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Experience.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Experience.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/portfolio.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/portfolio.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,6 +96,7 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "com.github.copilot.settings.customization.CustomizationConfigurable",
     "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Users\\abraa\\OneDrive\\Documentos\\GitHub\\Portifolio_Abraao\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -153,6 +151,7 @@
       <workItem from="1776567000655" duration="147000" />
       <workItem from="1776567167552" duration="2898000" />
       <workItem from="1776733274461" duration="787000" />
+      <workItem from="1777431864894" duration="1087000" />
     </task>
     <servers />
   </component>
