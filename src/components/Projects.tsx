@@ -37,10 +37,23 @@ export default function Projects() {
                 {/* Image Section */}
                 <div className={`lg:col-span-7 bg-surface rounded-2xl aspect-[4/3] md:aspect-video overflow-hidden ${isReverse ? 'lg:order-2' : ''}`}>
                   <div className="w-full h-full bg-zinc-900 transition-transform duration-[1.2s] group-hover:scale-[1.03] flex items-center justify-center relative">
-                    <div className="absolute inset-0 opacity-10 bg-noisy mix-blend-overlay"></div>
-                    <div className="absolute inset-x-0 h-[1px] bg-white/5 top-1/2"></div>
-                    <div className="absolute inset-y-0 w-[1px] bg-white/5 left-1/2"></div>
-                    <div className="text-zinc-700 font-display text-2xl z-10 font-bold select-none">{project.title} Preview</div>
+                    <div className="absolute inset-0 opacity-10 bg-noisy mix-blend-overlay z-10"></div>
+
+                    {/* Se tiver imagem, mostra a imagem. Senão, mostra o placeholder. */}
+                    {project.image ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover z-0 relative"
+                      />
+                    ) : (
+                      <>
+                        <div className="absolute inset-x-0 h-[1px] bg-white/5 top-1/2"></div>
+                        <div className="absolute inset-y-0 w-[1px] bg-white/5 left-1/2"></div>
+                        <div className="text-zinc-700 font-display text-2xl z-10 font-bold select-none">{project.title} Preview</div>
+                      </>
+                    )}
                   </div>
                 </div>
 

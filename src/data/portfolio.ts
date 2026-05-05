@@ -45,30 +45,33 @@ export const siteConfig = {
   projects: [
     {
       id: "01",
-      category: "Sistema de Pagamentos",
-      title: "PayGateway",
-      description: "Gateway de pagamentos com arquitetura de microsserviços, garantindo disponibilidade de 99.9% e processamento assíncrono.",
-      techs: ["Node.js", "RabbitMQ", "PostgreSQL"],
-      demoLink: "https://seulink.demo",
-      repoLink: "https://github.com/seuRepo",
+      category: "APIs REST e Gerenciamento",
+      title: "Sistema de Gerenciamento de Tarefas Kanban",
+      description: "Backend para gerenciamento de tarefas inspirado na metodologia Kanban. Permite a organização de fluxos de trabalho, criação de cards e controle de status de atividades de forma eficiente.",
+      techs: ["Java", "Spring Boot", "PostgreSQL"], // Você pode alterar as tecnologias aqui se forem outras
+      demoLink: "",
+      repoLink: "https://github.com/Abraao-SPX/Sistema-de-Gerenciamento-de-Tarefas-Kanban",
+      image: "", // Adicione o caminho da sua imagem aqui, ex: "/projeto-1.png"
     },
     {
       id: "02",
-      category: "SaaS / FinTech",
-      title: "Vault Finance API",
-      description: "API robusta para gestão de patrimônio. Complexidade de dados operacionais condensados em endpoints rápidos e seguros.",
-      techs: ["NestJS", "TypeScript", "Redis", "Docker"],
+      category: "Mensageria e Arquitetura Orientada a Eventos",
+      title: "Transaction Event Processor",
+      description: "Serviço de processamento de transações em tempo real. Utilização do Apache Kafka para ingestão de eventos e CQRS para segregação de comandos e consultas mantendo consistência eventual.",
+      techs: ["Java", "Spring Kafka", "Redis", "MongoDB"],
       demoLink: "https://seulink.demo",
-      repoLink: "https://github.com/seuRepo",
+      repoLink: "https://github.com/Abraao-SPX/Transaction-Event-Processor",
+      image: "", // Adicione o caminho da sua imagem aqui, ex: "/projeto-transaction.png"
     },
     {
       id: "03",
-      category: "Arquitetura de Dados",
-      title: "Data Core",
-      description: "Sistema de processamento de alto volume construído para lidar com milhares de workers simultâneos consumindo filas.",
-      techs: ["Golang", "Kafka", "AWS"],
+      category: "Segurança e Desempenho",
+      title: "OAuth2 Identity Provider",
+      description: "Servidor de autorização customizado com Spring Security. Gerenciamento seguro de acesso granular (RBAC), emissão e revogação de tokens JWT em uma arquitetura stateless altamente testável.",
+      techs: ["Java", "Spring Security", "PostgreSQL", "JUnit 5"],
       demoLink: "https://seulink.demo",
       repoLink: "https://github.com/seuRepo",
+      image: "", // Adicione o caminho da sua imagem aqui
     }
   ],
 
