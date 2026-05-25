@@ -4,43 +4,96 @@ import { siteConfig } from "@/data/portfolio";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
+const navLinks = [
+  { href: "#sobre", label: "Sobre" },
+  { href: "#projetos", label: "Projetos" },
+  { href: "#habilidades", label: "Skills" },
+  { href: "#experiencia", label: "Experiência" },
+];
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  
+  const [scrollProgress, setScrollProgress] = useState(0);
+
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrolled(scrollTop > 50);
+      setScrollProgress(docHeight > 0 ? scrollTop / docHeight : 0);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-      <motion.nav 
-        initial={{ y: -100 }} 
-        animate={{ y: 0 }} 
+      {/* Scroll progress */}
+      <div
+        className="fixed top-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent z-[100] transition-all duration-100"
+        style={{ width: `${scrollProgress * 100}%` }}
+      />
+
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'py-4 bg-background/80 backdrop-blur-md border-b border-white/5' : 'py-6 px-6 md:px-12 mix-blend-difference'}`}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+          scrolled
+            ? "py-3 bg-background/85 backdrop-blur-md border-b border-white/[0.06]"
+            : "py-6"
+        }`}
       >
-        <div className={`max-w-7xl mx-auto flex justify-between items-center ${scrolled ? 'px-6 md:px-12' : ''}`}>
-          {/* Logo Name */}
-          <div className="text-xl font-display font-bold tracking-tight text-white cursor-pointer" onClick={() => window.scrollTo(0,0)}>
-            {siteConfig.personal.name}
-          </div>
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-6 md:px-12">
+
+          {/* Logo */}
+          <motion.div
+            className="flex items-center gap-3 cursor-pointer group"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <div className="text-lg font-display font-bold tracking-tight text-white group-hover:text-zinc-200 transition-colors">
+              {siteConfig.personal.name}
+            </div>
+            {/* Availability dot */}
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot block" />
+              <span className="text-[10px] text-emerald-400 font-medium tracking-wide">Disponível</span>
+            </div>
+          </motion.div>
 
           {/* Desktop Nav */}
-          <ul className="hidden md:flex gap-10 text-sm font-medium text-white">
-            <li><a href="#sobre" className="hover:text-secondary hover:-translate-y-0.5 inline-block transition-all">Sobre</a></li>
-            <li><a href="#projetos" className="hover:text-secondary hover:-translate-y-0.5 inline-block transition-all">Projetos</a></li>
-            <li><a href="#experiencia" className="hover:text-secondary hover:-translate-y-0.5 inline-block transition-all">Experiência</a></li>
-            <li><a href="#contato" className="hover:text-secondary hover:-translate-y-0.5 inline-block transition-all">Contato</a></li>
+          <ul className="hidden md:flex gap-8 text-sm font-medium text-secondary">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="hover:text-white transition-colors relative group py-1"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full" />
+                </a>
+              </li>
+            ))}
           </ul>
 
-          {/* Mobile Hamburguer */}
-          <button className="md:hidden text-white" onClick={() => setMenuOpen(true)}>
-            <Menu />
+          {/* CTA */}
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href="#contato"
+              className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-zinc-100 transition-colors"
+            >
+              Contato
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Abrir menu"
+          >
+            <Menu size={20} />
           </button>
         </div>
       </motion.nav>
@@ -49,66 +102,38 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <div className="fixed inset-0 z-[60] flex justify-end">
-            {/* Fundo Escuro com Blur clicável para fechar o menu */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
               onClick={() => setMenuOpen(false)}
             />
 
-            {/* Painel Lateral do Menu (Apenas parte da tela) */}
-            <motion.div 
-              initial={{ x: '100%' }}
+            <motion.div
+              initial={{ x: "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-[60%] max-w-[280px] h-full bg-surface/95 backdrop-blur-xl border-l border-white/10 text-white flex flex-col pt-24 items-start overflow-hidden shadow-2xl shadow-black"
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 220 }}
+              className="relative w-[65%] max-w-[300px] h-full bg-[#0d0d0d] border-l border-white/8 text-white flex flex-col pt-20 overflow-hidden"
             >
-              {/* Fundo Animado do Menu */}
-              <div className="absolute inset-0 pointer-events-none -z-10 bg-surface">
-                {/* Textura de Grid Holográfica Animada */}
-                <motion.div 
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.2 }}
-                  className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_10%,#000_40%,transparent_100%)]"
-                />
-                
-                {/* Esferas de Luz Flutuantes Altamente Visíveis */}
-                <motion.div
-                  animate={{
-                    y: [0, 50, 0],
-                    x: [0, -40, 0],
-                    scale: [1, 1.5, 1],
-                    opacity: [0.15, 0.45, 0.15]
-                  }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute top-0 right-[-10%] w-[200px] h-[200px] bg-white/20 rounded-full blur-[70px]"
-                />
-                <motion.div
-                  animate={{
-                    y: [0, -40, 0],
-                    x: [0, 40, 0],
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.3, 0.1]
-                  }}
-                  transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute bottom-1/4 left-[-20%] w-[250px] h-[250px] bg-white/10 rounded-full blur-[80px]"
-                />
+              {/* Grid bg */}
+              <div className="absolute inset-0 bg-grid-pattern opacity-100 pointer-events-none" />
 
-                {/* Noise (Granulação) Estético Típico de Arquitetura Premium */}
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url('/noise.png')" }}></div>
-              </div>
-
+              {/* Close button */}
               <button
-                className="absolute top-6 right-6 p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors group"
+                className="absolute top-5 right-5 p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
-                <X size={20} className="group-hover:rotate-90 transition-transform duration-300 text-white/70 hover:text-white" />
+                <X size={18} className="text-white/70" />
               </button>
+
+              {/* Availability */}
+              <div className="px-6 mb-8 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot block" />
+                <span className="text-xs text-emerald-400 font-medium">Disponível para projetos</span>
+              </div>
 
               <motion.ul
                 initial="hidden"
@@ -116,24 +141,35 @@ export default function Navbar() {
                 exit="hidden"
                 variants={{
                   hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: { staggerChildren: 0.08, delayChildren: 0.1 }
-                  }
+                  visible: { opacity: 1, transition: { staggerChildren: 0.07, delayChildren: 0.05 } }
                 }}
-                className="flex flex-col gap-2 w-full px-6 text-lg font-medium text-left"
+                className="flex flex-col px-4 relative z-10"
               >
-                <motion.li variants={{ hidden: { x: 20, opacity: 0 }, visible: { x: 0, opacity: 1 } }}>
-                  <a href="#sobre" className="block w-full py-2.5 px-4 rounded-lg hover:bg-white/10 border border-transparent transition-all duration-300 text-zinc-300 hover:text-white" onClick={() => setMenuOpen(false)}>Sobre</a>
-                </motion.li>
-                <motion.li variants={{ hidden: { x: 20, opacity: 0 }, visible: { x: 0, opacity: 1 } }}>
-                  <a href="#projetos" className="block w-full py-2.5 px-4 rounded-lg hover:bg-white/10 border border-transparent transition-all duration-300 text-zinc-300 hover:text-white" onClick={() => setMenuOpen(false)}>Projetos</a>
-                </motion.li>
-                <motion.li variants={{ hidden: { x: 20, opacity: 0 }, visible: { x: 0, opacity: 1 } }}>
-                  <a href="#experiencia" className="block w-full py-2.5 px-4 rounded-lg hover:bg-white/10 border border-transparent transition-all duration-300 text-zinc-300 hover:text-white" onClick={() => setMenuOpen(false)}>Experiência</a>
-                </motion.li>
-                <motion.li variants={{ hidden: { x: 20, opacity: 0 }, visible: { x: 0, opacity: 1 } }}>
-                  <a href="#contato" className="block w-full py-2.5 px-4 rounded-lg hover:bg-white/10 border border-transparent transition-all duration-300 text-zinc-300 hover:text-white" onClick={() => setMenuOpen(false)}>Contato</a>
+                {navLinks.map((link) => (
+                  <motion.li
+                    key={link.href}
+                    variants={{ hidden: { x: 20, opacity: 0 }, visible: { x: 0, opacity: 1 } }}
+                  >
+                    <a
+                      href={link.href}
+                      className="block w-full py-3 px-4 rounded-xl hover:bg-white/6 text-zinc-300 hover:text-white transition-all text-base font-medium"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {link.label}
+                    </a>
+                  </motion.li>
+                ))}
+                <motion.li
+                  variants={{ hidden: { x: 20, opacity: 0 }, visible: { x: 0, opacity: 1 } }}
+                  className="mt-6 px-4"
+                >
+                  <a
+                    href="#contato"
+                    className="block w-full py-3 px-6 bg-white text-black rounded-full font-semibold text-sm text-center hover:bg-zinc-100 transition-colors"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Contato
+                  </a>
                 </motion.li>
               </motion.ul>
             </motion.div>
