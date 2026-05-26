@@ -1,4 +1,16 @@
 User-agent: *
 Allow: /
+Disallow: /.env
+Disallow: /.git/
+Disallow: /.vscode/
+Disallow: /.DS_Store
+Disallow: /@fs/
+Disallow: /api/swagger.json
+Disallow: /api/swagger/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /phpinfo.php
+Disallow: /admin/
+Disallow: /config/
 
-Sitemap: https://abraao_dev/sitemap.xml
+Sitemap: https://abraao_dev.tech/sitemap.xml

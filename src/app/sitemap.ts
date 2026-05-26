@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://abraao_dev.tech',
+      url: 'https://abraao-dev.tech',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
