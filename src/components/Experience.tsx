@@ -11,9 +11,41 @@ export default function Experience() {
   return (
     <section id="experiencia" className="py-32 px-6 md:px-12 lg:px-20 border-t border-white/[0.06] relative overflow-hidden">
 
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-violet-400/[0.025] blur-[130px] rounded-full pointer-events-none" />
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        <motion.div
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-violet-500/[0.05] blur-[120px] rounded-full"
+          animate={{ x: [0, -30, 15, 0], y: [0, 20, -12, 0], scale: [1, 1.07, 0.93, 1] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute left-[5%] top-[15%] w-[380px] h-[380px] bg-cyan-500/[0.04] blur-[110px] rounded-full"
+          animate={{ x: [0, 22, -12, 0], y: [0, -18, 10, 0], scale: [1, 0.93, 1.06, 1] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {[
+          { left: "5%",  top: "12%", delay: 0.4, color: "bg-cyan-400/20" },
+          { left: "88%", top: "18%", delay: 1.6, color: "bg-violet-400/20" },
+          { left: "92%", top: "60%", delay: 0.8, color: "bg-violet-400/15" },
+          { left: "8%",  top: "72%", delay: 2.2, color: "bg-cyan-400/15" },
+          { left: "48%", top: "88%", delay: 0.2, color: "bg-violet-400/20" },
+        ].map((dot, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-1 h-1 rounded-full ${dot.color}`}
+            style={{ left: dot.left, top: dot.top }}
+            animate={{ opacity: [0.1, 0.6, 0.1], scale: [1, 1.8, 1] }}
+            transition={{ duration: 3.5, repeat: Infinity, delay: dot.delay, ease: "easeInOut" }}
+          />
+        ))}
+        <motion.div
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-400/10 to-transparent"
+          animate={{ y: ["-10%", "110%"] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "linear", repeatDelay: 8 }}
+        />
+      </div>
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto relative z-10">
 
         {/* Header */}
         <motion.div

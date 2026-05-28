@@ -112,9 +112,44 @@ export default function Hero() {
     <section className="min-h-screen w-full flex items-center px-6 md:px-12 lg:px-20 relative pt-24 pb-16 overflow-hidden">
 
       {/* Background */}
-      <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-cyan-400/[0.03] blur-[160px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/5 w-[400px] h-[400px] bg-violet-400/[0.03] blur-[130px] rounded-full pointer-events-none" />
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        <motion.div
+          className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-cyan-500/[0.05] blur-[140px] rounded-full"
+          animate={{ x: [0, 40, -20, 0], y: [0, -30, 18, 0], scale: [1, 1.08, 0.93, 1] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 left-[8%] w-[450px] h-[450px] bg-violet-500/[0.05] blur-[120px] rounded-full"
+          animate={{ x: [0, -30, 15, 0], y: [0, 25, -12, 0], scale: [1, 0.92, 1.07, 1] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-[10%] left-1/3 w-[300px] h-[300px] bg-emerald-500/[0.03] blur-[100px] rounded-full"
+          animate={{ x: [0, 20, -10, 0], y: [0, -15, 8, 0], scale: [1, 1.05, 0.96, 1] }}
+          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {[
+          { left: "8%",  top: "20%", delay: 0,   color: "bg-cyan-400/20" },
+          { left: "75%", top: "15%", delay: 1.2, color: "bg-violet-400/20" },
+          { left: "85%", top: "60%", delay: 0.5, color: "bg-cyan-400/15" },
+          { left: "20%", top: "78%", delay: 1.9, color: "bg-emerald-400/20" },
+          { left: "50%", top: "85%", delay: 0.8, color: "bg-violet-400/15" },
+        ].map((dot, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-1 h-1 rounded-full ${dot.color}`}
+            style={{ left: dot.left, top: dot.top }}
+            animate={{ opacity: [0.1, 0.6, 0.1], scale: [1, 1.8, 1] }}
+            transition={{ duration: 3.5, repeat: Infinity, delay: dot.delay, ease: "easeInOut" }}
+          />
+        ))}
+        <motion.div
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
+          animate={{ y: ["-10%", "110%"] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "linear", repeatDelay: 5 }}
+        />
+      </div>
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center z-10 relative">
 

@@ -89,7 +89,46 @@ export default function Projects() {
   return (
     <section id="projetos" className="py-32 px-6 md:px-12 lg:px-20 border-t border-white/[0.06] relative overflow-hidden">
 
-      <div className="max-w-7xl mx-auto">
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        <motion.div
+          className="absolute top-[5%] right-[8%] w-[580px] h-[580px] bg-sky-500/[0.045] blur-[120px] rounded-full"
+          animate={{ x: [0, 35, -18, 0], y: [0, -28, 15, 0], scale: [1, 1.07, 0.93, 1] }}
+          transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-[5%] left-[5%] w-[500px] h-[500px] bg-violet-500/[0.04] blur-[110px] rounded-full"
+          animate={{ x: [0, -28, 14, 0], y: [0, 22, -12, 0], scale: [1, 0.92, 1.06, 1] }}
+          transition={{ duration: 21, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/3 w-[350px] h-[350px] bg-cyan-500/[0.03] blur-[100px] rounded-full"
+          animate={{ x: [0, 18, -9, 0], y: [0, -18, 9, 0], scale: [1, 1.05, 0.96, 1] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {[
+          { left: "5%",  top: "10%", delay: 0,   color: "bg-sky-400/20" },
+          { left: "82%", top: "12%", delay: 1.3, color: "bg-violet-400/20" },
+          { left: "92%", top: "50%", delay: 0.6, color: "bg-sky-400/15" },
+          { left: "10%", top: "75%", delay: 2.0, color: "bg-violet-400/15" },
+          { left: "55%", top: "92%", delay: 0.4, color: "bg-cyan-400/20" },
+        ].map((dot, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-1 h-1 rounded-full ${dot.color}`}
+            style={{ left: dot.left, top: dot.top }}
+            animate={{ opacity: [0.1, 0.6, 0.1], scale: [1, 1.8, 1] }}
+            transition={{ duration: 3.5, repeat: Infinity, delay: dot.delay, ease: "easeInOut" }}
+          />
+        ))}
+        <motion.div
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-sky-400/10 to-transparent"
+          animate={{ y: ["-10%", "110%"] }}
+          transition={{ duration: 11, repeat: Infinity, ease: "linear", repeatDelay: 7 }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Header */}
         <motion.div
@@ -167,15 +206,21 @@ export default function Projects() {
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-10">
-                    {project.techs.map((tech) => (
-                      <span
+                    {project.techs.map((tech, ti) => (
+                      <motion.span
                         key={tech}
-                        className={`px-3 py-1.5 border rounded-md text-xs font-mono transition-all ${
+                        initial={{ opacity: 0, scale: 0.88 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        whileHover={{ y: -2, scale: 1.06, transition: { duration: 0.15 } }}
+                        whileTap={{ scale: 0.94 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.25, delay: 0.04 * ti }}
+                        className={`px-3 py-1.5 border rounded-md text-xs font-mono transition-colors cursor-default ${
                           techAccent[tech] ?? "border-white/[0.1] text-secondary bg-white/[0.02]"
                         }`}
                       >
                         {tech}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
 

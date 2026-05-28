@@ -40,7 +40,39 @@ export default function Contact() {
   return (
     <section id="contato" className="py-32 px-6 md:px-12 lg:px-20 border-t border-white/[0.06] relative overflow-hidden">
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-cyan-400/[0.02] blur-[160px] rounded-full pointer-events-none" />
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-cyan-500/[0.05] blur-[130px] rounded-full"
+          animate={{ x: [0, 35, -18, 0], y: [0, -25, 14, 0], scale: [1, 1.08, 0.93, 1] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-[5%] right-[5%] w-[400px] h-[400px] bg-emerald-500/[0.04] blur-[110px] rounded-full"
+          animate={{ x: [0, -22, 11, 0], y: [0, 18, -10, 0], scale: [1, 0.93, 1.06, 1] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {[
+          { left: "5%",  top: "10%", delay: 0.5, color: "bg-cyan-400/20" },
+          { left: "88%", top: "15%", delay: 1.7, color: "bg-emerald-400/20" },
+          { left: "92%", top: "55%", delay: 0.9, color: "bg-cyan-400/15" },
+          { left: "8%",  top: "78%", delay: 2.3, color: "bg-emerald-400/15" },
+          { left: "45%", top: "90%", delay: 0.1, color: "bg-cyan-400/20" },
+        ].map((dot, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-1 h-1 rounded-full ${dot.color}`}
+            style={{ left: dot.left, top: dot.top }}
+            animate={{ opacity: [0.1, 0.6, 0.1], scale: [1, 1.8, 1] }}
+            transition={{ duration: 3.5, repeat: Infinity, delay: dot.delay, ease: "easeInOut" }}
+          />
+        ))}
+        <motion.div
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
+          animate={{ y: ["-10%", "110%"] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "linear", repeatDelay: 5 }}
+        />
+      </div>
 
       <div className="max-w-6xl mx-auto z-10 relative">
 

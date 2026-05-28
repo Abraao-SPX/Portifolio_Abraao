@@ -28,13 +28,63 @@ const tagAccent: Record<string, string> = {
   "Arquitetura & DevOps": "border-cyan-400/15 text-cyan-300/80 hover:border-cyan-400/40 hover:text-cyan-300",
 };
 
+const floatingDots = [
+  { left: "12%",  top: "18%",  delay: 0,   color: "bg-emerald-400/20" },
+  { left: "78%",  top: "12%",  delay: 1.4, color: "bg-violet-400/20" },
+  { left: "88%",  top: "52%",  delay: 0.6, color: "bg-cyan-400/20" },
+  { left: "22%",  top: "72%",  delay: 2.0, color: "bg-orange-400/20" },
+  { left: "55%",  top: "88%",  delay: 0.3, color: "bg-sky-400/20" },
+  { left: "42%",  top: "38%",  delay: 1.7, color: "bg-emerald-400/15" },
+  { left: "65%",  top: "25%",  delay: 0.9, color: "bg-violet-400/15" },
+  { left: "8%",   top: "55%",  delay: 2.5, color: "bg-cyan-400/15" },
+];
+
 export default function Skills() {
   const { skills } = siteConfig;
 
   return (
     <section id="habilidades" className="py-32 px-6 md:px-12 lg:px-20 border-t border-white/[0.06] relative overflow-hidden">
 
-      <div className="max-w-7xl mx-auto">
+      {/* ── Background decorations ── */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+
+        {/* Orb emerald — top right */}
+        <motion.div
+          className="absolute -top-20 right-1/4 w-[600px] h-[600px] rounded-full bg-emerald-500/[0.045] blur-[110px]"
+          animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0], scale: [1, 1.08, 0.93, 1] }}
+          transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Orb cyan — bottom left */}
+        <motion.div
+          className="absolute bottom-0 left-[5%] w-[500px] h-[500px] rounded-full bg-cyan-500/[0.04] blur-[100px]"
+          animate={{ x: [0, -30, 15, 0], y: [0, 25, -14, 0], scale: [1, 0.92, 1.06, 1] }}
+          transition={{ duration: 21, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Floating dots */}
+        {floatingDots.map((dot, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-1 h-1 rounded-full ${dot.color}`}
+            style={{ left: dot.left, top: dot.top }}
+            animate={{ opacity: [0.1, 0.6, 0.1], scale: [1, 1.8, 1] }}
+            transition={{ duration: 3.5, repeat: Infinity, delay: dot.delay, ease: "easeInOut" }}
+          />
+        ))}
+
+        {/* Scan line */}
+        <motion.div
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
+          animate={{ y: ["-10%", "110%"] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear", repeatDelay: 4 }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Header */}
         <motion.div
@@ -73,12 +123,13 @@ export default function Skills() {
                   key={group.category}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -5, transition: { duration: 0.2, ease: "easeOut" } }}
                   transition={{ duration: 0.75, ease: "easeOut", delay: 0.08 * idx }}
                   viewport={{ once: true, margin: "-60px" }}
-                  className="p-5 rounded-xl border border-white/[0.06] bg-surface/50 hover:bg-surface hover:border-white/[0.1] transition-all"
+                  className="p-5 rounded-xl border border-white/[0.06] bg-surface/50 hover:bg-surface hover:border-white/[0.12] transition-colors group cursor-default"
                 >
                   {/* Category label */}
-                  <div className={`inline-flex items-center gap-2 text-[10px] font-mono font-semibold mb-4 px-2.5 py-1 rounded-md border ${accent}`}>
+                  <div className={`inline-flex items-center gap-2 text-[10px] font-mono font-semibold mb-4 px-2.5 py-1 rounded-md border transition-all group-hover:brightness-125 ${accent}`}>
                     <span className="font-mono opacity-60">//</span>
                     {group.category}
                   </div>
@@ -87,11 +138,13 @@ export default function Skills() {
                     {group.items.map((item, j) => (
                       <motion.span
                         key={j}
-                        initial={{ opacity: 0, scale: 0.9 }}
+                        initial={{ opacity: 0, scale: 0.88 }}
                         whileInView={{ opacity: 1, scale: 1 }}
+                        whileHover={{ y: -2, scale: 1.06, transition: { duration: 0.15 } }}
+                        whileTap={{ scale: 0.94 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.25, delay: 0.04 * j + 0.08 * idx }}
-                        className={`px-3 py-1.5 border rounded-md text-xs font-mono transition-all cursor-default ${tags}`}
+                        className={`px-3 py-1.5 border rounded-md text-xs font-mono transition-colors cursor-default ${tags}`}
                       >
                         {item}
                       </motion.span>

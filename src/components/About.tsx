@@ -28,9 +28,41 @@ export default function About() {
   return (
     <section id="sobre" className="py-32 px-6 md:px-12 lg:px-20 border-t border-white/[0.06] relative overflow-hidden">
 
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-400/[0.02] blur-[140px] rounded-full pointer-events-none" />
+      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        <motion.div
+          className="absolute -left-20 top-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-500/[0.05] blur-[130px] rounded-full"
+          animate={{ x: [0, 30, -15, 0], y: [0, -20, 12, 0], scale: [1, 1.07, 0.93, 1] }}
+          transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute right-[5%] bottom-[10%] w-[400px] h-[400px] bg-emerald-500/[0.04] blur-[110px] rounded-full"
+          animate={{ x: [0, -25, 12, 0], y: [0, 20, -10, 0], scale: [1, 0.93, 1.06, 1] }}
+          transition={{ duration: 23, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {[
+          { left: "5%",  top: "15%", delay: 0.3, color: "bg-cyan-400/20" },
+          { left: "80%", top: "20%", delay: 1.5, color: "bg-emerald-400/20" },
+          { left: "90%", top: "55%", delay: 0.7, color: "bg-cyan-400/15" },
+          { left: "15%", top: "80%", delay: 2.1, color: "bg-emerald-400/15" },
+          { left: "50%", top: "90%", delay: 0.9, color: "bg-cyan-400/20" },
+        ].map((dot, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-1 h-1 rounded-full ${dot.color}`}
+            style={{ left: dot.left, top: dot.top }}
+            animate={{ opacity: [0.1, 0.6, 0.1], scale: [1, 1.8, 1] }}
+            transition={{ duration: 3.5, repeat: Infinity, delay: dot.delay, ease: "easeInOut" }}
+          />
+        ))}
+        <motion.div
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
+          animate={{ y: ["-10%", "110%"] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear", repeatDelay: 6 }}
+        />
+      </div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Section label */}
         <motion.div
