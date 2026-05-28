@@ -118,6 +118,7 @@ export default function Skills() {
             {skills.map((group, idx) => {
               const accent = categoryAccent[group.category] ?? "text-secondary border-white/15 bg-white/5";
               const tags = tagAccent[group.category] ?? "border-white/10 text-secondary hover:border-white/30 hover:text-primary";
+              const isFullWidth = group.category === "Arquitetura & DevOps";
               return (
                 <motion.div
                   key={group.category}
@@ -126,7 +127,7 @@ export default function Skills() {
                   whileHover={{ y: -5, transition: { duration: 0.2, ease: "easeOut" } }}
                   transition={{ duration: 0.75, ease: "easeOut", delay: 0.08 * idx }}
                   viewport={{ once: true, margin: "-60px" }}
-                  className="p-5 rounded-xl border border-white/[0.06] bg-surface/50 hover:bg-surface hover:border-white/[0.12] transition-colors group cursor-default"
+                  className={`p-5 rounded-xl border border-white/[0.06] bg-surface/50 hover:bg-surface hover:border-white/[0.12] transition-colors group cursor-default${isFullWidth ? " md:col-span-2" : ""}`}
                 >
                   {/* Category label */}
                   <div className={`inline-flex items-center gap-2 text-[10px] font-mono font-semibold mb-4 px-2.5 py-1 rounded-md border transition-all group-hover:brightness-125 ${accent}`}>
