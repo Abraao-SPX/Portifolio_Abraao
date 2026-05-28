@@ -3,74 +3,111 @@ import React from "react";
 import { siteConfig } from "@/data/portfolio";
 import { motion } from "framer-motion";
 
+const commitHashes = ["a3f9c12", "b7e2d45"];
+
 export default function Experience() {
-  const { experiences } = siteConfig;
+  const { experiences, personal } = siteConfig;
 
   return (
-    <section id="experiencia" className="py-32 px-6 md:px-20 border-t border-white/8 relative overflow-hidden">
+    <section id="experiencia" className="py-32 px-6 md:px-12 lg:px-20 border-t border-white/[0.06] relative overflow-hidden">
 
-      {/* Subtle bg */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.012] blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-violet-400/[0.025] blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-5xl mx-auto">
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-80px" }}
           className="mb-24"
         >
-          <p className="text-xs uppercase tracking-[0.3em] text-secondary font-medium mb-6 flex items-center gap-4">
-            <span className="w-8 h-[1px] bg-white/20" />
-            Trajetória
-          </p>
-          <h2 className="font-display text-5xl md:text-6xl font-bold tracking-tighter leading-[0.95]">
-            Minha Jornada<span className="text-zinc-700">.</span>
+          <div className="flex items-center gap-3 mb-6 font-mono text-xs text-muted">
+            <span className="text-cyan-400">~/</span>
+            <span>experience</span>
+            <span className="text-muted">/</span>
+            <span className="text-secondary">git log</span>
+          </div>
+          <h2 className="font-display font-bold text-5xl md:text-6xl tracking-tight leading-[0.9]">
+            <span className="text-primary">Minha</span>{" "}
+            <span className="text-gradient-cool">Jornada</span>
+            <span className="text-muted">.</span>
           </h2>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative pl-6 md:pl-0">
+        {/* Git log timeline */}
+        <div className="relative">
+          {/* Branch line */}
+          <div className="absolute left-[7px] top-3 bottom-3 w-[1px] bg-gradient-to-b from-cyan-400/30 via-white/[0.08] to-transparent pointer-events-none" />
 
-          {/* Vertical line */}
-          <div className="absolute left-[10px] md:left-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent md:hidden" />
-
-          <div className="space-y-12 md:space-y-0">
+          <div className="space-y-0">
             {experiences.map((exp, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: idx * 0.1 }}
-                viewport={{ once: true, margin: "-80px" }}
-                className="group relative md:grid md:grid-cols-12 md:gap-8 md:items-start md:border-b md:border-white/6 md:py-12 last:md:border-b-0"
+                transition={{ duration: 0.8, ease: "easeOut", delay: idx * 0.12 }}
+                viewport={{ once: true, margin: "-60px" }}
+                className="relative pl-9 pb-14 last:pb-0"
               >
-                {/* Period / Left column */}
-                <div className="md:col-span-3 flex items-start gap-4 mb-4 md:mb-0">
-                  {/* Dot - mobile only */}
-                  <div className="w-2.5 h-2.5 rounded-full border border-white/30 bg-background mt-1 shrink-0 md:hidden group-hover:border-white/60 transition-colors" />
-                  <span className="text-xs font-medium text-secondary uppercase tracking-widest">
-                    {exp.period}
+                {/* Commit dot */}
+                <div
+                  className={`absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2 flex items-center justify-center ${
+                    idx === 0
+                      ? "border-cyan-400 bg-cyan-400/20"
+                      : "border-white/20 bg-background"
+                  }`}
+                >
+                  {idx === 0 && (
+                    <span className="w-[5px] h-[5px] rounded-full bg-cyan-400 block" />
+                  )}
+                </div>
+
+                {/* Commit header */}
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  <span className="font-mono text-[10px] text-muted tracking-wider">
+                    commit{" "}
+                    <span className="text-cyan-400/60">{commitHashes[idx]}</span>
+                  </span>
+                  <span
+                    className={`font-mono text-[10px] px-2 py-0.5 rounded border ${
+                      idx === 0
+                        ? "border-cyan-400/25 bg-cyan-400/5 text-cyan-400"
+                        : "border-white/[0.08] bg-white/[0.02] text-secondary"
+                    }`}
+                  >
+                    {idx === 0 ? "main" : "feature/learning"}
                   </span>
                 </div>
 
-                {/* Content / Right column */}
-                <div className="md:col-span-9 pl-0 md:pl-0">
-                  <div className="p-6 md:p-8 rounded-2xl border border-white/6 bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/12 transition-all group-hover:border-white/10">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-                      <h4 className="text-xl font-display font-bold text-white">{exp.role}</h4>
-                      {exp.company && (
-                        <span className="text-xs font-medium text-secondary border border-white/8 px-3 py-1.5 rounded-full whitespace-nowrap bg-white/[0.02]">
-                          {exp.company}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-secondary font-light leading-relaxed text-base">
-                      {exp.description}
-                    </p>
+                {/* Commit meta */}
+                <div className="font-mono text-xs text-muted mb-5 space-y-1">
+                  <p>
+                    <span className="text-secondary/50">Author: </span>
+                    <span className="text-secondary">{personal.name} {personal.surname}</span>
+                  </p>
+                  <p>
+                    <span className="text-secondary/50">Date:   </span>
+                    <span className="text-secondary">{exp.period}</span>
+                  </p>
+                </div>
+
+                {/* Commit card */}
+                <div className="p-6 rounded-xl border border-white/[0.07] bg-surface/50 hover:bg-surface hover:border-white/[0.12] transition-all">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                    <h4 className="font-display text-lg font-bold text-primary leading-tight">
+                      {exp.role}
+                    </h4>
+                    {exp.company && (
+                      <span className="font-mono text-[10px] text-secondary border border-white/[0.08] px-3 py-1.5 rounded-md whitespace-nowrap bg-white/[0.02]">
+                        {exp.company}
+                      </span>
+                    )}
                   </div>
+                  <p className="font-mono text-sm text-secondary leading-[1.85]">
+                    {exp.description}
+                  </p>
                 </div>
               </motion.div>
             ))}

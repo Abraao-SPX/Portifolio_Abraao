@@ -1,29 +1,37 @@
 import type { Metadata } from "next";
-import { Inter, Syne } from "next/font/google";
+import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import AnimatedBackground from "@/components/AnimatedBackground";
 import DynamicFavicon from "@/components/DynamicFavicon";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", weight: ["300", "400", "500"] });
-const syne = Syne({ subsets: ["latin"], variable: "--font-syne", weight: ["400", "500", "600", "700", "800"] });
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["300", "400", "500", "700"],
+});
 
 export const metadata: Metadata = {
-  title: "Abraão Paixão | Desenvolvedor Java & Spring Boot",
-  description: "Portfólio profissional de Abraão Paixão. Desenvolvedor de software especializado em Java, Spring Boot, Flutter e soluções de back-end.",
+  title: "Abraão Paixão | Java · Flutter · Security",
+  description: "Portfólio de Abraão Paixão — desenvolvedor de software especializado em Java, Spring Boot, Flutter e entusiasta de segurança.",
   openGraph: {
     type: "website",
     url: "https://abraaoportfolio.me/",
-    title: "Abraão Paixão | Desenvolvedor Java & Spring Boot",
-    description: "Confira meus projetos de software, competências em Java, ecossistema Spring e desenvolvimento mobile com Flutter.",
+    title: "Abraão Paixão | Java · Flutter · Security",
+    description: "Confira meus projetos em Java, Spring Boot, Flutter e segurança de sistemas.",
     images: [{
       url: "https://abraaoportfolio.me/preview.png",
       width: 1200,
       height: 630,
-      alt: "Preview do Portfólio de Abraão Paixão"
-    }]
-  }
+      alt: "Preview do Portfólio de Abraão Paixão",
+    }],
+  },
 };
 
 export default function RootLayout({
@@ -33,9 +41,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${inter.variable} ${syne.variable} font-sans bg-background text-primary antialiased selection:bg-white selection:text-black overflow-x-hidden min-h-screen flex flex-col`}>
+      <body
+        className={`${bricolage.variable} ${jetbrainsMono.variable} font-sans bg-background text-primary antialiased selection:bg-cyan-400 selection:text-background overflow-x-hidden min-h-screen flex flex-col`}
+      >
         <DynamicFavicon />
-        <AnimatedBackground />
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

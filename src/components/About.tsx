@@ -4,75 +4,83 @@ import { siteConfig } from "@/data/portfolio";
 import { motion } from "framer-motion";
 
 const metrics = [
-  { value: "3", label: "Projetos\nPublicados", suffix: "" },
-  { value: "2", label: "Anos de\nEstudo Dedicado", suffix: "+" },
-  { value: "10", label: "Tecnologias\nDominadas", suffix: "+" },
-  { value: "100", label: "Commits\nno GitHub", suffix: "+" },
+  { value: "3", suffix: "", label: "Projetos\nPublicados" },
+  { value: "2", suffix: "+", label: "Anos de\nEstudo Dedicado" },
+  { value: "10", suffix: "+", label: "Tecnologias\nDominadas" },
+  { value: "100", suffix: "+", label: "Commits\nno GitHub" },
 ];
 
+const highlightAccent: Record<number, string> = {
+  0: "text-emerald-400 border-emerald-400/20 bg-emerald-400/5",
+  1: "text-violet-400 border-violet-400/20 bg-violet-400/5",
+  2: "text-orange-400 border-orange-400/20 bg-orange-400/5",
+  3: "text-cyan-400 border-cyan-400/20 bg-cyan-400/5",
+};
+
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.85, ease: "easeOut" } },
 };
 
 export default function About() {
   const { about } = siteConfig;
 
   return (
-    <section id="sobre" className="py-32 px-6 md:px-20 border-t border-white/8 relative overflow-hidden">
+    <section id="sobre" className="py-32 px-6 md:px-12 lg:px-20 border-t border-white/[0.06] relative overflow-hidden">
 
-      {/* Subtle radial bg */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.015] blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-400/[0.02] blur-[140px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
 
-        {/* Top label */}
-        <motion.p
+        {/* Section label */}
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={fadeUp}
-          className="text-xs uppercase tracking-[0.3em] text-secondary font-medium mb-16 flex items-center gap-4"
+          className="flex items-center gap-3 mb-16 font-mono text-xs text-muted"
         >
-          <span className="w-8 h-[1px] bg-white/20" />
-          Sobre mim
-        </motion.p>
+          <span className="text-cyan-400">~/</span>
+          <span>about</span>
+          <span className="text-muted">/</span>
+          <span className="text-secondary">README.md</span>
+        </motion.div>
 
+        {/* Main grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 mb-24">
 
-          {/* Left: heading */}
+          {/* Left: title */}
           <div className="lg:col-span-5">
             <motion.h2
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "-80px" }}
               variants={fadeUp}
-              className="font-display text-4xl md:text-5xl font-bold leading-[1.05] tracking-tighter"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] tracking-tight text-primary"
             >
               {about.title}
             </motion.h2>
-
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.2 }}
-              className="h-[1px] w-1/3 bg-gradient-to-r from-white/30 to-transparent mt-12 origin-left hidden lg:block"
+              className="h-[1px] w-1/3 bg-gradient-to-r from-cyan-400/30 to-transparent mt-10 origin-left hidden lg:block"
             />
           </div>
 
-          {/* Right: paragraphs + highlights */}
+          {/* Right: bio + highlights */}
           <div className="lg:col-span-7 flex flex-col gap-10">
-            <div className="space-y-6">
+            <div className="space-y-5">
               {about.paragraphs.map((p, i) => (
                 <motion.p
                   key={i}
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
+                  viewport={{ once: true, margin: "-60px" }}
                   variants={fadeUp}
-                  transition={{ delay: 0.1 * i }}
-                  className="text-lg md:text-xl text-secondary font-light leading-relaxed"
+                  transition={{ delay: 0.08 * i }}
+                  className="text-base md:text-lg text-secondary font-mono leading-[1.9]"
                 >
                   {p}
                 </motion.p>
@@ -82,16 +90,16 @@ export default function About() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: true, margin: "-60px" }}
               variants={fadeUp}
-              className="grid grid-cols-2 gap-3 mt-2"
+              className="grid grid-cols-2 gap-3"
             >
               {about.highlights.map((highlight, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-3 text-sm text-zinc-300 font-medium py-2.5 px-4 rounded-lg border border-white/6 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/15 transition-all"
+                  className={`flex items-center gap-2.5 text-xs font-mono py-2.5 px-4 rounded-lg border ${highlightAccent[idx]} transition-all`}
                 >
-                  <span className="w-1 h-1 rounded-full bg-emerald-400/70 block shrink-0" />
+                  <span className="w-1 h-1 rounded-full bg-current block shrink-0" />
                   {highlight}
                 </div>
               ))}
@@ -101,11 +109,11 @@ export default function About() {
 
         {/* Metrics grid */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/8 rounded-2xl overflow-hidden border border-white/8"
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.85, ease: "easeOut" }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.05] rounded-2xl overflow-hidden border border-white/[0.06]"
         >
           {metrics.map((metric, i) => (
             <motion.div
@@ -114,12 +122,15 @@ export default function About() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 * i }}
-              className="bg-background hover:bg-surface/60 transition-colors p-8 flex flex-col gap-2 group"
+              className="bg-background hover:bg-surface transition-colors p-8 flex flex-col gap-2 group"
             >
-              <span className="font-display font-bold text-4xl md:text-5xl text-white group-hover:text-gradient transition-all">
-                {metric.value}<span className="text-zinc-600">{metric.suffix}</span>
+              <span className="font-display font-bold text-4xl md:text-5xl text-primary">
+                {metric.value}
+                <span className="text-cyan-400/60 text-2xl">{metric.suffix}</span>
               </span>
-              <span className="text-xs text-secondary font-medium leading-relaxed whitespace-pre-line">{metric.label}</span>
+              <span className="text-xs text-secondary font-mono leading-relaxed whitespace-pre-line">
+                {metric.label}
+              </span>
             </motion.div>
           ))}
         </motion.div>
