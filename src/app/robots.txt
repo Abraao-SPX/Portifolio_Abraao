@@ -1,16 +1,43 @@
 User-agent: *
 Allow: /
+Allow: /.well-known/security.txt
+
+# Arquivos sensíveis
 Disallow: /.env
+Disallow: /.env.local
+Disallow: /.env.production
 Disallow: /.git/
+Disallow: /.github/
 Disallow: /.vscode/
 Disallow: /.DS_Store
+Disallow: /.htaccess
+Disallow: /.htpasswd
+
+# Paths de frameworks/CMS (não existem, mas evita varreduras)
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /xmlrpc.php
+Disallow: /phpinfo.php
+Disallow: /phpmyadmin/
+Disallow: /admin/
+Disallow: /administrator/
+Disallow: /config/
+Disallow: /backup/
+Disallow: /db/
+Disallow: /sql/
+Disallow: /dump.sql
+Disallow: /database.sql
+
+# APIs e diagnóstico
 Disallow: /@fs/
 Disallow: /api/swagger.json
 Disallow: /api/swagger/
-Disallow: /wp-admin/
-Disallow: /wp-login.php
-Disallow: /phpinfo.php
-Disallow: /admin/
-Disallow: /config/
+Disallow: /api/
+Disallow: /actuator/
+Disallow: /server-status
+Disallow: /server-info
+Disallow: /_profiler/
 
-Sitemap: https://abraao_dev.tech/sitemap.xml
+Sitemap: https://abraao-dev.tech/sitemap.xml

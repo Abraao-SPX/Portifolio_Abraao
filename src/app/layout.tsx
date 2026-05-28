@@ -41,6 +41,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content={[
+            "default-src 'self'",
+            "script-src 'self' 'unsafe-inline'",
+            "style-src 'self' 'unsafe-inline'",
+            "font-src 'self' data:",
+            "img-src 'self' data: https: blob:",
+            "connect-src 'self' https://api.emailjs.com",
+            "object-src 'none'",
+            "base-uri 'self'",
+            "form-action 'self' https://api.emailjs.com",
+            "upgrade-insecure-requests",
+          ].join("; ")}
+        />
+      </head>
       <body
         className={`${bricolage.variable} ${jetbrainsMono.variable} font-sans bg-background text-primary antialiased selection:bg-cyan-400 selection:text-background overflow-x-hidden min-h-screen flex flex-col`}
       >
