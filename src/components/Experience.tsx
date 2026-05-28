@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { siteConfig } from "@/data/portfolio";
 import { motion } from "framer-motion";
@@ -52,7 +52,7 @@ export default function Experience() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: false, margin: "-80px" }}
           className="mb-24"
         >
           <div className="flex items-center gap-3 mb-6 font-mono text-xs text-muted">
@@ -80,7 +80,7 @@ export default function Experience() {
                 initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: idx * 0.12 }}
-                viewport={{ once: true, margin: "-60px" }}
+                viewport={{ once: false, margin: "-60px" }}
                 className="relative pl-9 pb-14 last:pb-0"
               >
                 {/* Commit dot */}
@@ -149,3 +149,4 @@ export default function Experience() {
     </section>
   );
 }
+

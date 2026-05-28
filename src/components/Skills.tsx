@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { siteConfig } from "@/data/portfolio";
 import { motion } from "framer-motion";
@@ -91,7 +91,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: false, margin: "-80px" }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20"
         >
           <div className="lg:col-span-5">
@@ -126,7 +126,7 @@ export default function Skills() {
                   whileInView={{ opacity: 1, y: 0 }}
                   whileHover={{ y: -5, transition: { duration: 0.2, ease: "easeOut" } }}
                   transition={{ duration: 0.75, ease: "easeOut", delay: 0.08 * idx }}
-                  viewport={{ once: true, margin: "-60px" }}
+                  viewport={{ once: false, margin: "-60px" }}
                   className={`p-5 rounded-xl border border-white/[0.06] bg-surface/50 hover:bg-surface hover:border-white/[0.12] transition-colors group cursor-default${isFullWidth ? " md:col-span-2" : ""}`}
                 >
                   {/* Category label */}
@@ -143,7 +143,7 @@ export default function Skills() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         whileHover={{ y: -2, scale: 1.06, transition: { duration: 0.15 } }}
                         whileTap={{ scale: 0.94 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: false }}
                         transition={{ duration: 0.25, delay: 0.04 * j + 0.08 * idx }}
                         className={`px-3 py-1.5 border rounded-md text-xs font-mono transition-colors cursor-default ${tags}`}
                       >
@@ -161,7 +161,7 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 1 }}
           className="overflow-hidden border-y border-white/[0.05] py-4 relative"
         >
@@ -182,3 +182,4 @@ export default function Skills() {
     </section>
   );
 }
+

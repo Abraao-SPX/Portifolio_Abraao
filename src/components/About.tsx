@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { siteConfig } from "@/data/portfolio";
 import { motion } from "framer-motion";
@@ -68,7 +68,7 @@ export default function About() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: false, margin: "-80px" }}
           variants={fadeUp}
           className="flex items-center gap-3 mb-16 font-mono text-xs text-muted"
         >
@@ -86,7 +86,7 @@ export default function About() {
             <motion.h2
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-80px" }}
+              viewport={{ once: false, margin: "-80px" }}
               variants={fadeUp}
               className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] tracking-tight text-primary"
             >
@@ -95,7 +95,7 @@ export default function About() {
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 1.2, delay: 0.2 }}
               className="h-[1px] w-1/3 bg-gradient-to-r from-cyan-400/30 to-transparent mt-10 origin-left hidden lg:block"
             />
@@ -109,7 +109,7 @@ export default function About() {
                   key={i}
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, margin: "-60px" }}
+                  viewport={{ once: false, margin: "-60px" }}
                   variants={fadeUp}
                   transition={{ delay: 0.08 * i }}
                   className="text-base md:text-lg text-secondary font-mono leading-[1.9]"
@@ -122,7 +122,7 @@ export default function About() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: false, margin: "-60px" }}
               variants={fadeUp}
               className="grid grid-cols-2 gap-3"
             >
@@ -143,7 +143,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: false, margin: "-60px" }}
           transition={{ duration: 0.85, ease: "easeOut" }}
           className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.05] rounded-2xl overflow-hidden border border-white/[0.06]"
         >
@@ -152,7 +152,7 @@ export default function About() {
               key={metric.label}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.6, delay: 0.1 * i }}
               className="bg-background hover:bg-surface transition-colors p-8 flex flex-col gap-2 group"
             >
@@ -170,3 +170,4 @@ export default function About() {
     </section>
   );
 }
+

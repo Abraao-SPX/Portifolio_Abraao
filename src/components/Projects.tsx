@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { siteConfig } from "@/data/portfolio";
 import { motion } from "framer-motion";
@@ -64,7 +64,7 @@ function TerminalPlaceholder({ id, title }: { id: string; title: string }) {
               key={i}
               initial={{ opacity: 0, x: -5 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ duration: 0.35, delay: 0.05 * i }}
               className={
                 isPrompt ? "text-cyan-400" :
@@ -135,7 +135,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: false, margin: "-80px" }}
           className="mb-24"
         >
           <div className="flex items-center gap-3 mb-6 font-mono text-xs text-muted">
@@ -162,7 +162,7 @@ export default function Projects() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
-                viewport={{ once: true, margin: "-80px" }}
+                viewport={{ once: false, margin: "-80px" }}
                 className="group grid grid-cols-1 lg:grid-cols-12 gap-10 items-center py-20 border-b border-white/[0.06] last:border-b-0"
               >
                 {/* Terminal visual */}
@@ -213,7 +213,7 @@ export default function Projects() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         whileHover={{ y: -2, scale: 1.06, transition: { duration: 0.15 } }}
                         whileTap={{ scale: 0.94 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: false }}
                         transition={{ duration: 0.25, delay: 0.04 * ti }}
                         className={`px-3 py-1.5 border rounded-md text-xs font-mono transition-colors cursor-default ${
                           techAccent[tech] ?? "border-white/[0.1] text-secondary bg-white/[0.02]"
@@ -258,7 +258,7 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.7 }}
           className="mt-16 flex justify-center"
         >
@@ -277,3 +277,4 @@ export default function Projects() {
     </section>
   );
 }
+

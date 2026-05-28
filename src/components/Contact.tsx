@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useState } from "react";
 import { siteConfig } from "@/data/portfolio";
 import { sendEmailForm } from "@/lib/email";
@@ -81,7 +81,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-80px" }}
+          viewport={{ once: false, margin: "-80px" }}
           className="mb-20"
         >
           <div className="flex items-center gap-3 mb-6 font-mono text-xs text-muted">
@@ -105,7 +105,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: false, margin: "-80px" }}
             className="flex flex-col"
           >
             <p className="font-mono text-sm text-secondary leading-[1.9] mb-10 max-w-md">
@@ -159,7 +159,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: false, margin: "-80px" }}
           >
             <form
               onSubmit={handleSubmit}
@@ -251,3 +251,4 @@ export default function Contact() {
     </section>
   );
 }
+
