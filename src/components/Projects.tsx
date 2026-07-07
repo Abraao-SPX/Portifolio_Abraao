@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 import { siteConfig } from "@/data/portfolio";
 import { motion } from "framer-motion";
@@ -64,7 +64,7 @@ function TerminalPlaceholder({ id, title }: { id: string; title: string }) {
               key={i}
               initial={{ opacity: 0, x: -5 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false }}
+              viewport={{ once: true }}
               transition={{ duration: 0.35, delay: 0.05 * i }}
               className={
                 isPrompt ? "text-cyan-400" :
@@ -91,21 +91,24 @@ export default function Projects() {
 
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        {/* High performance blurred background orbs (hidden on mobile, will-change-transform for GPU layer) */}
         <motion.div
-          className="absolute top-[5%] right-[8%] w-[580px] h-[580px] bg-sky-500/[0.045] blur-[120px] rounded-full"
+          className="hidden md:block absolute top-[5%] right-[8%] w-[580px] h-[580px] bg-sky-500/[0.045] blur-[120px] rounded-full will-change-transform"
           animate={{ x: [0, 35, -18, 0], y: [0, -28, 15, 0], scale: [1, 1.07, 0.93, 1] }}
           transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-[5%] left-[5%] w-[500px] h-[500px] bg-violet-500/[0.04] blur-[110px] rounded-full"
+          className="hidden md:block absolute bottom-[5%] left-[5%] w-[500px] h-[500px] bg-violet-500/[0.04] blur-[110px] rounded-full will-change-transform"
           animate={{ x: [0, -28, 14, 0], y: [0, 22, -12, 0], scale: [1, 0.92, 1.06, 1] }}
           transition={{ duration: 21, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/3 w-[350px] h-[350px] bg-cyan-500/[0.03] blur-[100px] rounded-full"
+          className="hidden md:block absolute top-1/2 left-1/3 w-[350px] h-[350px] bg-cyan-500/[0.03] blur-[100px] rounded-full will-change-transform"
           animate={{ x: [0, 18, -9, 0], y: [0, -18, 9, 0], scale: [1, 1.05, 0.96, 1] }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
+        {/* Mobile static ambient glow */}
+        <div className="md:hidden absolute top-1/3 right-[5%] w-[200px] h-[200px] bg-sky-500/[0.03] blur-[70px] rounded-full pointer-events-none" />
         {[
           { left: "5%",  top: "10%", delay: 0,   color: "bg-sky-400/20" },
           { left: "82%", top: "12%", delay: 1.3, color: "bg-violet-400/20" },
@@ -135,7 +138,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: false, margin: "-80px" }}
+          viewport={{ once: true }}
           className="mb-24"
         >
           <div className="flex items-center gap-3 mb-6 font-mono text-xs text-muted">
@@ -162,7 +165,7 @@ export default function Projects() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
-                viewport={{ once: false, margin: "-80px" }}
+                viewport={{ once: true }}
                 className="group grid grid-cols-1 lg:grid-cols-12 gap-10 items-center py-20 border-b border-white/[0.06] last:border-b-0"
               >
                 {/* Terminal visual */}
@@ -213,7 +216,7 @@ export default function Projects() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         whileHover={{ y: -2, scale: 1.06, transition: { duration: 0.15 } }}
                         whileTap={{ scale: 0.94 }}
-                        viewport={{ once: false }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.25, delay: 0.04 * ti }}
                         className={`px-3 py-1.5 border rounded-md text-xs font-mono transition-colors cursor-default ${
                           techAccent[tech] ?? "border-white/[0.1] text-secondary bg-white/[0.02]"
@@ -258,7 +261,7 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ duration: 0.7 }}
           className="mt-16 flex justify-center"
         >

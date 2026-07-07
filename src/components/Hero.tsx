@@ -114,21 +114,28 @@ export default function Hero() {
       {/* Background */}
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        
+        {/* High performance animated ambient orbs (disabled on mobile for fluid FPS, will-change-transform for GPU layer) */}
         <motion.div
-          className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-cyan-500/[0.05] blur-[140px] rounded-full"
+          className="hidden md:block absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-cyan-500/[0.05] blur-[140px] rounded-full will-change-transform"
           animate={{ x: [0, 40, -20, 0], y: [0, -30, 18, 0], scale: [1, 1.08, 0.93, 1] }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-1/4 left-[8%] w-[450px] h-[450px] bg-violet-500/[0.05] blur-[120px] rounded-full"
+          className="hidden md:block absolute bottom-1/4 left-[8%] w-[450px] h-[450px] bg-violet-500/[0.05] blur-[120px] rounded-full will-change-transform"
           animate={{ x: [0, -30, 15, 0], y: [0, 25, -12, 0], scale: [1, 0.92, 1.07, 1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-[10%] left-1/3 w-[300px] h-[300px] bg-emerald-500/[0.03] blur-[100px] rounded-full"
+          className="hidden md:block absolute top-[10%] left-1/3 w-[300px] h-[300px] bg-emerald-500/[0.03] blur-[100px] rounded-full will-change-transform"
           animate={{ x: [0, 20, -10, 0], y: [0, -15, 8, 0], scale: [1, 1.05, 0.96, 1] }}
           transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
         />
+        
+        {/* Mobile static glow to preserve aesthetics on low-end screens */}
+        <div className="md:hidden absolute top-1/4 left-1/2 -translate-x-1/2 w-[280px] h-[280px] bg-cyan-500/[0.04] blur-[80px] rounded-full pointer-events-none" />
+        <div className="md:hidden absolute bottom-1/3 left-1/4 w-[240px] h-[240px] bg-violet-500/[0.03] blur-[70px] rounded-full pointer-events-none" />
+
         {[
           { left: "8%",  top: "20%", delay: 0,   color: "bg-cyan-400/20" },
           { left: "75%", top: "15%", delay: 1.2, color: "bg-violet-400/20" },
@@ -177,7 +184,7 @@ export default function Hero() {
               initial={{ y: 90, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="font-display font-bold text-[3.5rem] md:text-[5rem] lg:text-[5.5rem] leading-[0.88] tracking-tight text-primary"
+              className="font-display font-bold text-[2.8rem] xs:text-[3.5rem] sm:text-[4.5rem] md:text-[5rem] lg:text-[5.5rem] leading-[0.88] tracking-tight text-primary"
             >
               {personal.name}
             </motion.h1>
@@ -187,7 +194,7 @@ export default function Hero() {
               initial={{ y: 90, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="font-display font-bold text-[3.5rem] md:text-[5rem] lg:text-[5.5rem] leading-[0.88] tracking-tight text-gradient-cool"
+              className="font-display font-bold text-[2.8rem] xs:text-[3.5rem] sm:text-[4.5rem] md:text-[5rem] lg:text-[5.5rem] leading-[0.88] tracking-tight text-gradient-cool"
             >
               {personal.surname}.
             </motion.h1>

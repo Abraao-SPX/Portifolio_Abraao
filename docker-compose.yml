@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: development
+    image: abraao-portfolio:dev
     container_name: abraao_portfolio_dev
     ports:
       - "3001:3000"

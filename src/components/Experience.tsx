@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 import { siteConfig } from "@/data/portfolio";
 import { motion } from "framer-motion";
@@ -13,16 +13,19 @@ export default function Experience() {
 
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        {/* High performance blurred background orbs (hidden on mobile, will-change-transform for GPU layer) */}
         <motion.div
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-violet-500/[0.05] blur-[120px] rounded-full"
+          className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-violet-500/[0.05] blur-[120px] rounded-full will-change-transform"
           animate={{ x: [0, -30, 15, 0], y: [0, 20, -12, 0], scale: [1, 1.07, 0.93, 1] }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute left-[5%] top-[15%] w-[380px] h-[380px] bg-cyan-500/[0.04] blur-[110px] rounded-full"
+          className="hidden md:block absolute left-[5%] top-[15%] w-[380px] h-[380px] bg-cyan-500/[0.04] blur-[110px] rounded-full will-change-transform"
           animate={{ x: [0, 22, -12, 0], y: [0, -18, 10, 0], scale: [1, 0.93, 1.06, 1] }}
           transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
         />
+        {/* Mobile static ambient glow */}
+        <div className="md:hidden absolute top-1/4 right-0 w-[200px] h-[200px] bg-violet-500/[0.03] blur-[70px] rounded-full pointer-events-none" />
         {[
           { left: "5%",  top: "12%", delay: 0.4, color: "bg-cyan-400/20" },
           { left: "88%", top: "18%", delay: 1.6, color: "bg-violet-400/20" },
@@ -52,7 +55,7 @@ export default function Experience() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: false, margin: "-80px" }}
+          viewport={{ once: true }}
           className="mb-24"
         >
           <div className="flex items-center gap-3 mb-6 font-mono text-xs text-muted">
@@ -80,7 +83,7 @@ export default function Experience() {
                 initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: idx * 0.12 }}
-                viewport={{ once: false, margin: "-60px" }}
+                viewport={{ once: true }}
                 className="relative pl-9 pb-14 last:pb-0"
               >
                 {/* Commit dot */}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { siteConfig } from "@/data/portfolio";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -14,32 +14,48 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const progressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setScrolled(scrollTop > 50);
-      setScrollProgress(docHeight > 0 ? scrollTop / docHeight : 0);
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      
+      // Update DOM style directly (compositor scaleX transform)
+      // This is 100% SSR safe, hydration safe, and doesn't trigger React renders.
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${progress})`;
+      }
+
+      const shouldBeScrolled = scrollTop > 50;
+      setScrolled((prev) => {
+        if (prev !== shouldBeScrolled) {
+          return shouldBeScrolled;
+        }
+        return prev;
+      });
     };
+    
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Trigger initial check
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-      {/* Scroll progress */}
+      {/* Scroll progress progress-bar using GPU scaleX via Ref */}
       <div
-        className="fixed top-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent z-[100] transition-all duration-75"
-        style={{ width: `${scrollProgress * 100}%` }}
+        ref={progressRef}
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-500 via-cyan-400 to-violet-500 z-[100] origin-left transition-transform duration-75"
+        style={{ transform: "scaleX(0)" }}
       />
 
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           scrolled
             ? "py-3 bg-background/90 backdrop-blur-xl border-b border-white/[0.06]"
             : "py-5"

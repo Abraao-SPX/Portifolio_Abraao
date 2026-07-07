@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 import { siteConfig } from "@/data/portfolio";
 import { motion } from "framer-motion";
@@ -30,16 +30,19 @@ export default function About() {
 
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        {/* High performance blurred background orbs (hidden on mobile, will-change-transform for GPU acceleration) */}
         <motion.div
-          className="absolute -left-20 top-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-500/[0.05] blur-[130px] rounded-full"
+          className="hidden md:block absolute -left-20 top-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-500/[0.05] blur-[130px] rounded-full will-change-transform"
           animate={{ x: [0, 30, -15, 0], y: [0, -20, 12, 0], scale: [1, 1.07, 0.93, 1] }}
           transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute right-[5%] bottom-[10%] w-[400px] h-[400px] bg-emerald-500/[0.04] blur-[110px] rounded-full"
+          className="hidden md:block absolute right-[5%] bottom-[10%] w-[400px] h-[400px] bg-emerald-500/[0.04] blur-[110px] rounded-full will-change-transform"
           animate={{ x: [0, -25, 12, 0], y: [0, 20, -10, 0], scale: [1, 0.93, 1.06, 1] }}
           transition={{ duration: 23, repeat: Infinity, ease: "easeInOut" }}
         />
+        {/* Mobile static ambient glow */}
+        <div className="md:hidden absolute top-1/3 left-0 w-[200px] h-[200px] bg-cyan-500/[0.03] blur-[60px] rounded-full pointer-events-none" />
         {[
           { left: "5%",  top: "15%", delay: 0.3, color: "bg-cyan-400/20" },
           { left: "80%", top: "20%", delay: 1.5, color: "bg-emerald-400/20" },
@@ -68,7 +71,7 @@ export default function About() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, margin: "-80px" }}
+          viewport={{ once: true }}
           variants={fadeUp}
           className="flex items-center gap-3 mb-16 font-mono text-xs text-muted"
         >
@@ -86,7 +89,7 @@ export default function About() {
             <motion.h2
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, margin: "-80px" }}
+              viewport={{ once: true }}
               variants={fadeUp}
               className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] tracking-tight text-primary"
             >
@@ -95,7 +98,7 @@ export default function About() {
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
-              viewport={{ once: false }}
+              viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.2 }}
               className="h-[1px] w-1/3 bg-gradient-to-r from-cyan-400/30 to-transparent mt-10 origin-left hidden lg:block"
             />
@@ -109,7 +112,7 @@ export default function About() {
                   key={i}
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: false, margin: "-60px" }}
+                  viewport={{ once: true }}
                   variants={fadeUp}
                   transition={{ delay: 0.08 * i }}
                   className="text-base md:text-lg text-secondary font-mono leading-[1.9]"
@@ -122,7 +125,7 @@ export default function About() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, margin: "-60px" }}
+              viewport={{ once: true }}
               variants={fadeUp}
               className="grid grid-cols-2 gap-3"
             >
@@ -143,7 +146,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-60px" }}
+          viewport={{ once: true }}
           transition={{ duration: 0.85, ease: "easeOut" }}
           className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.05] rounded-2xl overflow-hidden border border-white/[0.06]"
         >
@@ -152,7 +155,7 @@ export default function About() {
               key={metric.label}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: false }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 * i }}
               className="bg-background hover:bg-surface transition-colors p-8 flex flex-col gap-2 group"
             >

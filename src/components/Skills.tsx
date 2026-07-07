@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 import { siteConfig } from "@/data/portfolio";
 import { motion } from "framer-motion";
@@ -52,18 +52,20 @@ export default function Skills() {
         <div className="absolute inset-0 bg-grid-pattern opacity-40" />
 
         {/* Orb emerald — top right */}
+        {/* High performance blurred background orbs (hidden on mobile, will-change-transform for GPU layer) */}
         <motion.div
-          className="absolute -top-20 right-1/4 w-[600px] h-[600px] rounded-full bg-emerald-500/[0.045] blur-[110px]"
+          className="hidden md:block absolute -top-20 right-1/4 w-[600px] h-[600px] rounded-full bg-emerald-500/[0.045] blur-[110px] will-change-transform"
           animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0], scale: [1, 1.08, 0.93, 1] }}
           transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* Orb cyan — bottom left */}
         <motion.div
-          className="absolute bottom-0 left-[5%] w-[500px] h-[500px] rounded-full bg-cyan-500/[0.04] blur-[100px]"
+          className="hidden md:block absolute bottom-0 left-[5%] w-[500px] h-[500px] rounded-full bg-cyan-500/[0.04] blur-[100px] will-change-transform"
           animate={{ x: [0, -30, 15, 0], y: [0, 25, -14, 0], scale: [1, 0.92, 1.06, 1] }}
           transition={{ duration: 21, repeat: Infinity, ease: "easeInOut" }}
         />
+        {/* Mobile static ambient glow */}
+        <div className="md:hidden absolute top-1/4 right-[10%] w-[180px] h-[180px] bg-emerald-500/[0.03] blur-[60px] rounded-full pointer-events-none" />
 
         {/* Floating dots */}
         {floatingDots.map((dot, i) => (
@@ -91,7 +93,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: false, margin: "-80px" }}
+          viewport={{ once: true }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20"
         >
           <div className="lg:col-span-5">
@@ -126,8 +128,8 @@ export default function Skills() {
                   whileInView={{ opacity: 1, y: 0 }}
                   whileHover={{ y: -5, transition: { duration: 0.2, ease: "easeOut" } }}
                   transition={{ duration: 0.75, ease: "easeOut", delay: 0.08 * idx }}
-                  viewport={{ once: false, margin: "-60px" }}
-                  className={`p-5 rounded-xl border border-white/[0.06] bg-surface/50 hover:bg-surface hover:border-white/[0.12] transition-colors group cursor-default${isFullWidth ? " md:col-span-2" : ""}`}
+                  viewport={{ once: true }}
+                  className={`p-5 rounded-xl border border-white/[0.06] bg-surface/50 hover:bg-surface hover:border-white/[0.12] transition-colors group cursor-default ${isFullWidth ? "md:col-span-2" : ""}`}
                 >
                   {/* Category label */}
                   <div className={`inline-flex items-center gap-2 text-[10px] font-mono font-semibold mb-4 px-2.5 py-1 rounded-md border transition-all group-hover:brightness-125 ${accent}`}>
@@ -143,7 +145,7 @@ export default function Skills() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         whileHover={{ y: -2, scale: 1.06, transition: { duration: 0.15 } }}
                         whileTap={{ scale: 0.94 }}
-                        viewport={{ once: false }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.25, delay: 0.04 * j + 0.08 * idx }}
                         className={`px-3 py-1.5 border rounded-md text-xs font-mono transition-colors cursor-default ${tags}`}
                       >
@@ -161,7 +163,7 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ duration: 1 }}
           className="overflow-hidden border-y border-white/[0.05] py-4 relative"
         >

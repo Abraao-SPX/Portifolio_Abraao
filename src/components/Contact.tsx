@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useState } from "react";
 import { siteConfig } from "@/data/portfolio";
 import { sendEmailForm } from "@/lib/email";
@@ -42,16 +42,19 @@ export default function Contact() {
 
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        {/* High performance blurred background orbs (hidden on mobile, will-change-transform for GPU layer) */}
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-cyan-500/[0.05] blur-[130px] rounded-full"
+          className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-cyan-500/[0.05] blur-[130px] rounded-full will-change-transform"
           animate={{ x: [0, 35, -18, 0], y: [0, -25, 14, 0], scale: [1, 1.08, 0.93, 1] }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-[5%] right-[5%] w-[400px] h-[400px] bg-emerald-500/[0.04] blur-[110px] rounded-full"
+          className="hidden md:block absolute bottom-[5%] right-[5%] w-[400px] h-[400px] bg-emerald-500/[0.04] blur-[110px] rounded-full will-change-transform"
           animate={{ x: [0, -22, 11, 0], y: [0, 18, -10, 0], scale: [1, 0.93, 1.06, 1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
+        {/* Mobile static ambient glow */}
+        <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] bg-cyan-500/[0.03] blur-[70px] rounded-full pointer-events-none" />
         {[
           { left: "5%",  top: "10%", delay: 0.5, color: "bg-cyan-400/20" },
           { left: "88%", top: "15%", delay: 1.7, color: "bg-emerald-400/20" },
@@ -81,7 +84,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: false, margin: "-80px" }}
+          viewport={{ once: true }}
           className="mb-20"
         >
           <div className="flex items-center gap-3 mb-6 font-mono text-xs text-muted">
@@ -105,7 +108,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: false, margin: "-80px" }}
+            viewport={{ once: true }}
             className="flex flex-col"
           >
             <p className="font-mono text-sm text-secondary leading-[1.9] mb-10 max-w-md">
@@ -159,7 +162,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
-            viewport={{ once: false, margin: "-80px" }}
+            viewport={{ once: true }}
           >
             <form
               onSubmit={handleSubmit}
