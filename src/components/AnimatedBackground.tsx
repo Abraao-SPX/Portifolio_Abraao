@@ -15,8 +15,8 @@ export default function AnimatedBackground() {
     let particles: Particle[] = [];
 
     // Configurações das partículas
-    const particleCount = 70; // Quantidade de pontos
-    const maxSpeed = 0.3; // Bem lento e sutil
+    const particleCount = 50; // Less particles for light theme
+    const maxSpeed = 0.25; // Slightly slower
 
     class Particle {
       x: number;
@@ -25,21 +25,30 @@ export default function AnimatedBackground() {
       speedX: number;
       speedY: number;
       opacity: number;
+      color: string;
 
       constructor(w: number, h: number) {
         this.x = Math.random() * w;
         this.y = Math.random() * h;
-        this.size = Math.random() * 1.5 + 0.5; // Tamanhos pequenos
+        this.size = Math.random() * 1.5 + 0.5;
         this.speedX = (Math.random() - 0.5) * maxSpeed;
         this.speedY = (Math.random() - 0.5) * maxSpeed;
-        this.opacity = Math.random() * 0.5 + 0.1; // Opacidade baixa (0.1 a 0.6)
+        this.opacity = Math.random() * 0.15 + 0.03; // Very subtle for light theme
+
+        // Mix of indigo and coral tones
+        const colors = [
+          "67, 56, 202",   // accent (indigo)
+          "99, 102, 241",  // accentLight
+          "232, 93, 74",   // coral
+          "5, 150, 105",   // elegant
+        ];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
       }
 
       update(w: number, h: number) {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        // Efeito infinito de reaparecer no lado oposto sem criar novas instâncias processuais
         if (this.x < 0) this.x = w;
         if (this.x > w) this.x = 0;
         if (this.y < 0) this.y = h;
@@ -49,12 +58,12 @@ export default function AnimatedBackground() {
       draw(context: CanvasRenderingContext2D) {
         context.beginPath();
         context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        context.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        context.fillStyle = `rgba(${this.color}, ${this.opacity})`;
         context.fill();
 
-        // Brilho difuso em volta da partícula principal
-        context.shadowBlur = 10;
-        context.shadowColor = "rgba(255, 255, 255, 0.4)";
+        // Subtle glow
+        context.shadowBlur = 8;
+        context.shadowColor = `rgba(${this.color}, 0.15)`;
       }
     }
 
@@ -68,7 +77,6 @@ export default function AnimatedBackground() {
     };
 
     const animate = () => {
-      // Limpa o canvas e deixa o fundo transparente
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p) => {
@@ -100,9 +108,8 @@ export default function AnimatedBackground() {
         ref={canvasRef}
         className="fixed inset-0 w-full h-full pointer-events-none z-[-10]"
       />
-      {/* Um fraco gradiente estático para misturar as cores dando sensação de profundidade sem impacto de FPS */}
-      <div className="fixed inset-0 w-full h-full pointer-events-none z-[-11] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/[0.03] via-background to-background" />
+      {/* A faint warm gradient for depth */}
+      <div className="fixed inset-0 w-full h-full pointer-events-none z-[-11] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-accent/[0.02] via-background to-background" />
     </>
   );
 }
-

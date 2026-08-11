@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import { Sora, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import DynamicFavicon from "@/components/DynamicFavicon";
 
-const bricolage = Bricolage_Grotesque({
+const sora = Sora({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   weight: ["300", "400", "500", "700"],
@@ -61,7 +61,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${bricolage.variable} ${jetbrainsMono.variable} font-sans bg-background text-primary antialiased selection:bg-cyan-400 selection:text-background overflow-x-hidden min-h-screen flex flex-col`}
+        className={`${sora.variable} ${ibmPlexMono.variable} font-sans bg-background text-primary antialiased selection:bg-accent selection:text-white overflow-x-hidden min-h-screen flex flex-col grain-overlay`}
       >
         <DynamicFavicon />
         <SmoothScrollProvider>

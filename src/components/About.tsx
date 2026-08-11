@@ -11,10 +11,10 @@ const metrics = [
 ];
 
 const highlightAccent: Record<number, string> = {
-  0: "text-emerald-400 border-emerald-400/20 bg-emerald-400/5",
-  1: "text-violet-400 border-violet-400/20 bg-violet-400/5",
-  2: "text-orange-400 border-orange-400/20 bg-orange-400/5",
-  3: "text-cyan-400 border-cyan-400/20 bg-cyan-400/5",
+  0: "text-elegant border-elegant/20 bg-elegant/5",
+  1: "text-accent border-accent/20 bg-accent/5",
+  2: "text-coral border-coral/20 bg-coral/5",
+  3: "text-accentLight border-accentLight/20 bg-accentLight/5",
 };
 
 const fadeUp = {
@@ -26,43 +26,24 @@ export default function About() {
   const { about } = siteConfig;
 
   return (
-    <section id="sobre" className="py-32 px-6 md:px-12 lg:px-20 border-t border-white/[0.06] relative overflow-hidden">
+    <section id="sobre" className="py-32 px-6 md:px-12 lg:px-20 relative overflow-hidden">
+
+      {/* Section divider */}
+      <div className="absolute top-0 left-0 right-0 section-divider" />
 
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-40" />
-        {/* High performance blurred background orbs (hidden on mobile, will-change-transform for GPU acceleration) */}
-        <motion.div
-          className="hidden md:block absolute -left-20 top-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-cyan-500/[0.05] blur-[130px] rounded-full will-change-transform"
-          animate={{ x: [0, 30, -15, 0], y: [0, -20, 12, 0], scale: [1, 1.07, 0.93, 1] }}
-          transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="hidden md:block absolute right-[5%] bottom-[10%] w-[400px] h-[400px] bg-emerald-500/[0.04] blur-[110px] rounded-full will-change-transform"
-          animate={{ x: [0, -25, 12, 0], y: [0, 20, -10, 0], scale: [1, 0.93, 1.06, 1] }}
-          transition={{ duration: 23, repeat: Infinity, ease: "easeInOut" }}
-        />
-        {/* Mobile static ambient glow */}
-        <div className="md:hidden absolute top-1/3 left-0 w-[200px] h-[200px] bg-cyan-500/[0.03] blur-[60px] rounded-full pointer-events-none" />
-        {[
-          { left: "5%",  top: "15%", delay: 0.3, color: "bg-cyan-400/20" },
-          { left: "80%", top: "20%", delay: 1.5, color: "bg-emerald-400/20" },
-          { left: "90%", top: "55%", delay: 0.7, color: "bg-cyan-400/15" },
-          { left: "15%", top: "80%", delay: 2.1, color: "bg-emerald-400/15" },
-          { left: "50%", top: "90%", delay: 0.9, color: "bg-cyan-400/20" },
-        ].map((dot, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-1 h-1 rounded-full ${dot.color}`}
-            style={{ left: dot.left, top: dot.top }}
-            animate={{ opacity: [0.1, 0.6, 0.1], scale: [1, 1.8, 1] }}
-            transition={{ duration: 3.5, repeat: Infinity, delay: dot.delay, ease: "easeInOut" }}
-          />
-        ))}
-        <motion.div
-          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
-          animate={{ y: ["-10%", "110%"] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear", repeatDelay: 6 }}
-        />
+        
+        {/* Geometric shapes */}
+        <div className="hidden md:block absolute -left-10 top-1/3 w-28 h-28 border-2 border-accent/[0.06] rounded-full geo-float-2" />
+        <div className="hidden md:block absolute right-[8%] bottom-[15%] w-20 h-20 bg-coral/[0.04] rounded-2xl geo-float-1" style={{ animationDelay: '2s' }} />
+        <div className="hidden md:block absolute left-[40%] top-[10%] w-14 h-14 border border-elegant/[0.08] rounded-lg rotate-12 geo-float-2" style={{ animationDelay: '6s' }} />
+        
+        {/* Subtle gradient */}
+        <div className="hidden md:block absolute -left-20 top-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-accent/[0.02] blur-[100px] rounded-full" />
+        
+        {/* Mobile glow */}
+        <div className="md:hidden absolute top-1/3 left-0 w-[180px] h-[180px] bg-accent/[0.03] blur-[60px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -75,7 +56,7 @@ export default function About() {
           variants={fadeUp}
           className="flex items-center gap-3 mb-16 font-mono text-xs text-muted"
         >
-          <span className="text-cyan-400">~/</span>
+          <span className="text-accent">~/</span>
           <span>about</span>
           <span className="text-muted">/</span>
           <span className="text-secondary">README.md</span>
@@ -100,7 +81,7 @@ export default function About() {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.2 }}
-              className="h-[1px] w-1/3 bg-gradient-to-r from-cyan-400/30 to-transparent mt-10 origin-left hidden lg:block"
+              className="h-[2px] w-1/3 bg-gradient-to-r from-accent/40 to-transparent mt-10 origin-left hidden lg:block rounded-full"
             />
           </div>
 
@@ -132,7 +113,7 @@ export default function About() {
               {about.highlights.map((highlight, idx) => (
                 <div
                   key={idx}
-                  className={`flex items-center gap-2.5 text-xs font-mono py-2.5 px-4 rounded-lg border ${highlightAccent[idx]} transition-all`}
+                  className={`flex items-center gap-2.5 text-xs font-mono py-2.5 px-4 rounded-lg border ${highlightAccent[idx]} transition-all hover:shadow-sm`}
                 >
                   <span className="w-1 h-1 rounded-full bg-current block shrink-0" />
                   {highlight}
@@ -148,7 +129,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.85, ease: "easeOut" }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.05] rounded-2xl overflow-hidden border border-white/[0.06]"
+          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border shadow-sm"
         >
           {metrics.map((metric, i) => (
             <motion.div
@@ -157,11 +138,11 @@ export default function About() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 * i }}
-              className="bg-background hover:bg-surface transition-colors p-8 flex flex-col gap-2 group"
+              className="bg-surface hover:bg-surfaceAlt transition-colors p-8 flex flex-col gap-2 group"
             >
               <span className="font-display font-bold text-4xl md:text-5xl text-primary">
                 {metric.value}
-                <span className="text-cyan-400/60 text-2xl">{metric.suffix}</span>
+                <span className="text-accent/60 text-2xl">{metric.suffix}</span>
               </span>
               <span className="text-xs text-secondary font-mono leading-relaxed whitespace-pre-line">
                 {metric.label}
@@ -173,4 +154,3 @@ export default function About() {
     </section>
   );
 }
-

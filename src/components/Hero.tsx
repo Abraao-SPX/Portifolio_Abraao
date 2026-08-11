@@ -86,16 +86,16 @@ const codeLines: CodeLineData[] = [
 ];
 
 const segmentClass: Record<string, string> = {
-  comment: "text-secondary",
-  keyword: "text-violet-400",
-  classname: "text-emerald-400",
-  type: "text-cyan-400",
-  annotation: "text-amber-400",
-  string: "text-amber-300",
+  comment: "text-muted",
+  keyword: "text-accent",
+  classname: "text-elegant",
+  type: "text-accentLight",
+  annotation: "text-coral",
+  string: "text-coral/80",
   op: "text-secondary",
   plain: "text-primary",
-  method: "text-sky-300",
-  cursor: "text-cyan-400 cursor-blink",
+  method: "text-accent",
+  cursor: "text-accent cursor-blink",
 };
 
 export default function Hero() {
@@ -113,49 +113,21 @@ export default function Hero() {
 
       {/* Background */}
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-60" />
         
-        {/* High performance animated ambient orbs (disabled on mobile for fluid FPS, will-change-transform for GPU layer) */}
-        <motion.div
-          className="hidden md:block absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-cyan-500/[0.05] blur-[140px] rounded-full will-change-transform"
-          animate={{ x: [0, 40, -20, 0], y: [0, -30, 18, 0], scale: [1, 1.08, 0.93, 1] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="hidden md:block absolute bottom-1/4 left-[8%] w-[450px] h-[450px] bg-violet-500/[0.05] blur-[120px] rounded-full will-change-transform"
-          animate={{ x: [0, -30, 15, 0], y: [0, 25, -12, 0], scale: [1, 0.92, 1.07, 1] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="hidden md:block absolute top-[10%] left-1/3 w-[300px] h-[300px] bg-emerald-500/[0.03] blur-[100px] rounded-full will-change-transform"
-          animate={{ x: [0, 20, -10, 0], y: [0, -15, 8, 0], scale: [1, 1.05, 0.96, 1] }}
-          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-        />
-        
-        {/* Mobile static glow to preserve aesthetics on low-end screens */}
-        <div className="md:hidden absolute top-1/4 left-1/2 -translate-x-1/2 w-[280px] h-[280px] bg-cyan-500/[0.04] blur-[80px] rounded-full pointer-events-none" />
-        <div className="md:hidden absolute bottom-1/3 left-1/4 w-[240px] h-[240px] bg-violet-500/[0.03] blur-[70px] rounded-full pointer-events-none" />
+        {/* Geometric floating shapes */}
+        <div className="hidden md:block absolute top-[15%] right-[12%] w-32 h-32 border-2 border-accent/[0.08] rounded-3xl geo-float-1" />
+        <div className="hidden md:block absolute bottom-[20%] left-[8%] w-24 h-24 bg-coral/[0.05] rounded-full geo-float-2" />
+        <div className="hidden md:block absolute top-[60%] right-[35%] w-16 h-16 border-2 border-elegant/[0.08] rounded-xl rotate-45 geo-float-1" style={{ animationDelay: '3s' }} />
+        <div className="hidden md:block absolute top-[8%] left-[25%] w-20 h-20 bg-accent/[0.04] rounded-full geo-float-2" style={{ animationDelay: '5s' }} />
+        <div className="hidden md:block absolute bottom-[35%] right-[8%] w-12 h-12 border border-coral/[0.1] rounded-lg geo-float-1" style={{ animationDelay: '7s' }} />
 
-        {[
-          { left: "8%",  top: "20%", delay: 0,   color: "bg-cyan-400/20" },
-          { left: "75%", top: "15%", delay: 1.2, color: "bg-violet-400/20" },
-          { left: "85%", top: "60%", delay: 0.5, color: "bg-cyan-400/15" },
-          { left: "20%", top: "78%", delay: 1.9, color: "bg-emerald-400/20" },
-          { left: "50%", top: "85%", delay: 0.8, color: "bg-violet-400/15" },
-        ].map((dot, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-1 h-1 rounded-full ${dot.color}`}
-            style={{ left: dot.left, top: dot.top }}
-            animate={{ opacity: [0.1, 0.6, 0.1], scale: [1, 1.8, 1] }}
-            transition={{ duration: 3.5, repeat: Infinity, delay: dot.delay, ease: "easeInOut" }}
-          />
-        ))}
-        <motion.div
-          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
-          animate={{ y: ["-10%", "110%"] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "linear", repeatDelay: 5 }}
-        />
+        {/* Gradient orbs (very subtle on light) */}
+        <div className="hidden md:block absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-accent/[0.03] blur-[120px] rounded-full" />
+        <div className="hidden md:block absolute bottom-1/4 left-[8%] w-[400px] h-[400px] bg-coral/[0.03] blur-[100px] rounded-full" />
+        
+        {/* Mobile static glow */}
+        <div className="md:hidden absolute top-1/4 left-1/2 -translate-x-1/2 w-[250px] h-[250px] bg-accent/[0.04] blur-[70px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center z-10 relative">
@@ -170,12 +142,12 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-1.5 mb-8 font-mono text-xs text-muted"
           >
-            <span className="text-cyan-400">~</span>
+            <span className="text-accent">~</span>
             <span className="text-secondary">/</span>
             <span>portfolio</span>
             <span className="text-secondary">/</span>
             <span className="text-primary">home</span>
-            <span className="text-cyan-400/70 cursor-blink ml-1">█</span>
+            <span className="text-accent/70 cursor-blink ml-1">█</span>
           </motion.div>
 
           {/* Name */}
@@ -194,7 +166,7 @@ export default function Hero() {
               initial={{ y: 90, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="font-display font-bold text-[2.8rem] xs:text-[3.5rem] sm:text-[4.5rem] md:text-[5rem] lg:text-[5.5rem] leading-[0.88] tracking-tight text-gradient-cool"
+              className="font-display font-bold text-[2.8rem] xs:text-[3.5rem] sm:text-[4.5rem] md:text-[5rem] lg:text-[5.5rem] leading-[0.88] tracking-tight text-gradient-warm"
             >
               {personal.surname}.
             </motion.h1>
@@ -207,14 +179,14 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.35 }}
             className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 font-mono text-sm"
           >
-            <span className="flex items-center gap-1.5 text-emerald-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span className="flex items-center gap-1.5 text-elegant">
+              <span className="w-1.5 h-1.5 rounded-full bg-elegant" />
               Java &amp; Spring Boot
             </span>
             <span className="text-muted">·</span>
-            <span className="text-violet-400">Flutter</span>
+            <span className="text-accent">Flutter</span>
             <span className="text-muted">·</span>
-            <span className="text-orange-400">Security</span>
+            <span className="text-coral">Security</span>
           </motion.div>
 
           {/* Bio */}
@@ -236,13 +208,13 @@ export default function Hero() {
           >
             <a
               href="#projetos"
-              className="flex items-center gap-2 px-6 py-3 bg-cyan-400 text-background font-display font-semibold text-sm rounded-lg hover:bg-cyan-300 hover:gap-3 transition-all duration-200"
+              className="flex items-center gap-2 px-6 py-3 bg-accent text-white font-display font-semibold text-sm rounded-lg hover:bg-accentLight hover:gap-3 transition-all duration-200 shadow-sm hover:shadow-lg hover:shadow-accent/20"
             >
               Ver Projetos <ArrowRight size={15} />
             </a>
             <a
               href="#contato"
-              className="flex items-center gap-2 px-6 py-3 border border-white/[0.1] text-secondary font-mono text-sm rounded-lg hover:border-white/[0.2] hover:text-primary transition-all"
+              className="flex items-center gap-2 px-6 py-3 border border-border text-secondary font-mono text-sm rounded-lg hover:border-borderHover hover:text-primary hover:bg-surfaceAlt transition-all"
             >
               Contato
             </a>
@@ -250,7 +222,7 @@ export default function Hero() {
               href={personal.socials.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-3 border border-white/[0.08] text-muted font-mono text-sm rounded-lg hover:border-white/[0.18] hover:text-secondary transition-all"
+              className="flex items-center gap-2 px-4 py-3 border border-border text-muted font-mono text-sm rounded-lg hover:border-borderHover hover:text-secondary hover:bg-surfaceAlt transition-all"
               aria-label="GitHub"
             >
               <Github size={15} />
@@ -259,7 +231,7 @@ export default function Hero() {
               href={personal.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-3 border border-white/[0.08] text-muted font-mono text-sm rounded-lg hover:border-white/[0.18] hover:text-secondary transition-all"
+              className="flex items-center gap-2 px-4 py-3 border border-border text-muted font-mono text-sm rounded-lg hover:border-borderHover hover:text-secondary hover:bg-surfaceAlt transition-all"
               aria-label="LinkedIn"
             >
               <Linkedin size={15} />
@@ -271,7 +243,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.8 }}
-            className="flex gap-10 pt-8 border-t border-white/[0.06]"
+            className="flex gap-10 pt-8 border-t border-border"
           >
             {stats.map((stat, i) => (
               <motion.div
@@ -295,22 +267,22 @@ export default function Hero() {
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
           className="hidden lg:block float-animation"
         >
-          <div className="rounded-xl border border-white/[0.08] bg-surface overflow-hidden shadow-2xl shadow-black/60">
+          <div className="rounded-xl border border-border bg-surface overflow-hidden shadow-xl shadow-primary/[0.04]">
             {/* Window chrome */}
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-background/50">
-              <div className="terminal-dot bg-red-500/70" />
-              <div className="terminal-dot bg-yellow-500/70" />
-              <div className="terminal-dot bg-emerald-400/70" />
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-surfaceAlt/50">
+              <div className="terminal-dot bg-coral/60" />
+              <div className="terminal-dot bg-yellow-500/60" />
+              <div className="terminal-dot bg-elegant/60" />
               <span className="ml-4 font-mono text-xs text-muted">Abraão.java</span>
               <div className="ml-auto">
-                <span className="text-[10px] font-mono text-emerald-400/70 bg-emerald-400/10 border border-emerald-400/20 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono text-elegant bg-elegant/10 border border-elegant/20 px-2 py-0.5 rounded">
                   Java
                 </span>
               </div>
             </div>
 
             {/* Code body */}
-            <div className="px-4 py-4 font-mono text-[0.72rem] leading-none select-none">
+            <div className="px-4 py-4 font-mono text-[0.72rem] leading-none select-none bg-surface">
               {codeLines.map((line, i) => (
                 <motion.div
                   key={line.num}
@@ -322,7 +294,7 @@ export default function Hero() {
                   <span className="line-num">{line.num}</span>
                   <span>
                     {line.segments.length === 0
-                      ? " "
+                      ? " "
                       : line.segments.map((seg, j) => (
                           <span key={j} className={segmentClass[seg.type] ?? "text-primary"}>
                             {seg.text}

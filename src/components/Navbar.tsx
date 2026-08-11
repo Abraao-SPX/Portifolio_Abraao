@@ -22,8 +22,6 @@ export default function Navbar() {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? scrollTop / docHeight : 0;
       
-      // Update DOM style directly (compositor scaleX transform)
-      // This is 100% SSR safe, hydration safe, and doesn't trigger React renders.
       if (progressRef.current) {
         progressRef.current.style.transform = `scaleX(${progress})`;
       }
@@ -38,16 +36,16 @@ export default function Navbar() {
     };
     
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Trigger initial check
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-      {/* Scroll progress progress-bar using GPU scaleX via Ref */}
+      {/* Scroll progress bar */}
       <div
         ref={progressRef}
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-500 via-cyan-400 to-violet-500 z-[100] origin-left transition-transform duration-75"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-accent via-accentLight to-coral z-[100] origin-left transition-transform duration-75"
         style={{ transform: "scaleX(0)" }}
       />
 
@@ -57,7 +55,7 @@ export default function Navbar() {
         transition={{ duration: 0.7, ease: "easeOut" }}
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           scrolled
-            ? "py-3 bg-background/90 backdrop-blur-xl border-b border-white/[0.06]"
+            ? "py-3 bg-background/85 backdrop-blur-xl border-b border-border"
             : "py-5"
         }`}
       >
@@ -69,13 +67,13 @@ export default function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             <span className="font-mono text-sm font-medium tracking-tight">
-              <span className="text-cyan-400">ap</span>
-              <span className="text-secondary">_</span>
-              <span className="text-cyan-400/70 cursor-blink">▋</span>
+              <span className="text-accent">ap</span>
+              <span className="text-muted">_</span>
+              <span className="text-accent/70 cursor-blink">▋</span>
             </span>
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-400/20 bg-emerald-400/5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot block" />
-              <span className="text-[10px] text-emerald-400 font-mono tracking-wide">disponível</span>
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-elegant/20 bg-elegant/5">
+              <span className="w-1.5 h-1.5 rounded-full bg-elegant pulse-dot block" />
+              <span className="text-[10px] text-elegant font-mono tracking-wide">disponível</span>
             </div>
           </div>
 
@@ -87,9 +85,9 @@ export default function Navbar() {
                   href={link.href}
                   className="hover:text-primary transition-colors relative group py-1 flex items-center gap-0.5"
                 >
-                  <span className="text-cyan-400/40 group-hover:text-cyan-400/70 transition-colors text-xs">~/</span>
+                  <span className="text-accent/40 group-hover:text-accent/70 transition-colors text-xs">~/</span>
                   {link.label}
-                  <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-cyan-400/40 transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-[1.5px] bg-accent/50 transition-all duration-300 group-hover:w-full rounded-full" />
                 </a>
               </li>
             ))}
@@ -99,7 +97,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center">
             <a
               href="#contato"
-              className="px-5 py-2 border border-cyan-400/30 bg-cyan-400/5 text-cyan-400 text-sm font-mono rounded-lg hover:bg-cyan-400/10 hover:border-cyan-400/60 transition-all"
+              className="px-5 py-2 bg-accent text-white text-sm font-mono rounded-lg hover:bg-accentLight transition-all shadow-sm hover:shadow-md hover:shadow-accent/15"
             >
               contato
             </a>
@@ -107,7 +105,7 @@ export default function Navbar() {
 
           {/* Mobile button */}
           <button
-            className="md:hidden text-primary p-2 hover:bg-surface rounded-lg transition-colors"
+            className="md:hidden text-primary p-2 hover:bg-surfaceAlt rounded-lg transition-colors"
             onClick={() => setMenuOpen(true)}
             aria-label="Abrir menu"
           >
@@ -125,7 +123,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-primary/20 backdrop-blur-sm"
               onClick={() => setMenuOpen(false)}
             />
             <motion.div
@@ -133,20 +131,18 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 220 }}
-              className="relative w-[68%] max-w-[280px] h-full bg-surface border-l border-white/[0.07] text-primary flex flex-col pt-20 overflow-hidden"
+              className="relative w-[68%] max-w-[280px] h-full bg-surface border-l border-border text-primary flex flex-col pt-20 overflow-hidden shadow-2xl"
             >
-              <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none" />
-
               <button
-                className="absolute top-5 right-5 p-2 bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
+                className="absolute top-5 right-5 p-2 bg-surfaceAlt hover:bg-border/50 rounded-lg transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 <X size={17} className="text-secondary" />
               </button>
 
               <div className="px-6 mb-8 flex items-center gap-2 relative z-10">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot block" />
-                <span className="text-xs text-emerald-400 font-mono">disponível para projetos</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-elegant pulse-dot block" />
+                <span className="text-xs text-elegant font-mono">disponível para projetos</span>
               </div>
 
               <nav className="flex flex-col px-4 gap-1 relative z-10">
@@ -157,10 +153,10 @@ export default function Navbar() {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: i * 0.07 }}
                     href={link.href}
-                    className="flex items-center gap-1.5 py-3 px-4 rounded-xl hover:bg-surfaceHover text-secondary hover:text-primary transition-all font-mono text-sm"
+                    className="flex items-center gap-1.5 py-3 px-4 rounded-xl hover:bg-surfaceAlt text-secondary hover:text-primary transition-all font-mono text-sm"
                     onClick={() => setMenuOpen(false)}
                   >
-                    <span className="text-cyan-400/50 text-xs">~/</span>
+                    <span className="text-accent/50 text-xs">~/</span>
                     {link.label}
                   </motion.a>
                 ))}
@@ -169,7 +165,7 @@ export default function Navbar() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: navLinks.length * 0.07 }}
                   href="#contato"
-                  className="mt-4 py-3 px-4 border border-cyan-400/30 bg-cyan-400/5 text-cyan-400 rounded-xl font-mono text-sm text-center hover:bg-cyan-400/10 transition-all"
+                  className="mt-4 py-3 px-4 bg-accent text-white rounded-xl font-mono text-sm text-center hover:bg-accentLight transition-all"
                   onClick={() => setMenuOpen(false)}
                 >
                   contato

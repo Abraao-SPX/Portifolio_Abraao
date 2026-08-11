@@ -35,46 +35,25 @@ export default function Contact() {
   };
 
   const inputClass =
-    "w-full bg-background border border-white/[0.08] px-4 py-3 rounded-lg focus:outline-none focus:border-cyan-400/40 hover:border-white/[0.14] transition-all text-primary placeholder-muted text-sm font-mono";
+    "w-full bg-surfaceAlt border border-border px-4 py-3 rounded-lg focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 hover:border-borderHover transition-all text-primary placeholder-muted text-sm font-mono";
 
   return (
-    <section id="contato" className="py-32 px-6 md:px-12 lg:px-20 border-t border-white/[0.06] relative overflow-hidden">
+    <section id="contato" className="py-32 px-6 md:px-12 lg:px-20 relative overflow-hidden">
+
+      <div className="absolute top-0 left-0 right-0 section-divider" />
 
       <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-40" />
-        {/* High performance blurred background orbs (hidden on mobile, will-change-transform for GPU layer) */}
-        <motion.div
-          className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-cyan-500/[0.05] blur-[130px] rounded-full will-change-transform"
-          animate={{ x: [0, 35, -18, 0], y: [0, -25, 14, 0], scale: [1, 1.08, 0.93, 1] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="hidden md:block absolute bottom-[5%] right-[5%] w-[400px] h-[400px] bg-emerald-500/[0.04] blur-[110px] rounded-full will-change-transform"
-          animate={{ x: [0, -22, 11, 0], y: [0, 18, -10, 0], scale: [1, 0.93, 1.06, 1] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        />
-        {/* Mobile static ambient glow */}
-        <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] bg-cyan-500/[0.03] blur-[70px] rounded-full pointer-events-none" />
-        {[
-          { left: "5%",  top: "10%", delay: 0.5, color: "bg-cyan-400/20" },
-          { left: "88%", top: "15%", delay: 1.7, color: "bg-emerald-400/20" },
-          { left: "92%", top: "55%", delay: 0.9, color: "bg-cyan-400/15" },
-          { left: "8%",  top: "78%", delay: 2.3, color: "bg-emerald-400/15" },
-          { left: "45%", top: "90%", delay: 0.1, color: "bg-cyan-400/20" },
-        ].map((dot, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-1 h-1 rounded-full ${dot.color}`}
-            style={{ left: dot.left, top: dot.top }}
-            animate={{ opacity: [0.1, 0.6, 0.1], scale: [1, 1.8, 1] }}
-            transition={{ duration: 3.5, repeat: Infinity, delay: dot.delay, ease: "easeInOut" }}
-          />
-        ))}
-        <motion.div
-          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
-          animate={{ y: ["-10%", "110%"] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "linear", repeatDelay: 5 }}
-        />
+
+        {/* Geometric shapes */}
+        <div className="hidden md:block absolute top-[15%] right-[15%] w-28 h-28 border-2 border-accent/[0.06] rounded-3xl geo-float-1" />
+        <div className="hidden md:block absolute bottom-[20%] left-[10%] w-20 h-20 bg-elegant/[0.04] rounded-full geo-float-2" style={{ animationDelay: '4s' }} />
+        
+        {/* Gradient orbs */}
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-accent/[0.02] blur-[110px] rounded-full" />
+        <div className="hidden md:block absolute bottom-[5%] right-[5%] w-[350px] h-[350px] bg-coral/[0.02] blur-[90px] rounded-full" />
+        
+        <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-accent/[0.03] blur-[60px] rounded-full" />
       </div>
 
       <div className="max-w-6xl mx-auto z-10 relative">
@@ -88,7 +67,7 @@ export default function Contact() {
           className="mb-20"
         >
           <div className="flex items-center gap-3 mb-6 font-mono text-xs text-muted">
-            <span className="text-cyan-400">~/</span>
+            <span className="text-accent">~/</span>
             <span>contact</span>
             <span className="text-muted">/</span>
             <span className="text-secondary">send-message</span>
@@ -96,7 +75,7 @@ export default function Contact() {
           <h2 className="font-display font-bold text-5xl md:text-7xl tracking-tight leading-[0.88]">
             <span className="text-primary">Inicie um</span>
             <br />
-            <span className="text-gradient-cool">Projeto</span>
+            <span className="text-gradient-warm">Projeto</span>
             <span className="text-muted">.</span>
           </h2>
         </motion.div>
@@ -120,10 +99,10 @@ export default function Contact() {
               href={`mailto:${siteConfig.personal.email}`}
               className="inline-flex items-center gap-3 text-primary font-mono text-sm mb-10 group w-fit"
             >
-              <div className="w-9 h-9 rounded-lg border border-white/[0.1] flex items-center justify-center group-hover:border-cyan-400/40 group-hover:bg-cyan-400/5 transition-all">
-                <Mail size={14} className="text-secondary group-hover:text-cyan-400 transition-colors" />
+              <div className="w-9 h-9 rounded-lg border border-border flex items-center justify-center group-hover:border-accent/40 group-hover:bg-accent/5 transition-all">
+                <Mail size={14} className="text-secondary group-hover:text-accent transition-colors" />
               </div>
-              <span className="border-b border-white/[0.2] group-hover:border-cyan-400/50 transition-colors pb-0.5 text-secondary group-hover:text-primary">
+              <span className="border-b border-border group-hover:border-accent/50 transition-colors pb-0.5 text-secondary group-hover:text-primary">
                 {siteConfig.personal.email}
               </span>
             </a>
@@ -136,7 +115,7 @@ export default function Contact() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2.5 border border-white/[0.08] rounded-lg text-secondary hover:text-primary hover:border-white/[0.2] transition-all text-xs font-mono"
+                  className="flex items-center gap-2 px-4 py-2.5 border border-border rounded-lg text-secondary hover:text-primary hover:border-borderHover hover:bg-surfaceAlt transition-all text-xs font-mono"
                 >
                   {socialIcons[key] ?? null}
                   <span className="capitalize">{key}</span>
@@ -145,14 +124,14 @@ export default function Contact() {
             </div>
 
             {/* Terminal note */}
-            <div className="mt-12 p-4 rounded-lg bg-surface/60 border border-white/[0.06] font-mono text-xs">
+            <div className="mt-12 p-4 rounded-lg bg-surfaceAlt border border-border font-mono text-xs">
               <div className="flex items-center gap-2 mb-3 text-muted">
                 <Terminal size={12} />
                 <span>response time</span>
               </div>
               <p className="text-secondary leading-relaxed">
-                <span className="text-cyan-400">$</span> echo &quot;Respondo em até{" "}
-                <span className="text-emerald-400">24h</span> em dias úteis.&quot;
+                <span className="text-accent">$</span> echo &quot;Respondo em até{" "}
+                <span className="text-elegant">24h</span> em dias úteis.&quot;
               </p>
             </div>
           </motion.div>
@@ -166,20 +145,20 @@ export default function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-5 p-7 bg-surface/50 border border-white/[0.07] rounded-2xl"
+              className="flex flex-col gap-5 p-7 bg-surface border border-border rounded-2xl shadow-sm"
             >
               {/* Form header */}
-              <div className="flex items-center gap-2 pb-4 border-b border-white/[0.06]">
-                <div className="terminal-dot bg-red-500/60" />
-                <div className="terminal-dot bg-yellow-500/60" />
-                <div className="terminal-dot bg-emerald-400/60" />
+              <div className="flex items-center gap-2 pb-4 border-b border-border">
+                <div className="terminal-dot bg-coral/50" />
+                <div className="terminal-dot bg-yellow-500/50" />
+                <div className="terminal-dot bg-elegant/50" />
                 <span className="ml-2 font-mono text-[10px] text-muted">new-message.sh</span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
                   <label className="font-mono text-[10px] text-muted flex items-center gap-1.5">
-                    <span className="text-cyan-400">›</span> nome
+                    <span className="text-accent">›</span> nome
                   </label>
                   <input
                     required
@@ -191,7 +170,7 @@ export default function Contact() {
                 </div>
                 <div className="flex flex-col gap-2">
                   <label className="font-mono text-[10px] text-muted flex items-center gap-1.5">
-                    <span className="text-cyan-400">›</span> email
+                    <span className="text-accent">›</span> email
                   </label>
                   <input
                     required
@@ -205,7 +184,7 @@ export default function Contact() {
 
               <div className="flex flex-col gap-2">
                 <label className="font-mono text-[10px] text-muted flex items-center gap-1.5">
-                  <span className="text-cyan-400">›</span> mensagem
+                  <span className="text-accent">›</span> mensagem
                 </label>
                 <textarea
                   required
@@ -220,7 +199,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`flex items-center gap-2 bg-cyan-400 text-background px-7 py-3 rounded-lg font-display font-semibold hover:bg-cyan-300 transition-all text-sm ${
+                  className={`flex items-center gap-2 bg-coral text-white px-7 py-3 rounded-lg font-display font-semibold hover:bg-coralLight transition-all text-sm shadow-sm hover:shadow-md hover:shadow-coral/20 ${
                     isSubmitting ? "opacity-60 pointer-events-none" : ""
                   }`}
                 >
@@ -232,7 +211,7 @@ export default function Contact() {
                   <motion.div
                     initial={{ opacity: 0, x: 8 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="flex items-center gap-2 text-emerald-400 text-xs font-mono"
+                    className="flex items-center gap-2 text-elegant text-xs font-mono"
                   >
                     <CheckCircle size={14} /> Mensagem enviada!
                   </motion.div>
@@ -241,7 +220,7 @@ export default function Contact() {
                   <motion.div
                     initial={{ opacity: 0, x: 8 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="flex items-center gap-2 text-red-400 text-xs font-mono"
+                    className="flex items-center gap-2 text-coral text-xs font-mono"
                   >
                     <AlertCircle size={14} className="shrink-0" /> {errorMsg}
                   </motion.div>
@@ -254,4 +233,3 @@ export default function Contact() {
     </section>
   );
 }
-
