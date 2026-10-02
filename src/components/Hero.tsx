@@ -12,6 +12,7 @@ export default function Hero() {
           <span className="eyebrow"><span className="small-asterisk">✳</span> DESENVOLVEDOR DE SOFTWARE</span>
           <span className="availability"><span /> Disponível para oportunidades</span>
         </div>
+        <div className="hero-story">
         <div className="hero-grid">
           <div className="hero-main">
             <h1 id="hero-heading" aria-label={`${personal.name} ${personal.surname}`}><span className="hero-title-line" aria-hidden="true"><span>{personal.name}</span></span><span className="hero-title-line" aria-hidden="true"><span>{personal.surname}<span className="hero-period">.</span></span></span></h1>
@@ -26,6 +27,7 @@ export default function Hero() {
             </div>
           </div>
           <HeroSculpture />
+        </div>
         </div>
         <div className="hero-bottomline">
           <span className="eyebrow">BACK-END · MOBILE · SEGURANÇA</span>
