@@ -1,23 +1,34 @@
 import type { Metadata } from "next";
-import { Sora, IBM_Plex_Mono } from "next/font/google";
+import { Manrope, IBM_Plex_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import DynamicFavicon from "@/components/DynamicFavicon";
 
-const sora = Sora({
+const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: "400",
+  style: ["normal", "italic"],
+  adjustFontFallback: false,
+  display: "swap",
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["300", "400", "500", "700"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://abraaoportfolio.me"),
+  icons: { icon: "/favicon.svg" },
   title: "Abraão Paixão | Java · Flutter · Security",
   description: "Portfólio de Abraão Paixão — desenvolvedor de software especializado em Java, Spring Boot, Flutter e entusiasta de segurança.",
   openGraph: {
@@ -61,12 +72,9 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${sora.variable} ${ibmPlexMono.variable} font-sans bg-background text-primary antialiased selection:bg-accent selection:text-white overflow-x-hidden min-h-screen flex flex-col grain-overlay`}
+        className={`${manrope.variable} ${ibmPlexMono.variable} ${instrumentSerif.variable}`}
       >
-        <DynamicFavicon />
-        <SmoothScrollProvider>
-          {children}
-        </SmoothScrollProvider>
+        {children}
       </body>
     </html>
   );

@@ -1,328 +1,87 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import { ArrowDown, ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
-import { motion } from "framer-motion";
-import { ArrowRight, Github, Linkedin, ChevronDown } from "lucide-react";
 
-const stats = [
-  { value: "3", label: "Projetos" },
-  { value: "2+", label: "Anos estudando" },
-  { value: "10+", label: "Tecnologias" },
-];
-
-type CodeSegment = { type: string; text: string };
-type CodeLineData = { num: number; segments: CodeSegment[] };
-
-const codeLines: CodeLineData[] = [
-  { num: 1, segments: [{ type: "comment", text: "// Abraão.java" }] },
-  { num: 2, segments: [] },
-  {
-    num: 3, segments: [
-      { type: "keyword", text: "public class " },
-      { type: "classname", text: "Abraão " },
-      { type: "keyword", text: "extends " },
-      { type: "classname", text: "Developer " },
-      { type: "plain", text: "{" },
-    ],
-  },
-  { num: 4, segments: [] },
-  { num: 5, segments: [{ type: "annotation", text: "  @Specializations" }] },
-  {
-    num: 6, segments: [
-      { type: "type", text: "  String[] " },
-      { type: "plain", text: "backend " },
-      { type: "op", text: "= { " },
-      { type: "string", text: '"Java"' },
-      { type: "op", text: ", " },
-      { type: "string", text: '"Spring Boot"' },
-      { type: "op", text: " };" },
-    ],
-  },
-  {
-    num: 7, segments: [
-      { type: "type", text: "  String[] " },
-      { type: "plain", text: "mobile " },
-      { type: "op", text: "= { " },
-      { type: "string", text: '"Flutter"' },
-      { type: "op", text: ", " },
-      { type: "string", text: '"Dart"' },
-      { type: "op", text: " };" },
-    ],
-  },
-  {
-    num: 8, segments: [
-      { type: "type", text: "  String[] " },
-      { type: "plain", text: "security " },
-      { type: "op", text: "= { " },
-      { type: "string", text: '"Ethical Hacking"' },
-      { type: "op", text: " };" },
-    ],
-  },
-  { num: 9, segments: [] },
-  { num: 10, segments: [{ type: "annotation", text: "  @Override" }] },
-  {
-    num: 11, segments: [
-      { type: "keyword", text: "  public " },
-      { type: "type", text: "String " },
-      { type: "method", text: "passion" },
-      { type: "plain", text: "() {" },
-    ],
-  },
-  {
-    num: 12, segments: [
-      { type: "keyword", text: "    return " },
-      { type: "string", text: '"Código limpo. Sistemas sólidos."' },
-      { type: "op", text: ";" },
-    ],
-  },
-  { num: 13, segments: [{ type: "plain", text: "  }" }] },
-  { num: 14, segments: [] },
-  {
-    num: 15, segments: [
-      { type: "plain", text: "}" },
-      { type: "cursor", text: "█" },
-    ],
-  },
-];
-
-const segmentClass: Record<string, string> = {
-  comment: "text-muted",
-  keyword: "text-accent",
-  classname: "text-elegant",
-  type: "text-accentLight",
-  annotation: "text-coral",
-  string: "text-coral/80",
-  op: "text-secondary",
-  plain: "text-primary",
-  method: "text-accent",
-  cursor: "text-accent cursor-blink",
-};
+function ArchitectureDrawing() {
+  return (
+    <div className="architecture-art" aria-hidden="true">
+      <div className="art-coordinate art-coordinate-top">FIG. 01 — CAMADAS DE UMA IDEIA</div>
+      <svg viewBox="0 0 480 500" fill="none" className="architecture-svg">
+        <defs>
+          <pattern id="drawing-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.8" fill="#a8aa9c" opacity=".5" />
+          </pattern>
+        </defs>
+        <rect x="15" y="25" width="450" height="450" fill="url(#drawing-grid)" />
+        <ellipse cx="240" cy="270" rx="210" ry="210" stroke="#d8d7ca" />
+        <ellipse cx="240" cy="270" rx="160" ry="210" stroke="#deddd2" strokeDasharray="3 6" />
+        <path d="M240 18V486M10 270H470" stroke="#c7c8bc" strokeDasharray="3 6" />
+        <path d="M64 367L240 459L416 367L240 275L64 367Z" fill="#e7e7dc" stroke="#979c8b" />
+        <path d="M64 367V387L240 479L416 387V367M240 459V479" stroke="#979c8b" />
+        <path d="M99 385L275 293M135 404L311 312M170 422L346 330M205 441L381 348M99 348L275 440M135 330L310 421M170 311L346 404M205 293L381 385" stroke="#bac0ad" />
+        <g className="art-middle-layer">
+          <path d="M64 248L240 340L416 248V272L240 365L64 272V248Z" fill="#252a24" stroke="#252a24" />
+          <path d="M64 248L240 340L416 248L240 156L64 248Z" fill="#424b3d" stroke="#252a24" />
+          <path d="M99 248L240 322L381 248L240 174L99 248Z" stroke="#839075" />
+          <path d="M135 248L240 303L346 248L240 193L135 248Z" stroke="#839075" />
+          <path d="M170 248L240 285L311 248L240 211L170 248Z" stroke="#a6b38e" />
+          <path d="M240 340V365" stroke="#74816a" />
+        </g>
+        <path d="M64 144V246M416 144V246M240 236V338M64 276V363M416 276V363M240 367V450" stroke="#929885" strokeDasharray="4 6" />
+        <g className="art-top-layer">
+          <path d="M64 126V147L240 239L416 147V126" fill="#c74722" stroke="#a63d1f" />
+          <path d="M64 126L240 218L416 126L240 34L64 126Z" fill="#e85a2a" stroke="#b54420" />
+          <path d="M99 126L240 200L381 126L240 52L99 126Z" stroke="#f79669" />
+          <path d="M64 126L240 218L416 126M240 218V239" stroke="#ffae87" />
+          <path d="M215 92L177 112L215 132M265 119L303 139L265 159M255 90L225 160" stroke="#fff2d9" strokeWidth="5" strokeLinecap="square" strokeLinejoin="miter" />
+        </g>
+        <path d="M416 126H455M416 248H455M416 367H455" stroke="#858b7b" />
+        <circle cx="455" cy="126" r="3" fill="#e85a2a" />
+        <circle cx="455" cy="248" r="3" fill="#424b3d" />
+        <circle cx="455" cy="367" r="3" fill="#858b7b" />
+        <path d="M34 65H46M40 59V71M423 430H435M429 424V436" stroke="#7b8370" />
+      </svg>
+      <div className="art-caption"><span>BOAS IDEIAS PRECISAM<br />DE UMA BOA ESTRUTURA.</span><span className="art-caption-symbol">↗</span></div>
+    </div>
+  );
+}
 
 export default function Hero() {
-  const { hero, personal } = siteConfig;
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
+  const { personal } = siteConfig;
   return (
-    <section className="min-h-screen w-full flex items-center px-6 md:px-12 lg:px-20 relative pt-24 pb-16 overflow-hidden">
-
-      {/* Background */}
-      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-60" />
-        
-        {/* Geometric floating shapes */}
-        <div className="hidden md:block absolute top-[15%] right-[12%] w-32 h-32 border-2 border-accent/[0.08] rounded-3xl geo-float-1" />
-        <div className="hidden md:block absolute bottom-[20%] left-[8%] w-24 h-24 bg-coral/[0.05] rounded-full geo-float-2" />
-        <div className="hidden md:block absolute top-[60%] right-[35%] w-16 h-16 border-2 border-elegant/[0.08] rounded-xl rotate-45 geo-float-1" style={{ animationDelay: '3s' }} />
-        <div className="hidden md:block absolute top-[8%] left-[25%] w-20 h-20 bg-accent/[0.04] rounded-full geo-float-2" style={{ animationDelay: '5s' }} />
-        <div className="hidden md:block absolute bottom-[35%] right-[8%] w-12 h-12 border border-coral/[0.1] rounded-lg geo-float-1" style={{ animationDelay: '7s' }} />
-
-        {/* Gradient orbs (very subtle on light) */}
-        <div className="hidden md:block absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-accent/[0.03] blur-[120px] rounded-full" />
-        <div className="hidden md:block absolute bottom-1/4 left-[8%] w-[400px] h-[400px] bg-coral/[0.03] blur-[100px] rounded-full" />
-        
-        {/* Mobile static glow */}
-        <div className="md:hidden absolute top-1/4 left-1/2 -translate-x-1/2 w-[250px] h-[250px] bg-accent/[0.04] blur-[70px] rounded-full" />
-      </div>
-
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center z-10 relative">
-
-        {/* ── Left: content ── */}
-        <div className="flex flex-col">
-
-          {/* Breadcrumb */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-1.5 mb-8 font-mono text-xs text-muted"
-          >
-            <span className="text-accent">~</span>
-            <span className="text-secondary">/</span>
-            <span>portfolio</span>
-            <span className="text-secondary">/</span>
-            <span className="text-primary">home</span>
-            <span className="text-accent/70 cursor-blink ml-1">█</span>
-          </motion.div>
-
-          {/* Name */}
-          <div className="overflow-hidden mb-2">
-            <motion.h1
-              initial={{ y: 90, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="font-display font-bold text-[2.8rem] xs:text-[3.5rem] sm:text-[4.5rem] md:text-[5rem] lg:text-[5.5rem] leading-[0.88] tracking-tight text-primary"
-            >
-              {personal.name}
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden mb-8">
-            <motion.h1
-              initial={{ y: 90, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="font-display font-bold text-[2.8rem] xs:text-[3.5rem] sm:text-[4.5rem] md:text-[5rem] lg:text-[5.5rem] leading-[0.88] tracking-tight text-gradient-warm"
-            >
-              {personal.surname}.
-            </motion.h1>
-          </div>
-
-          {/* Role tags */}
-          <motion.div
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.35 }}
-            className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 font-mono text-sm"
-          >
-            <span className="flex items-center gap-1.5 text-elegant">
-              <span className="w-1.5 h-1.5 rounded-full bg-elegant" />
-              Java &amp; Spring Boot
-            </span>
-            <span className="text-muted">·</span>
-            <span className="text-accent">Flutter</span>
-            <span className="text-muted">·</span>
-            <span className="text-coral">Security</span>
-          </motion.div>
-
-          {/* Bio */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-secondary font-mono text-sm leading-[1.85] mb-10 max-w-[480px]"
-          >
-            {hero.paragraph}
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.65 }}
-            className="flex flex-wrap gap-3 mb-12"
-          >
-            <a
-              href="#projetos"
-              className="flex items-center gap-2 px-6 py-3 bg-accent text-white font-display font-semibold text-sm rounded-lg hover:bg-accentLight hover:gap-3 transition-all duration-200 shadow-sm hover:shadow-lg hover:shadow-accent/20"
-            >
-              Ver Projetos <ArrowRight size={15} />
-            </a>
-            <a
-              href="#contato"
-              className="flex items-center gap-2 px-6 py-3 border border-border text-secondary font-mono text-sm rounded-lg hover:border-borderHover hover:text-primary hover:bg-surfaceAlt transition-all"
-            >
-              Contato
-            </a>
-            <a
-              href={personal.socials.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-3 border border-border text-muted font-mono text-sm rounded-lg hover:border-borderHover hover:text-secondary hover:bg-surfaceAlt transition-all"
-              aria-label="GitHub"
-            >
-              <Github size={15} />
-            </a>
-            <a
-              href={personal.socials.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-3 border border-border text-muted font-mono text-sm rounded-lg hover:border-borderHover hover:text-secondary hover:bg-surfaceAlt transition-all"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={15} />
-            </a>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.8 }}
-            className="flex gap-10 pt-8 border-t border-border"
-          >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 + i * 0.1 }}
-                className="flex flex-col gap-1"
-              >
-                <span className="font-display font-bold text-2xl text-primary">{stat.value}</span>
-                <span className="font-mono text-xs text-muted">{stat.label}</span>
-              </motion.div>
-            ))}
-          </motion.div>
+    <section id="inicio" className="hero" aria-labelledby="hero-heading">
+      <div className="container">
+        <div className="hero-topline">
+          <span className="eyebrow"><span className="small-asterisk">✳</span> DESENVOLVEDOR DE SOFTWARE</span>
+          <span className="availability"><span /> Disponível para oportunidades</span>
         </div>
-
-        {/* ── Right: Java code card ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 24, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-          className="hidden lg:block float-animation"
-        >
-          <div className="rounded-xl border border-border bg-surface overflow-hidden shadow-xl shadow-primary/[0.04]">
-            {/* Window chrome */}
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-surfaceAlt/50">
-              <div className="terminal-dot bg-coral/60" />
-              <div className="terminal-dot bg-yellow-500/60" />
-              <div className="terminal-dot bg-elegant/60" />
-              <span className="ml-4 font-mono text-xs text-muted">Abraão.java</span>
-              <div className="ml-auto">
-                <span className="text-[10px] font-mono text-elegant bg-elegant/10 border border-elegant/20 px-2 py-0.5 rounded">
-                  Java
-                </span>
-              </div>
+        <div className="hero-grid">
+          <div className="hero-main">
+            <h1 id="hero-heading">Abraão<br />Paixão<span className="hero-period">.</span></h1>
+            <div className="hero-intro">
+              <ArrowDownRight className="hero-intro-arrow" size={30} strokeWidth={1.25} aria-hidden="true" />
+              <p>Entre a ideia e o código,<br />eu gosto de <em>construir.</em></p>
             </div>
-
-            {/* Code body */}
-            <div className="px-4 py-4 font-mono text-[0.72rem] leading-none select-none bg-surface">
-              {codeLines.map((line, i) => (
-                <motion.div
-                  key={line.num}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.25, delay: 0.45 + i * 0.055 }}
-                  className="code-line"
-                >
-                  <span className="line-num">{line.num}</span>
-                  <span>
-                    {line.segments.length === 0
-                      ? " "
-                      : line.segments.map((seg, j) => (
-                          <span key={j} className={segmentClass[seg.type] ?? "text-primary"}>
-                            {seg.text}
-                          </span>
-                        ))}
-                  </span>
-                </motion.div>
-              ))}
+            <p className="hero-description">Desenvolvo aplicações com Java e Flutter.<br className="desktop-break" /> Estudante, curioso por natureza e atento à segurança em cada detalhe.</p>
+            <div className="hero-actions">
+              <a className="button-primary" href="#projetos">Explore meus projetos <ArrowDown size={17} aria-hidden="true" /></a>
+              <a className="text-link" href={personal.socials.github} target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight size={17} aria-hidden="true" /></a>
             </div>
           </div>
-        </motion.div>
+          <ArchitectureDrawing />
+        </div>
+        <div className="hero-bottomline">
+          <span className="eyebrow">BACK-END · MOBILE · SEGURANÇA</span>
+          <a href="#projetos" className="scroll-prompt">UM POUCO DO QUE EU FAÇO <ArrowDown size={13} aria-hidden="true" /></a>
+        </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: scrollY > 80 ? 0 : 1 }}
-        transition={{ duration: 0.4 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted pointer-events-none"
-      >
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em]">scroll</span>
-        <motion.div
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown size={13} />
-        </motion.div>
-      </motion.div>
+      <div className="specialties-strip" aria-label="Principais tecnologias">
+        <div className="container specialties-inner">
+          <span>Java <span className="strip-plus">+</span> Spring Boot</span><span className="strip-mark" aria-hidden="true">✳</span>
+          <span>Flutter <span className="strip-plus">&</span> Dart</span><span className="strip-mark" aria-hidden="true">✳</span>
+          <span>APIs & arquitetura</span><span className="strip-mark" aria-hidden="true">✳</span>
+          <span>Segurança por princípio</span>
+        </div>
+      </div>
     </section>
   );
 }

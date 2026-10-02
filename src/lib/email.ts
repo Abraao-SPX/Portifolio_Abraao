@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import emailjs from '@emailjs/browser';
 
 /**
@@ -22,4 +21,3 @@ export const sendEmailForm = (formElement: HTMLFormElement) => {
   // Fazemos a chamada HTTP
   return emailjs.sendForm(serviceID, templateID, formElement, publicKey);
 };
-

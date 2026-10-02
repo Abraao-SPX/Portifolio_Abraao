@@ -1,155 +1,42 @@
-"use client";
-import React from "react";
-import { siteConfig } from "@/data/portfolio";
-import { motion } from "framer-motion";
-
-const metrics = [
-  { value: "3", suffix: "", label: "Projetos\nPublicados" },
-  { value: "2", suffix: "+", label: "Anos de\nEstudo Dedicado" },
-  { value: "10", suffix: "+", label: "Tecnologias\nDominadas" },
-  { value: "100", suffix: "+", label: "Commits\nno GitHub" },
-];
-
-const highlightAccent: Record<number, string> = {
-  0: "text-elegant border-elegant/20 bg-elegant/5",
-  1: "text-accent border-accent/20 bg-accent/5",
-  2: "text-coral border-coral/20 bg-coral/5",
-  3: "text-accentLight border-accentLight/20 bg-accentLight/5",
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.85, ease: "easeOut" } },
-};
+import "./about.css";
 
 export default function About() {
-  const { about } = siteConfig;
-
   return (
-    <section id="sobre" className="py-32 px-6 md:px-12 lg:px-20 relative overflow-hidden">
+    <section id="sobre" className="about-section" aria-labelledby="about-heading">
+      <div className="container">
+        <p className="eyebrow about-eyebrow">02 / UM POUCO SOBRE MIM</p>
 
-      {/* Section divider */}
-      <div className="absolute top-0 left-0 right-0 section-divider" />
-
-      <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-40" />
-        
-        {/* Geometric shapes */}
-        <div className="hidden md:block absolute -left-10 top-1/3 w-28 h-28 border-2 border-accent/[0.06] rounded-full geo-float-2" />
-        <div className="hidden md:block absolute right-[8%] bottom-[15%] w-20 h-20 bg-coral/[0.04] rounded-2xl geo-float-1" style={{ animationDelay: '2s' }} />
-        <div className="hidden md:block absolute left-[40%] top-[10%] w-14 h-14 border border-elegant/[0.08] rounded-lg rotate-12 geo-float-2" style={{ animationDelay: '6s' }} />
-        
-        {/* Subtle gradient */}
-        <div className="hidden md:block absolute -left-20 top-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-accent/[0.02] blur-[100px] rounded-full" />
-        
-        {/* Mobile glow */}
-        <div className="md:hidden absolute top-1/3 left-0 w-[180px] h-[180px] bg-accent/[0.03] blur-[60px] rounded-full" />
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-
-        {/* Section label */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="flex items-center gap-3 mb-16 font-mono text-xs text-muted"
-        >
-          <span className="text-accent">~/</span>
-          <span>about</span>
-          <span className="text-muted">/</span>
-          <span className="text-secondary">README.md</span>
-        </motion.div>
-
-        {/* Main grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 mb-24">
-
-          {/* Left: title */}
-          <div className="lg:col-span-5">
-            <motion.h2
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] tracking-tight text-primary"
-            >
-              {about.title}
-            </motion.h2>
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, delay: 0.2 }}
-              className="h-[2px] w-1/3 bg-gradient-to-r from-accent/40 to-transparent mt-10 origin-left hidden lg:block rounded-full"
-            />
+        <div className="about-layout">
+          <div className="about-title-column">
+            <h2 id="about-heading" className="about-heading">
+              Curiosidade como<br />
+              <em>ponto de partida.</em>
+            </h2>
+            <span className="about-asterisk" aria-hidden="true">✳</span>
           </div>
 
-          {/* Right: bio + highlights */}
-          <div className="lg:col-span-7 flex flex-col gap-10">
-            <div className="space-y-5">
-              {about.paragraphs.map((p, i) => (
-                <motion.p
-                  key={i}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                  transition={{ delay: 0.08 * i }}
-                  className="text-base md:text-lg text-secondary font-mono leading-[1.9]"
-                >
-                  {p}
-                </motion.p>
-              ))}
+          <div className="about-copy">
+            <p className="about-intro">Gosto de entender o que acontece por trás da tela.</p>
+            <p>
+              Sou Abraão, estudante universitário e desenvolvedor de software.
+              Meu foco está no back-end com Java e Spring Boot, mas também
+              exploro o desenvolvimento mobile com Flutter.
+            </p>
+            <p>
+              Segurança é outro assunto que me prende a atenção. Estudar
+              Ethical Hacking me ajuda a olhar para os sistemas por outro
+              ângulo e a pensar com mais cuidado no que construo.
+            </p>
+            <p>
+              Aprendo colocando a mão no código: criando projetos, testando
+              ideias e voltando para melhorar o que já fiz.
+            </p>
+            <div className="about-note">
+              <span aria-hidden="true" />
+              EM FORMAÇÃO. SEMPRE EM CONSTRUÇÃO.
             </div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeUp}
-              className="grid grid-cols-2 gap-3"
-            >
-              {about.highlights.map((highlight, idx) => (
-                <div
-                  key={idx}
-                  className={`flex items-center gap-2.5 text-xs font-mono py-2.5 px-4 rounded-lg border ${highlightAccent[idx]} transition-all hover:shadow-sm`}
-                >
-                  <span className="w-1 h-1 rounded-full bg-current block shrink-0" />
-                  {highlight}
-                </div>
-              ))}
-            </motion.div>
           </div>
         </div>
-
-        {/* Metrics grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.85, ease: "easeOut" }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border shadow-sm"
-        >
-          {metrics.map((metric, i) => (
-            <motion.div
-              key={metric.label}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 * i }}
-              className="bg-surface hover:bg-surfaceAlt transition-colors p-8 flex flex-col gap-2 group"
-            >
-              <span className="font-display font-bold text-4xl md:text-5xl text-primary">
-                {metric.value}
-                <span className="text-accent/60 text-2xl">{metric.suffix}</span>
-              </span>
-              <span className="text-xs text-secondary font-mono leading-relaxed whitespace-pre-line">
-                {metric.label}
-              </span>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

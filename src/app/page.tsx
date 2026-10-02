@@ -1,4 +1,3 @@
-import { siteConfig } from "@/data/portfolio";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -10,16 +9,18 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main>
+    <>
+      <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
       <Navbar />
-      <Hero />
-      <About />
-      <Projects />
-      <Skills />
-      <Experience />
-      <Contact />
+      <main id="conteudo">
+        <Hero />
+        <Projects />
+        <About />
+        <Skills />
+        <Experience />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
-
