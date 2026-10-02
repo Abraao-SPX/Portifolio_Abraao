@@ -1,0 +1,85 @@
+.page-scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 80;
+  height: 2px;
+  background: var(--orange, #e85a2a);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+.about-section .about-asterisk {
+  transform: rotate(var(--about-turn, -12deg));
+  transform-origin: 50% 54%;
+}
+
+.contact-socials a,
+.site-footer .footer-top {
+  padding-bottom: 4px;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition: color 180ms ease, background-size 300ms ease;
+}
+
+.contact-socials a:focus-visible,
+.site-footer .footer-top:focus-visible {
+  background-size: 100% 1px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .skills-section .skills-row {
+    transition: border-color 220ms ease;
+  }
+
+  .skills-row > div,
+  .skills-row > .skills-number {
+    transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1), color 220ms ease;
+  }
+
+  .skills-section .skills-row:hover {
+    border-color: #b74723;
+  }
+
+  .skills-row:hover > div,
+  .skills-row:hover > .skills-number {
+    transform: translateX(5px);
+  }
+
+  .skills-row:hover > .skills-number {
+    color: #b74723;
+  }
+
+  .contact-socials a:hover,
+  .site-footer .footer-top:hover {
+    background-size: 100% 1px;
+  }
+
+  .journey-link svg,
+  .contact-submit > svg:not(.contact-spinner),
+  .nav-contact svg {
+    transition: transform 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .journey-link:hover svg,
+  .contact-submit:not(:disabled):hover > svg,
+  .nav-contact:hover svg {
+    transform: translate(3px, -3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-section .about-asterisk {
+    transform: rotate(-12deg);
+  }
+
+  .skills-row:hover > div,
+  .skills-row:hover > .skills-number,
+  .journey-link:hover svg,
+  .contact-submit:not(:disabled):hover > svg,
+  .nav-contact:hover svg {
+    transform: none;
+  }
+}

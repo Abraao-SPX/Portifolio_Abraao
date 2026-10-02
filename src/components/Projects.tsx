@@ -1,5 +1,6 @@
 import { ArrowUpRight, Check, Database, Ellipsis, Layers3, LockKeyhole, Plus } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
+import TiltSurface from "./TiltSurface";
 import "./projects.css";
 
 const boardColumns = [
@@ -83,10 +84,10 @@ export default function Projects() {
         <div className="projects-grid">
           {featuredProjects.map((project, index) => (
             <article className="project-card" key={project.id}>
-              <a className="project-preview-link" href={project.repoLink} target="_blank" rel="noopener noreferrer" aria-label={`Ver repositório de ${project.title} no GitHub (abre em nova aba)`}>
+              <TiltSurface href={project.repoLink} target="_blank" rel="noopener noreferrer" aria-label={`Ver repositório de ${project.title} no GitHub (abre em nova aba)`}>
                 {index === 0 ? <KanbanPreview /> : <EventsPreview />}
                 <span className="project-preview-open" aria-hidden="true"><ArrowUpRight size={21} /></span>
-              </a>
+              </TiltSurface>
               <div className="project-card-meta"><span>{project.id} / {index === 0 ? "APIs & organização" : "Eventos & arquitetura"}</span><span>PROJETO PESSOAL</span></div>
               <div className="project-card-title"><h3>{index === 0 ? "Kanban Task Manager" : project.title}</h3><a href={project.repoLink} target="_blank" rel="noopener noreferrer" aria-label={`Código de ${project.title} no GitHub (abre em nova aba)`}><ArrowUpRight size={25} /></a></div>
               <p className="project-card-description">{project.description}</p>
