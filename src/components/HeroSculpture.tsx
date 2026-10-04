@@ -18,10 +18,12 @@ export default function HeroSculpture() {
   const hostRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<ArchitectureSceneController | null>(null);
   const progressRef = useRef<HTMLDivElement>(null);
+  const scrollSyncRef = useRef<(() => void) | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "fallback">("loading");
   const [chapter, setChapter] = useState(0);
   const [motionEnabled, setMotionEnabled] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [cinematicEnabled, setCinematicEnabled] = useState(false);
   const settingsRef = useRef({ chapter: 0, motionEnabled: false });
   const manualRef = useRef<number | null>(null);
   const pointerRef = useRef({ x: 0, y: 0 });
@@ -40,10 +42,11 @@ export default function HeroSculpture() {
     settingsRef.current.motionEnabled = !preference.matches;
     setReducedMotion(preference.matches);
     setMotionEnabled(!preference.matches);
+    setCinematicEnabled(cinematic.matches);
 
     const updateScroll = () => {
       scrollFrame = 0;
-      if (!visible || !cinematic.matches || preference.matches || !settingsRef.current.motionEnabled) return;
+      if (!visible || !controllerRef.current || !cinematic.matches || preference.matches || !settingsRef.current.motionEnabled) return;
       if (manualRef.current !== null) {
         if (Math.abs(window.scrollY - manualRef.current) < 32) return;
         manualRef.current = null;
@@ -64,6 +67,11 @@ export default function HeroSculpture() {
     const scheduleScroll = () => {
       if (visible && !scrollFrame) scrollFrame = requestAnimationFrame(updateScroll);
     };
+    scrollSyncRef.current = scheduleScroll;
+    const onCinematicChange = () => {
+      setCinematicEnabled(cinematic.matches);
+      scheduleScroll();
+    };
     const onPreferenceChange = () => {
       const enabled = !preference.matches;
       settingsRef.current.motionEnabled = enabled;
@@ -79,6 +87,9 @@ export default function HeroSculpture() {
       setStatus("fallback");
       controllerRef.current?.dispose();
       controllerRef.current = null;
+      settingsRef.current.chapter = 0;
+      setChapter(0);
+      if (progressRef.current) progressRef.current.style.transform = "scaleX(0)";
     };
     const load = async () => {
       if (loading || disposed) return;
@@ -101,13 +112,13 @@ export default function HeroSculpture() {
     };
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
-      if (visible) void load();
+      if (visible) { void load(); scheduleScroll(); }
       controllerRef.current?.setVisible(visible && !document.hidden);
     }, { threshold: 0.02 });
     const onVisibilityChange = () => controllerRef.current?.setVisible(visible && !document.hidden);
     observer.observe(root);
     preference.addEventListener("change", onPreferenceChange);
-    cinematic.addEventListener("change", scheduleScroll);
+    cinematic.addEventListener("change", onCinematicChange);
     document.addEventListener("visibilitychange", onVisibilityChange);
     window.addEventListener("scroll", scheduleScroll, { passive: true });
     window.addEventListener("resize", scheduleScroll, { passive: true });
@@ -115,11 +126,12 @@ export default function HeroSculpture() {
       disposed = true;
       observer.disconnect();
       preference.removeEventListener("change", onPreferenceChange);
-      cinematic.removeEventListener("change", scheduleScroll);
+      cinematic.removeEventListener("change", onCinematicChange);
       document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("scroll", scheduleScroll);
       window.removeEventListener("resize", scheduleScroll);
       cancelAnimationFrame(scrollFrame);
+      scrollSyncRef.current = null;
       controllerRef.current?.dispose();
       controllerRef.current = null;
     };
@@ -143,6 +155,7 @@ export default function HeroSculpture() {
     settingsRef.current.motionEnabled = enabled;
     setMotionEnabled(enabled);
     controllerRef.current?.setMotionEnabled(enabled);
+    if (enabled) scrollSyncRef.current?.();
   };
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if (status !== "ready" || reducedMotion || event.button !== 0) return;
@@ -197,7 +210,7 @@ export default function HeroSculpture() {
         <span className="sculpture-step-number" aria-hidden="true">0{chapter + 1}<i> / 03</i></span>
         <span className="sculpture-stage-hint" aria-hidden="true">ARRASTE PARA EXPLORAR</span>
       </div>
-      <p id="sculpture-instructions" className="sculpture-sr-only">Arraste para girar a escultura ou use as setas do teclado. A tecla Home restaura a orientação. Os botões abaixo alternam as três composições.</p>
+      <p id="sculpture-instructions" className="sculpture-sr-only">{reducedMotion ? "Use os botões abaixo para alternar entre as três composições estáticas." : "Arraste para girar a escultura ou use as setas do teclado. A tecla Home restaura a orientação. Os botões abaixo alternam as três composições."}</p>
       <figcaption className="sculpture-caption" id="sculpture-caption">
         <div className="sculpture-caption-copy" key={chapter}><span className="sculpture-caption-title">{chapters[chapter].title}</span><span className="sculpture-caption-detail">{chapters[chapter].detail}</span></div>
         <ArrowUpRight size={23} strokeWidth={1.3} aria-hidden="true" />
@@ -207,7 +220,7 @@ export default function HeroSculpture() {
       </div>
       <div className="sculpture-timeline" aria-hidden="true"><div ref={progressRef} /></div>
       <div className="sculpture-toolbar">
-        <span className="sculpture-scroll-note">{reducedMotion ? "EXPLORE AS TRÊS COMPOSIÇÕES" : "ROLE PARA TRANSFORMAR"}</span>
+        <span className="sculpture-scroll-note">{status === "fallback" ? "ESTUDO DE FORMA E MOVIMENTO" : !reducedMotion && cinematicEnabled ? "ROLE PARA TRANSFORMAR" : "EXPLORE AS TRÊS COMPOSIÇÕES"}</span>
         <div>
           <button type="button" onClick={replay} disabled={status !== "ready"} aria-label="Recomeçar sequência 3D" title="Recomeçar sequência"><RotateCcw size={14} aria-hidden="true" /></button>
           {!reducedMotion && <button type="button" onClick={toggleMotion} disabled={status !== "ready"} aria-label={motionEnabled ? "Pausar animação 3D" : "Retomar animação 3D"} title={motionEnabled ? "Pausar animação" : "Retomar animação"}>{motionEnabled ? <Pause size={13} aria-hidden="true" /> : <Play size={13} aria-hidden="true" />}</button>}
