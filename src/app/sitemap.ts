@@ -1,12 +1,14 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://abraao-dev.tech',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      url: "https://abraao-dev.tech",
+      lastModified: new Date("2026-11-20"),
+      changeFrequency: "monthly",
       priority: 1,
     },
-  ]
+  ];
 }
