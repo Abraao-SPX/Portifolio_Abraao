@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  type Locale,
-  portfolioContent,
-} from "@/content/portfolio-data";
+import { type Locale, portfolioContent } from "@/content/portfolio-data";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
+import { AboutSection } from "@/components/AboutSection";
 import { ProjectsBento } from "@/components/ProjectsBento";
 import { ResearchSection } from "@/components/ResearchSection";
 import { StackSection } from "@/components/StackSection";
@@ -14,7 +12,8 @@ import { ContactFooter } from "@/components/ContactFooter";
 
 export function PortfolioApp() {
   const [locale, setLocale] = useState<Locale>("pt");
-  const [accent, setAccent] = useState<"emerald" | "cobalt">("emerald");
+  // Default to warm light theme ("light") for a bright, human, editorial feel
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
 
   useEffect(() => {
@@ -23,15 +22,18 @@ export function PortfolioApp() {
       if (savedLocale === "pt" || savedLocale === "en") {
         setLocale(savedLocale);
       }
-      const savedAccent = localStorage.getItem("abraao_accent") as
-        | "emerald"
-        | "cobalt"
+      const savedTheme = localStorage.getItem("abraao_theme_v4") as
+        | "light"
+        | "dark"
         | null;
-      if (savedAccent === "emerald" || savedAccent === "cobalt") {
-        setAccent(savedAccent);
+      if (savedTheme === "light" || savedTheme === "dark") {
+        setTheme(savedTheme);
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
       }
     } catch {
-      // Ignore storage access errors in strict privacy browsers
+      // Ignore storage access errors
     }
   }, []);
 
@@ -45,10 +47,11 @@ export function PortfolioApp() {
     }
   };
 
-  const handleAccentChange = (nextAccent: "emerald" | "cobalt") => {
-    setAccent(nextAccent);
+  const handleThemeChange = (nextTheme: "light" | "dark") => {
+    setTheme(nextTheme);
+    document.documentElement.setAttribute("data-theme", nextTheme);
     try {
-      localStorage.setItem("abraao_accent", nextAccent);
+      localStorage.setItem("abraao_theme_v4", nextTheme);
     } catch {
       // ignore
     }
@@ -57,29 +60,33 @@ export function PortfolioApp() {
   const dict = portfolioContent[locale];
 
   return (
-    <div
-      data-accent={accent}
-      className="relative min-h-screen bg-[#09090B] text-zinc-100 selection:bg-[var(--accent-muted)] selection:text-white"
-    >
-      {/* Subtle Top Light & Architectural 64px Grid Background */}
+    <div className="relative min-h-screen bg-[var(--bg-canvas)] text-[var(--ink)]">
+      {/* Subtle Notebook Paper Dots & Warm Sunlight Wash */}
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
       >
-        <div className="bg-architectural-grid absolute inset-0" />
+        <div className="bg-notebook-dots absolute inset-0 opacity-55" />
         <div
-          className="absolute -top-48 left-1/2 h-[440px] w-[880px] -translate-x-1/2 rounded-full opacity-25 blur-[130px]"
+          className="absolute -top-44 right-[-10%] h-[420px] w-[620px] rounded-full opacity-35 blur-[120px]"
           style={{
             background:
-              "radial-gradient(circle, var(--accent) 0%, transparent 70%)",
+              "radial-gradient(circle, var(--accent-soft) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute top-32 left-[-10%] h-[380px] w-[520px] rounded-full opacity-35 blur-[120px]"
+          style={{
+            background:
+              "radial-gradient(circle, var(--cobalt-soft) 0%, transparent 70%)",
           }}
         />
       </div>
 
-      {/* Skip to content link for accessibility */}
+      {/* Skip Link */}
       <a
         href="#projetos"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-zinc-100 focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:font-semibold focus:text-zinc-950"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-xl focus:bg-[var(--ink)] focus:px-4 focus:py-2 focus:text-xs focus:font-semibold focus:text-[var(--bg-canvas)]"
       >
         {locale === "pt" ? "Pular para os projetos" : "Skip to projects"}
       </a>
@@ -88,17 +95,15 @@ export function PortfolioApp() {
         <Navbar
           locale={locale}
           onLocaleChange={handleLocaleChange}
-          accent={accent}
-          onAccentChange={handleAccentChange}
+          theme={theme}
+          onThemeChange={handleThemeChange}
           dict={dict.nav}
         />
 
         <main>
-          <HeroSection
-            locale={locale}
-            dict={dict.hero}
-            topologyNodes={dict.topologyNodes}
-          />
+          <HeroSection dict={dict.hero} />
+
+          <AboutSection dict={dict.aboutStrip} />
 
           <ProjectsBento
             dict={dict.projectsSection}
@@ -110,7 +115,7 @@ export function PortfolioApp() {
           <ResearchSection dict={dict.researchSection} />
 
           <StackSection
-            dict={dict.stackSection}
+            dict={dict.craftSection}
             selectedTech={selectedTech}
             onSelectTech={setSelectedTech}
           />

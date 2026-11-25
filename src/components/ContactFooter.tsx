@@ -10,13 +10,11 @@ import {
   GraduationCap,
   Linkedin,
   Mail,
-  Terminal,
 } from "lucide-react";
 import {
   type PortfolioDictionary,
   PROFILE_LINKS,
 } from "@/content/portfolio-data";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
 
 interface ContactFooterProps {
   contactDict: PortfolioDictionary["contactSection"];
@@ -27,39 +25,39 @@ export function ContactFooter({
   contactDict,
   footerDict,
 }: ContactFooterProps) {
-  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = async () => {
     try {
       await navigator.clipboard.writeText(PROFILE_LINKS.email);
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 2500);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2600);
     } catch {
       window.location.href = `mailto:${PROFILE_LINKS.email}`;
     }
   };
 
-  const socialChannels = [
+  const links = [
     {
       label: "GitHub",
-      handle: "@Abraao-SPX",
+      handle: "github.com/Abraao-SPX",
       href: PROFILE_LINKS.github,
       icon: Github,
     },
     {
       label: "LinkedIn",
-      handle: "/in/abraaospx",
+      handle: "linkedin.com/in/abraaospx",
       href: PROFILE_LINKS.linkedin,
       icon: Linkedin,
     },
     {
       label: "Currículo Lattes",
-      handle: "CNPq / Produção Científica",
+      handle: "Produção Científica CNPq",
       href: PROFILE_LINKS.lattes,
       icon: GraduationCap,
     },
     {
-      label: "PrintWeb (Em Produção)",
+      label: "PrintWeb (No ar)",
       handle: "printweb.me",
       href: PROFILE_LINKS.printweb,
       icon: Globe,
@@ -70,35 +68,37 @@ export function ContactFooter({
     <>
       <section
         id="contato"
-        className="relative border-t border-white/[0.07] bg-[#0C0C0F]/80 py-24 sm:py-32"
+        className="border-t border-[var(--border)] bg-[var(--bg-subtle)]/65 py-24 sm:py-28"
       >
-        <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-            {/* Left 7 Cols: Headline + 1-Click Copy Email Box */}
+        <div className="mx-auto max-w-[1180px] px-5 sm:px-8">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+            {/* Left 7 Cols */}
             <div className="lg:col-span-7">
-              <div className="font-mono text-[11px] font-medium tracking-[0.08em] text-[var(--accent)] uppercase">
+              <div className="font-mono text-xs font-medium text-[var(--accent)]">
                 {contactDict.eyebrow}
               </div>
-              <h2 className="mt-3 text-balance text-3xl font-semibold tracking-[-0.035em] text-zinc-50 sm:text-4xl">
-                {contactDict.title}{" "}
-                <span className="text-zinc-500">{contactDict.titleMuted}</span>
+              <h2 className="mt-2.5 text-balance text-3xl font-semibold tracking-[-0.03em] text-[var(--ink)] sm:text-4xl">
+                {contactDict.titleStart}{" "}
+                <span className="font-serif-editorial text-[1.12em] font-normal italic text-[var(--accent)]">
+                  {contactDict.titleItalic}
+                </span>
               </h2>
-              <p className="mt-3 max-w-xl text-pretty text-base leading-relaxed text-zinc-400">
+              <p className="mt-3 max-w-xl text-pretty text-base leading-relaxed text-[var(--ink-secondary)]">
                 {contactDict.subtitle}
               </p>
 
-              {/* Primary Email Command Box */}
-              <SpotlightCard className="mt-8 p-5 sm:p-6">
-                <div className="font-mono text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
-                  {contactDict.emailLabel}
+              {/* Warm Tactile Email Card */}
+              <div className="editorial-card mt-8 rounded-3xl p-6 sm:p-7">
+                <div className="font-mono text-[11px] text-[var(--ink-muted)]">
+                  {contactDict.emailCardLabel}
                 </div>
 
-                <div className="mt-2.5 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                <div className="mt-3 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                   <div className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-[#0D0D10] text-[var(--accent)]">
-                      <Mail className="h-4 w-4" />
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)]">
+                      <Mail className="h-5 w-5" />
                     </span>
-                    <span className="font-mono text-sm font-semibold text-zinc-100 sm:text-base">
+                    <span className="font-mono text-sm font-semibold text-[var(--ink)] sm:text-base">
                       {PROFILE_LINKS.email}
                     </span>
                   </div>
@@ -107,48 +107,48 @@ export function ContactFooter({
                     <button
                       type="button"
                       onClick={handleCopyEmail}
-                      className="inline-flex h-10 items-center gap-2 rounded-xl bg-zinc-100 px-4 font-mono text-xs font-semibold text-zinc-950 transition-all hover:bg-white"
+                      className="inline-flex h-10 items-center gap-2 rounded-xl bg-[var(--ink)] px-4 text-xs font-semibold text-[var(--bg-canvas)] transition-transform hover:-translate-y-0.5"
                     >
-                      {copiedEmail ? (
+                      {copied ? (
                         <>
-                          <Check className="h-3.5 w-3.5 text-emerald-600" />
-                          <span>{contactDict.copiedEmail}</span>
+                          <Check className="h-3.5 w-3.5" />
+                          <span>{contactDict.copiedButton}</span>
                         </>
                       ) : (
                         <>
                           <Copy className="h-3.5 w-3.5" />
-                          <span>{contactDict.copyEmail}</span>
+                          <span>{contactDict.copyButton}</span>
                         </>
                       )}
                     </button>
 
                     <a
-                      href={`mailto:${PROFILE_LINKS.email}?subject=Contato%20via%20abraao-dev.tech`}
-                      className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-white/[0.1] bg-[#16161A] px-3.5 font-mono text-xs text-zinc-200 transition-colors hover:border-white/[0.2] hover:text-white"
+                      href={`mailto:${PROFILE_LINKS.email}?subject=Ol%C3%A1%20Abra%C3%A3o!`}
+                      className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-[var(--border-strong)] bg-[var(--surface-muted)] px-4 text-xs font-medium text-[var(--ink)] hover:bg-[var(--bg-subtle)]"
                     >
-                      <span>{contactDict.sendEmail}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400" />
+                      <span>{contactDict.writeEmailButton}</span>
+                      <ArrowUpRight className="h-3.5 w-3.5 text-[var(--accent)]" />
                     </a>
                   </div>
                 </div>
 
                 <span className="sr-only" aria-live="polite">
-                  {copiedEmail ? contactDict.copiedEmail : ""}
+                  {copied ? contactDict.copiedButton : ""}
                 </span>
-              </SpotlightCard>
+              </div>
 
-              {/* Current Engagement Scope */}
-              <div className="mt-6 rounded-2xl border border-white/[0.07] bg-[#121215]/70 p-5">
-                <div className="font-mono text-[10px] font-semibold tracking-wider text-zinc-400 uppercase">
-                  {contactDict.availabilityTitle}
+              {/* Open To List */}
+              <div className="mt-6 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6">
+                <div className="text-xs font-semibold text-[var(--ink)]">
+                  {contactDict.openToTitle}
                 </div>
-                <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                  {contactDict.availabilityItems.map((item) => (
+                <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                  {contactDict.openToList.map((item) => (
                     <div
                       key={item}
-                      className="flex items-center gap-2 text-xs text-zinc-300"
+                      className="flex items-start gap-2 text-xs leading-relaxed text-[var(--ink-secondary)]"
                     >
-                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--sage)]" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -156,38 +156,36 @@ export function ContactFooter({
               </div>
             </div>
 
-            {/* Right 5 Cols: Verified Directories & Direct Profiles */}
+            {/* Right 5 Cols: Profiles */}
             <div className="lg:col-span-5">
-              <div className="mb-3 font-mono text-[11px] font-semibold tracking-wider text-zinc-400 uppercase">
-                {contactDict.directChannelsTitle}
+              <div className="mb-3 text-xs font-semibold text-[var(--ink-muted)]">
+                {contactDict.elsewhereTitle}
               </div>
-
               <div className="space-y-3">
-                {socialChannels.map((channel) => {
-                  const Icon = channel.icon;
+                {links.map((item) => {
+                  const Icon = item.icon;
                   return (
                     <a
-                      key={channel.label}
-                      href={channel.href}
+                      key={item.label}
+                      href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-between rounded-2xl border border-white/[0.08] bg-[#121215] p-4 transition-all hover:border-[var(--accent-border)] hover:bg-[#16161B]"
+                      className="editorial-card group flex items-center justify-between rounded-2xl p-4"
                     >
                       <div className="flex items-center gap-3.5">
-                        <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.08] bg-[#0D0D10] text-zinc-300 transition-colors group-hover:border-[var(--accent-border)] group-hover:text-[var(--accent)]">
+                        <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--surface-muted)] text-[var(--ink-secondary)] transition-colors group-hover:border-[var(--accent-border)] group-hover:bg-[var(--accent-soft)] group-hover:text-[var(--accent)]">
                           <Icon className="h-4 w-4" />
                         </span>
                         <div>
-                          <div className="text-sm font-semibold text-zinc-100">
-                            {channel.label}
+                          <div className="text-sm font-semibold text-[var(--ink)]">
+                            {item.label}
                           </div>
-                          <div className="font-mono text-xs text-zinc-400">
-                            {channel.handle}
+                          <div className="font-mono text-xs text-[var(--ink-muted)]">
+                            {item.handle}
                           </div>
                         </div>
                       </div>
-
-                      <ArrowUpRight className="h-4 w-4 text-zinc-500 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[var(--accent)]" />
+                      <ArrowUpRight className="h-4 w-4 text-[var(--ink-muted)] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[var(--accent)]" />
                     </a>
                   );
                 })}
@@ -197,25 +195,20 @@ export function ContactFooter({
         </div>
       </section>
 
-      {/* Minimalist Terminal-Style Status Footer */}
-      <footer className="border-t border-white/[0.08] bg-[#09090B] py-8">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-4 px-5 font-mono text-xs text-zinc-500 sm:flex-row sm:items-center sm:px-8">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 text-zinc-300">
-              <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
-              <span>{footerDict.status}</span>
+      {/* Warm Editorial Colophon Footer */}
+      <footer className="border-t border-[var(--border)] bg-[var(--bg-canvas)] py-10">
+        <div className="mx-auto flex max-w-[1180px] flex-col items-start justify-between gap-4 px-5 sm:flex-row sm:items-center sm:px-8">
+          <div className="flex items-center gap-3">
+            <span className="font-serif-editorial text-2xl italic text-[var(--accent)]">
+              Abraão Paixão
             </span>
-            <span className="text-zinc-700">·</span>
-            <span>{footerDict.region}</span>
-            <span className="text-zinc-700">·</span>
-            <span className="inline-flex items-center gap-1 text-zinc-400">
-              <Terminal className="h-3 w-3 text-[var(--accent)]" />
-              abraao-dev.tech v3.0
+            <span className="text-xs text-[var(--ink-muted)]">
+              · {footerDict.location}
             </span>
           </div>
 
-          <div className="text-zinc-500">
-            © {new Date().getFullYear()} {footerDict.rights}
+          <div className="text-xs text-[var(--ink-muted)]">
+            © {new Date().getFullYear()} {footerDict.signature}
           </div>
         </div>
       </footer>

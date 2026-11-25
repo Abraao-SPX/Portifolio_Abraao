@@ -4,13 +4,12 @@ import React, { useState } from "react";
 import {
   ArrowUpRight,
   BookOpen,
+  CheckCircle2,
   Code2,
   ExternalLink,
-  GitBranch,
-  Layers,
+  FolderGit2,
   Sparkles,
   X,
-  CheckCircle2,
 } from "lucide-react";
 import {
   type PortfolioDictionary,
@@ -18,7 +17,6 @@ import {
   type ProjectItem,
   PROFILE_LINKS,
 } from "@/content/portfolio-data";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { ProjectDiagram } from "@/components/ui/ProjectDiagrams";
 import { cn } from "@/lib/utils";
 
@@ -36,75 +34,84 @@ export function ProjectsBento({
   onSelectTech,
 }: ProjectsBentoProps) {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("all");
-  const [inspectedProject, setInspectedProject] = useState<ProjectItem | null>(
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(
     null
   );
 
-  const filteredProjects = projects.filter((project) => {
-    const categoryMatch =
-      activeCategory === "all" || project.category === activeCategory;
-    return categoryMatch;
-  });
+  const visibleProjects = projects.filter(
+    (p) => activeCategory === "all" || p.category === activeCategory
+  );
 
-  const isProjectHighlightedByTech = (project: ProjectItem) => {
+  const matchesTech = (project: ProjectItem) => {
     if (!highlightedTech) return false;
-    const query = highlightedTech.toLowerCase();
+    const q = highlightedTech.toLowerCase();
     return project.stack.some(
-      (s) =>
-        s.toLowerCase().includes(query) || query.includes(s.toLowerCase())
+      (s) => s.toLowerCase().includes(q) || q.includes(s.toLowerCase())
     );
   };
 
   const getSpanClass = (span: ProjectItem["featuredSpan"]) => {
+    if (activeCategory !== "all") return "lg:col-span-6";
     switch (span) {
       case "col-7":
         return "lg:col-span-7";
       case "col-5":
         return "lg:col-span-5";
-      case "col-4":
-        return "lg:col-span-4";
+      case "col-6":
+        return "lg:col-span-6";
     }
   };
 
-  const getStatusDotClass = (status: ProjectItem["status"]) => {
-    switch (status) {
-      case "live":
-        return "bg-emerald-400";
-      case "research":
-        return "bg-blue-400";
-      case "production":
+  const getToneBadgeStyle = (tone: ProjectItem["tone"]) => {
+    switch (tone) {
+      case "terracotta":
+        return "border-[var(--accent-border)] bg-[var(--accent-soft)] text-[var(--accent)]";
+      case "cobalt":
+        return "border-[var(--cobalt-border)] bg-[var(--cobalt-soft)] text-[var(--cobalt)]";
+      case "sage":
+        return "border-[var(--sage-border)] bg-[var(--sage-soft)] text-[var(--sage)]";
+      case "amber":
+        return "border-[var(--amber-border)] bg-[var(--amber-soft)] text-[var(--amber)]";
+    }
+  };
+
+  const getTopBarColor = (tone: ProjectItem["tone"]) => {
+    switch (tone) {
+      case "terracotta":
         return "bg-[var(--accent)]";
-      case "open-source":
-        return "bg-amber-400";
+      case "cobalt":
+        return "bg-[var(--cobalt)]";
+      case "sage":
+        return "bg-[var(--sage)]";
+      case "amber":
+        return "bg-[var(--amber)]";
     }
   };
 
   return (
-    <section
-      id="projetos"
-      className="relative border-t border-white/[0.07] py-24 sm:py-32"
-    >
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
-        {/* Section Header */}
+    <section id="projetos" className="py-24 sm:py-28">
+      <div className="mx-auto max-w-[1180px] px-5 sm:px-8">
+        {/* Header & Warm Category Pills */}
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-2xl">
-            <div className="font-mono text-[11px] font-medium tracking-[0.08em] text-[var(--accent)] uppercase">
+            <div className="font-mono text-xs font-medium text-[var(--accent)]">
               {dict.eyebrow}
             </div>
-            <h2 className="mt-3 text-balance text-3xl font-semibold tracking-[-0.035em] text-zinc-50 sm:text-4xl">
-              {dict.title}{" "}
-              <span className="text-zinc-500">{dict.titleMuted}</span>
+            <h2 className="mt-2.5 text-balance text-3xl font-semibold tracking-[-0.03em] text-[var(--ink)] sm:text-4xl">
+              {dict.titleStart}{" "}
+              <span className="font-serif-editorial text-[1.12em] font-normal italic text-[var(--accent)]">
+                {dict.titleItalic}
+              </span>
             </h2>
-            <p className="mt-3 text-pretty text-base leading-relaxed text-zinc-400">
+            <p className="mt-3 text-pretty text-base leading-relaxed text-[var(--ink-secondary)]">
               {dict.subtitle}
             </p>
           </div>
 
-          {/* Domain Filter Segmented Control */}
           <div
             role="tablist"
-            aria-label="Filtrar projetos por domínio"
-            className="flex flex-wrap items-center gap-1.5 rounded-xl border border-white/[0.08] bg-[#121215] p-1"
+            aria-label="Filtrar projetos"
+            className="flex flex-wrap items-center gap-1.5 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-1.5 shadow-2xs"
           >
             {dict.filters.map((filter) => {
               const active = activeCategory === filter.id;
@@ -116,10 +123,10 @@ export function ProjectsBento({
                   aria-selected={active}
                   onClick={() => setActiveCategory(filter.id)}
                   className={cn(
-                    "rounded-lg px-3 py-1.5 font-mono text-xs transition-all",
+                    "rounded-xl px-3.5 py-1.5 text-xs font-medium transition-all",
                     active
-                      ? "bg-zinc-100 font-semibold text-zinc-950 shadow-sm"
-                      : "text-zinc-400 hover:bg-white/[0.04] hover:text-zinc-200"
+                      ? "bg-[var(--ink)] text-[var(--bg-canvas)] shadow-2xs"
+                      : "text-[var(--ink-secondary)] hover:bg-[var(--bg-subtle)] hover:text-[var(--ink)]"
                   )}
                 >
                   {filter.label}
@@ -129,361 +136,361 @@ export function ProjectsBento({
           </div>
         </div>
 
-        {/* Active Technology Cross-Highlight Banner */}
+        {/* Active Stack Filter Banner */}
         {highlightedTech && (
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[var(--accent-border)] bg-[var(--accent-muted)] px-4 py-2.5">
-            <div className="flex items-center gap-2 font-mono text-xs text-zinc-100">
-              <Sparkles className="h-3.5 w-3.5 text-[var(--accent)]" />
-              <span>Stack selecionada:</span>
-              <span className="rounded bg-white/[0.12] px-2 py-0.5 font-semibold text-white">
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--accent-border)] bg-[var(--accent-soft)] px-4 py-3">
+            <div className="flex items-center gap-2 text-xs font-medium text-[var(--ink)] sm:text-sm">
+              <Sparkles className="h-4 w-4 text-[var(--accent)]" />
+              <span>{dict.labels.filteringBy}</span>
+              <span className="rounded-lg border border-[var(--accent-border)] bg-[var(--surface)] px-2.5 py-0.5 font-mono text-xs font-semibold text-[var(--accent)]">
                 {highlightedTech}
               </span>
             </div>
             <button
               type="button"
               onClick={() => onSelectTech(null)}
-              className="inline-flex items-center gap-1 font-mono text-xs text-zinc-300 hover:text-white"
+              className="inline-flex items-center gap-1 rounded-lg bg-[var(--surface)] px-3 py-1 text-xs font-medium text-[var(--ink)] shadow-2xs hover:text-[var(--accent)]"
             >
-              <span>Limpar filtro</span>
+              <span>{dict.labels.clearTechFilter}</span>
               <X className="h-3.5 w-3.5" />
             </button>
           </div>
         )}
 
-        {/* Asymmetric 12-Column Bento Grid */}
-        <div className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-12">
-          {filteredProjects.map((project) => {
-            const techHighlighted = isProjectHighlightedByTech(project);
+        {/* Asymmetric Bento Grid */}
+        <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
+          {visibleProjects.map((project) => {
+            const isHighlighted = matchesTech(project);
 
             return (
-              <SpotlightCard
+              <article
                 key={project.id}
-                as="article"
-                highlighted={techHighlighted}
                 className={cn(
-                  "flex flex-col justify-between p-6 sm:p-7",
-                  activeCategory === "all"
-                    ? getSpanClass(project.featuredSpan)
-                    : "lg:col-span-6"
+                  "editorial-card relative flex flex-col justify-between overflow-hidden rounded-3xl transition-all",
+                  getSpanClass(project.featuredSpan),
+                  isHighlighted &&
+                    "ring-2 ring-[var(--accent)] border-[var(--accent)]"
                 )}
               >
-                <div>
-                  {/* Top Bar: ID, Status Badge & Highlight Metric */}
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-[#0D0D10] px-2.5 py-1">
+                {/* Subtle Color Accent Ribbon */}
+                <div
+                  className={cn("h-1 w-full", getTopBarColor(project.tone))}
+                />
+
+                <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
+                  <div>
+                    {/* Top Meta Row */}
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <span
                         className={cn(
-                          "h-2 w-2 rounded-full",
-                          getStatusDotClass(project.status)
+                          "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium",
+                          getToneBadgeStyle(project.tone)
                         )}
-                      />
-                      <span className="font-mono text-[10px] font-medium tracking-wider text-zinc-300 uppercase">
-                        {project.statusLabel}
+                      >
+                        {project.badge}
+                      </span>
+
+                      <span className="font-serif-editorial text-xl italic text-[var(--ink-muted)]">
+                        Nº {project.id} · {project.year}
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-400">
-                      <span className="rounded-md border border-white/[0.07] bg-[#0D0D10] px-2 py-0.5 text-zinc-300">
-                        {project.highlightMetric}
-                      </span>
-                      <span className="text-zinc-600">#{project.id}</span>
-                    </div>
-                  </div>
-
-                  {/* Title & Subtitle */}
-                  <div className="mt-4">
-                    <h3 className="text-xl font-semibold tracking-[-0.02em] text-zinc-50 sm:text-2xl">
+                    {/* Title & Tagline */}
+                    <h3 className="mt-4 text-2xl font-semibold tracking-[-0.02em] text-[var(--ink)]">
                       {project.title}
                     </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-zinc-400">
-                      {project.subtitle}
+                    <p className="mt-1 text-sm leading-relaxed text-[var(--ink-secondary)]">
+                      {project.tagline}
                     </p>
-                  </div>
 
-                  {/* Custom Technical Architecture Schematic SVG */}
-                  <div className="my-5 overflow-hidden rounded-xl border border-white/[0.07] bg-[#09090B]/90 px-3 py-2">
-                    <ProjectDiagram type={project.diagramType} />
-                  </div>
-
-                  {/* Structured Case Study: Problema -> Arquitetura -> Resultado */}
-                  <div className="space-y-2.5 rounded-xl border border-white/[0.06] bg-[#0D0D10]/80 p-4">
-                    <div className="grid grid-cols-1 gap-1 sm:grid-cols-[100px_1fr] sm:gap-3">
-                      <span className="font-mono text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
-                        {dict.labels.problem}
-                      </span>
-                      <p className="text-xs leading-relaxed text-zinc-300">
-                        {project.problem}
-                      </p>
+                    {/* Warm Notebook Architectural Sketch */}
+                    <div className="blueprint-surface my-5 overflow-hidden rounded-2xl border border-[var(--border)] px-3 py-2">
+                      <ProjectDiagram type={project.diagramType} />
                     </div>
 
-                    <div className="h-px bg-white/[0.05]" />
+                    {/* Human Story -> Engineering -> Outcome */}
+                    <div className="space-y-3.5 rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)]/75 p-4 sm:p-5">
+                      <div>
+                        <div className="font-mono text-[10px] font-semibold tracking-wider text-[var(--ink-muted)] uppercase">
+                          {dict.labels.whyItMatters}
+                        </div>
+                        <p className="mt-1 text-[13.5px] leading-relaxed text-[var(--ink-secondary)]">
+                          {project.humanStory}
+                        </p>
+                      </div>
 
-                    <div className="grid grid-cols-1 gap-1 sm:grid-cols-[100px_1fr] sm:gap-3">
-                      <span className="font-mono text-[10px] font-semibold tracking-wider text-[var(--accent)] uppercase">
-                        {dict.labels.architecture}
-                      </span>
-                      <p className="text-xs leading-relaxed text-zinc-200">
-                        {project.architecture}
-                      </p>
+                      <div className="h-px bg-[var(--border)]" />
+
+                      <div>
+                        <div className="font-mono text-[10px] font-semibold tracking-wider text-[var(--accent)] uppercase">
+                          {dict.labels.howItsBuilt}
+                        </div>
+                        <p className="mt-1 text-[13.5px] leading-relaxed text-[var(--ink)]">
+                          {project.engineeringSolution}
+                        </p>
+                      </div>
+
+                      <div className="h-px bg-[var(--border)]" />
+
+                      <div>
+                        <div className="font-mono text-[10px] font-semibold tracking-wider text-[var(--sage)] uppercase">
+                          {dict.labels.outcome}
+                        </div>
+                        <p className="mt-1 text-[13.5px] leading-relaxed text-[var(--ink-secondary)]">
+                          {project.impactResult}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Footer: Stack Pills & Links */}
+                  <div className="mt-6">
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.stack.map((tech) => {
+                        const selected =
+                          highlightedTech?.toLowerCase() === tech.toLowerCase();
+                        return (
+                          <button
+                            key={tech}
+                            type="button"
+                            onClick={() =>
+                              onSelectTech(selected ? null : tech)
+                            }
+                            className={cn(
+                              "rounded-lg border px-2.5 py-1 font-mono text-[11px] transition-colors",
+                              selected
+                                ? "border-[var(--accent)] bg-[var(--accent-soft)] font-semibold text-[var(--accent)]"
+                                : "border-[var(--border)] bg-[var(--surface-muted)] text-[var(--ink-secondary)] hover:border-[var(--border-strong)] hover:text-[var(--ink)]"
+                            )}
+                          >
+                            {tech}
+                          </button>
+                        );
+                      })}
                     </div>
 
-                    <div className="h-px bg-white/[0.05]" />
+                    {/* Actions */}
+                    <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--border)] pt-4">
+                      <div className="flex flex-wrap items-center gap-2">
+                        {project.links.demo && (
+                          <a
+                            href={project.links.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-xl bg-[var(--ink)] px-3.5 py-2 text-xs font-medium text-[var(--bg-canvas)] transition-opacity hover:opacity-90"
+                          >
+                            <span>{dict.labels.openLive}</span>
+                            <ExternalLink className="h-3.5 w-3.5" />
+                          </a>
+                        )}
 
-                    <div className="grid grid-cols-1 gap-1 sm:grid-cols-[100px_1fr] sm:gap-3">
-                      <span className="font-mono text-[10px] font-semibold tracking-wider text-zinc-400 uppercase">
-                        {dict.labels.result}
-                      </span>
-                      <p className="text-xs leading-relaxed text-zinc-300">
-                        {project.result}
-                      </p>
+                        {project.links.paper && (
+                          <a
+                            href="#pesquisa"
+                            className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--cobalt-border)] bg-[var(--cobalt-soft)] px-3.5 py-2 text-xs font-medium text-[var(--cobalt)]"
+                          >
+                            <BookOpen className="h-3.5 w-3.5" />
+                            <span>{dict.labels.readPaper}</span>
+                          </a>
+                        )}
+
+                        {project.links.repo && (
+                          <a
+                            href={project.links.repo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] px-3.5 py-2 text-xs font-medium text-[var(--ink)] transition-colors hover:bg-[var(--bg-subtle)]"
+                          >
+                            <Code2 className="h-3.5 w-3.5 text-[var(--ink-muted)]" />
+                            <span>{dict.labels.viewCode}</span>
+                          </a>
+                        )}
+
+                        {project.links.secondaryRepo && (
+                          <a
+                            href={project.links.secondaryRepo.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 rounded-xl border border-[var(--border)] bg-[var(--surface-muted)] px-3 py-2 text-xs text-[var(--ink-secondary)] hover:text-[var(--ink)]"
+                          >
+                            <span>{project.links.secondaryRepo.label}</span>
+                            <ArrowUpRight className="h-3.5 w-3.5" />
+                          </a>
+                        )}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setSelectedProject(project)}
+                        className="text-xs font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+                      >
+                        {dict.labels.readCaseStudy} →
+                      </button>
                     </div>
                   </div>
                 </div>
-
-                {/* Card Footer: Metrics, Stack Tags & Action Links */}
-                <div className="mt-5 pt-2">
-                  {/* Stack Tags */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.stack.map((tech) => {
-                      const isSelected =
-                        highlightedTech?.toLowerCase() === tech.toLowerCase();
-                      return (
-                        <button
-                          key={tech}
-                          type="button"
-                          onClick={() =>
-                            onSelectTech(isSelected ? null : tech)
-                          }
-                          className={cn(
-                            "rounded-md border px-2 py-1 font-mono text-[11px] transition-colors",
-                            isSelected
-                              ? "border-[var(--accent)] bg-[var(--accent-muted)] text-white"
-                              : "border-white/[0.07] bg-[#17171C] text-zinc-300 hover:border-white/[0.16] hover:text-white"
-                          )}
-                        >
-                          {tech}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Action Links Row */}
-                  <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-white/[0.07] pt-3.5">
-                    <div className="flex flex-wrap items-center gap-2">
-                      {project.links.demo && (
-                        <a
-                          href={project.links.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-100 px-3 py-1.5 font-mono text-xs font-semibold text-zinc-950 transition-colors hover:bg-white"
-                        >
-                          <span>{dict.labels.demo}</span>
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
-                      )}
-
-                      {project.links.paper && (
-                        <a
-                          href="#pesquisa"
-                          className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--accent-border)] bg-[var(--accent-muted)] px-3 py-1.5 font-mono text-xs font-medium text-zinc-100 transition-colors hover:bg-[var(--accent)]/20"
-                        >
-                          <BookOpen className="h-3 w-3 text-[var(--accent)]" />
-                          <span>{dict.labels.paper}</span>
-                        </a>
-                      )}
-
-                      {project.links.repo && (
-                        <a
-                          href={project.links.repo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.09] bg-[#16161A] px-3 py-1.5 font-mono text-xs text-zinc-200 transition-colors hover:border-white/[0.18] hover:text-white"
-                        >
-                          <Code2 className="h-3.5 w-3.5 text-zinc-400" />
-                          <span>{dict.labels.repo}</span>
-                          <ArrowUpRight className="h-3 w-3 text-zinc-500" />
-                        </a>
-                      )}
-
-                      {project.links.secondaryRepo && (
-                        <a
-                          href={project.links.secondaryRepo.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-lg border border-white/[0.07] bg-[#121215] px-2.5 py-1.5 font-mono text-[11px] text-zinc-300 transition-colors hover:border-white/[0.16] hover:text-white"
-                        >
-                          <span>{project.links.secondaryRepo.label}</span>
-                          <ArrowUpRight className="h-3 w-3 text-zinc-500" />
-                        </a>
-                      )}
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => setInspectedProject(project)}
-                      className="inline-flex items-center gap-1 font-mono text-xs text-zinc-400 transition-colors hover:text-[var(--accent)]"
-                    >
-                      <Layers className="h-3.5 w-3.5" />
-                      <span>{dict.labels.inspect}</span>
-                    </button>
-                  </div>
-                </div>
-              </SpotlightCard>
+              </article>
             );
           })}
+        </div>
 
-          {/* 7th Bento Card: +29 GitHub Repositories Archive Card (4 cols on desktop) */}
-          {activeCategory === "all" && (
-            <SpotlightCard
-              as="article"
-              className="flex flex-col justify-between p-6 sm:p-7 lg:col-span-4"
+        {/* Open Notebook GitHub Shelf (+29 Repositories) */}
+        <div className="editorial-card mt-8 rounded-3xl p-6 sm:p-8">
+          <div className="flex flex-col justify-between gap-4 border-b border-[var(--border)] pb-6 lg:flex-row lg:items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 font-mono text-xs font-medium text-[var(--accent)]">
+                <FolderGit2 className="h-4 w-4" />
+                <span>{dict.githubShelf.eyebrow}</span>
+              </div>
+              <h3 className="mt-1.5 text-xl font-semibold text-[var(--ink)]">
+                {dict.githubShelf.title}
+              </h3>
+              <p className="mt-1 max-w-2xl text-sm text-[var(--ink-secondary)]">
+                {dict.githubShelf.description}
+              </p>
+            </div>
+
+            <a
+              href={`${PROFILE_LINKS.github}?tab=repositories`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center gap-2 self-start rounded-xl border border-[var(--border-strong)] bg-[var(--surface-muted)] px-4 py-2.5 text-xs font-semibold text-[var(--ink)] transition-colors hover:bg-[var(--bg-subtle)] lg:self-auto"
             >
-              <div>
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[10px] font-semibold tracking-wider text-[var(--accent)] uppercase">
-                    {dict.archiveCard.eyebrow}
+              <span>{dict.githubShelf.cta}</span>
+              <ArrowUpRight className="h-4 w-4 text-[var(--accent)]" />
+            </a>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {dict.githubShelf.items.map((repo) => (
+              <div
+                key={repo.name}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)]/65 p-4"
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-sm font-semibold text-[var(--ink)]">
+                    {repo.name}
                   </span>
-                  <GitBranch className="h-4 w-4 text-zinc-500" />
                 </div>
-
-                <h3 className="mt-3 text-xl font-semibold tracking-[-0.02em] text-zinc-50">
-                  {dict.archiveCard.title}
-                </h3>
-
-                <p className="mt-2 text-xs leading-relaxed text-zinc-400">
-                  {dict.archiveCard.description}
+                <div className="mt-1 font-mono text-[11px] text-[var(--accent)]">
+                  {repo.tech}
+                </div>
+                <p className="mt-2 text-xs leading-relaxed text-[var(--ink-secondary)]">
+                  {repo.note}
                 </p>
-
-                <ul className="mt-4 space-y-2 border-t border-white/[0.06] pt-4">
-                  {dict.archiveCard.highlights.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2 font-mono text-[11px] text-zinc-300"
-                    >
-                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
-
-              <div className="mt-6 border-t border-white/[0.07] pt-4">
-                <a
-                  href={`${PROFILE_LINKS.github}?tab=repositories`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-between rounded-xl border border-white/[0.1] bg-[#16161A] px-4 py-2.5 font-mono text-xs font-medium text-zinc-100 transition-all hover:border-[var(--accent-border)] hover:bg-[#1B1B20]"
-                >
-                  <span>{dict.archiveCard.cta}</span>
-                  <ArrowUpRight className="h-4 w-4 text-[var(--accent)]" />
-                </a>
-              </div>
-            </SpotlightCard>
-          )}
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Deep-Dive Architecture Specification Modal */}
-      {inspectedProject && (
+      {/* Detailed Architecture Case Study Modal */}
+      {selectedProject && (
         <div
           role="dialog"
           aria-modal="true"
-          aria-labelledby="modal-project-title"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md"
-          onClick={() => setInspectedProject(null)}
+          aria-labelledby="case-study-title"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs"
+          onClick={() => setSelectedProject(null)}
         >
           <div
-            className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/[0.12] bg-[#121215] p-6 shadow-2xl sm:p-8"
+            className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-2xl sm:p-8"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <div className="font-mono text-xs text-[var(--accent)]">
-                  {inspectedProject.statusLabel} · #{inspectedProject.id}
-                </div>
-                <h3
-                  id="modal-project-title"
-                  className="mt-1 text-2xl font-semibold text-zinc-50"
+                <span
+                  className={cn(
+                    "inline-flex rounded-full border px-3 py-0.5 text-xs font-medium",
+                    getToneBadgeStyle(selectedProject.tone)
+                  )}
                 >
-                  {inspectedProject.title}
+                  {selectedProject.badge}
+                </span>
+                <h3
+                  id="case-study-title"
+                  className="mt-2 text-2xl font-semibold text-[var(--ink)]"
+                >
+                  {selectedProject.title}
                 </h3>
-                <p className="mt-1 text-sm text-zinc-400">
-                  {inspectedProject.subtitle}
+                <p className="mt-1 text-sm text-[var(--ink-secondary)]">
+                  {selectedProject.tagline}
                 </p>
               </div>
+
               <button
                 type="button"
-                onClick={() => setInspectedProject(null)}
-                aria-label={dict.labels.closeModal}
-                className="rounded-lg border border-white/[0.1] bg-[#18181B] p-2 text-zinc-400 hover:text-white"
+                onClick={() => setSelectedProject(null)}
+                aria-label={dict.labels.closeDrawer}
+                className="rounded-xl border border-[var(--border)] bg-[var(--surface-muted)] p-2 text-[var(--ink-secondary)] hover:text-[var(--ink)]"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            {/* Schematic */}
-            <div className="my-5 rounded-xl border border-white/[0.08] bg-[#09090B] p-3">
-              <ProjectDiagram type={inspectedProject.diagramType} />
+            <div className="blueprint-surface my-5 rounded-2xl border border-[var(--border)] p-3">
+              <ProjectDiagram type={selectedProject.diagramType} />
             </div>
 
-            {/* Key Metrics */}
-            <div className="grid grid-cols-3 gap-2.5">
-              {inspectedProject.metrics.map((m) => (
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {selectedProject.highlights.map((h) => (
                 <div
-                  key={m.label}
-                  className="rounded-xl border border-white/[0.07] bg-[#0D0D10] p-3"
+                  key={h.label}
+                  className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] p-3.5"
                 >
-                  <div className="font-mono text-[10px] text-zinc-500 uppercase">
-                    {m.label}
+                  <div className="font-mono text-[10px] text-[var(--ink-muted)] uppercase">
+                    {h.label}
                   </div>
-                  <div className="mt-1 font-mono text-xs font-semibold text-zinc-100">
-                    {m.value}
+                  <div className="mt-1 text-sm font-semibold text-[var(--ink)]">
+                    {h.value}
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Execution Pipeline Flow */}
-            <div className="mt-5 rounded-xl border border-white/[0.07] bg-[#0D0D10] p-4">
-              <div className="font-mono text-[10px] font-semibold tracking-wider text-zinc-400 uppercase">
-                {dict.labels.flow}
+            <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] p-4">
+              <div className="font-mono text-[10px] font-semibold tracking-wider text-[var(--ink-muted)] uppercase">
+                {dict.labels.pipeline}
               </div>
               <div className="mt-3 flex flex-wrap items-center gap-2">
-                {inspectedProject.architectureFlow.map((step, i) => (
+                {selectedProject.architectureSteps.map((step, idx) => (
                   <React.Fragment key={step}>
-                    <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-[#16161A] px-2.5 py-1 font-mono text-xs text-zinc-200">
-                      <CheckCircle2 className="h-3 w-3 text-[var(--accent)]" />
+                    <span className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-medium text-[var(--ink)]">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[var(--sage)]" />
                       {step}
                     </span>
-                    {i < inspectedProject.architectureFlow.length - 1 && (
-                      <span className="font-mono text-xs text-zinc-600">→</span>
+                    {idx < selectedProject.architectureSteps.length - 1 && (
+                      <span className="text-xs text-[var(--ink-muted)]">→</span>
                     )}
                   </React.Fragment>
                 ))}
               </div>
             </div>
 
-            {/* Problem / Architecture / Result */}
-            <div className="mt-5 space-y-3 text-sm">
+            <div className="mt-5 space-y-4 text-sm leading-relaxed">
               <div>
-                <div className="font-mono text-[11px] font-semibold text-zinc-400">
-                  {dict.labels.problem}
+                <div className="font-mono text-xs font-semibold text-[var(--ink-muted)]">
+                  {dict.labels.whyItMatters}
                 </div>
-                <p className="mt-1 text-zinc-300">{inspectedProject.problem}</p>
-              </div>
-              <div>
-                <div className="font-mono text-[11px] font-semibold text-[var(--accent)]">
-                  {dict.labels.architecture}
-                </div>
-                <p className="mt-1 text-zinc-200">
-                  {inspectedProject.architecture}
+                <p className="mt-1 text-[var(--ink-secondary)]">
+                  {selectedProject.humanStory}
                 </p>
               </div>
               <div>
-                <div className="font-mono text-[11px] font-semibold text-zinc-400">
-                  {dict.labels.result}
+                <div className="font-mono text-xs font-semibold text-[var(--accent)]">
+                  {dict.labels.howItsBuilt}
                 </div>
-                <p className="mt-1 text-zinc-300">{inspectedProject.result}</p>
+                <p className="mt-1 text-[var(--ink)]">
+                  {selectedProject.engineeringSolution}
+                </p>
+              </div>
+              <div>
+                <div className="font-mono text-xs font-semibold text-[var(--sage)]">
+                  {dict.labels.outcome}
+                </div>
+                <p className="mt-1 text-[var(--ink-secondary)]">
+                  {selectedProject.impactResult}
+                </p>
               </div>
             </div>
           </div>

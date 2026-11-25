@@ -7,9 +7,9 @@ import React from "react";
 export const metadata: Metadata = {
   metadataBase: new URL("https://abraao-dev.tech"),
   icons: { icon: "/favicon.svg" },
-  title: "Abraão Paixão — Engenharia Back-end & Arquitetura Distribuída",
+  title: "Abraão Paixão — Engenheiro de Software & Pesquisador",
   description:
-    "Portfólio de Engenharia de Software de Abraão Paixão (abraao-dev.tech). Foco em Back-end, Sistemas Distribuídos (Java, Spring Boot, Apache Kafka, Redis, OCI), Full-Stack (TypeScript, React, Flutter) e Pesquisa Científica (CLIHC 2026 / SBC).",
+    "Portfólio pessoal de Abraão Paixão (abraao-dev.tech). Engenharia de Software Back-end, Sistemas Distribuídos (Java, Spring Boot, Kafka, Redis, OCI), Full-Stack e Pesquisa Científica publicada na CLIHC 2026 / SBC.",
   keywords: [
     "Abraão Paixão",
     "abraao-dev.tech",
@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     "CaronaJu",
     "PrintWeb",
     "IncluEdu Engine",
+    "NeuroFlow",
     "Flutter",
   ],
   authors: [{ name: "Abraão Silva Paixão", url: "https://abraao-dev.tech" }],
@@ -32,22 +33,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: "https://abraao-dev.tech/",
-    siteName: "Abraão Paixão · Engenharia de Software & Arquitetura",
-    title: "Abraão Paixão — Engenharia Back-end & Arquitetura Distribuída",
+    siteName: "Abraão Paixão · Engenharia de Software & Pesquisa",
+    title: "Abraão Paixão — Engenheiro de Software & Pesquisador",
     description:
-      "Sistemas distribuídos, microsserviços Java/Spring Boot, Apache Kafka, Redis, OCI ARM64 e pesquisa científica publicada na CLIHC 2026 / SBC.",
+      "Construo sistemas distribuídos robustos no back-end pensados para pessoas reais — do Java/Kafka e nuvem ARM na OCI à pesquisa publicada na CLIHC 2026 / SBC.",
     images: [
       {
         url: "https://abraao-dev.tech/preview.png",
         width: 1200,
         height: 630,
-        alt: "Abraão Paixão — Engenharia Back-end & Arquitetura Distribuída",
+        alt: "Abraão Paixão — Engenheiro de Software & Pesquisador",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abraão Paixão — Engenharia Back-end & Arquitetura Distribuída",
+    title: "Abraão Paixão — Engenheiro de Software & Pesquisador",
     description:
       "Engenharia de Software Back-end & Full-Stack (Java/Spring Boot, Kafka, Redis, OCI, React, Flutter) · Pesquisador CLIHC 2026 / SBC.",
   },
@@ -65,26 +66,16 @@ const structuredData = {
       url: "https://abraao-dev.tech",
       jobTitle: "Back-end & Full-Stack Software Engineer",
       email: "mailto:abraao.aspx@hotmail.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Aracaju",
+        addressRegion: "SE",
+        addressCountry: "BR",
+      },
       sameAs: [
         "https://github.com/Abraao-SPX",
         "https://linkedin.com/in/abraaospx",
         "https://printweb.me",
-      ],
-      knowsAbout: [
-        "Software Engineering",
-        "Distributed Systems",
-        "Java",
-        "Spring Boot",
-        "Apache Kafka",
-        "Redis",
-        "PostgreSQL",
-        "MySQL",
-        "Python",
-        "TypeScript",
-        "React",
-        "Flutter",
-        "Oracle Cloud Infrastructure",
-        "Cloudflare",
       ],
     },
     {
@@ -110,7 +101,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${GeistSans.variable} ${GeistMono.variable} dark`}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <head>
         <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -119,9 +110,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="bg-[#09090B] text-[#FAFAFA] antialiased">
-        {children}
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

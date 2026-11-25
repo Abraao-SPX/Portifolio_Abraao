@@ -1,32 +1,85 @@
 @import "tailwindcss";
+@import "@fontsource/instrument-serif/latin-400.css";
+@import "@fontsource/instrument-serif/latin-400-italic.css";
+@import "@fontsource/instrument-serif/latin-ext-400.css";
+@import "@fontsource/instrument-serif/latin-ext-400-italic.css";
 
 :root {
-  --bg-canvas: #09090b;
-  --bg-subtle: #0c0c0f;
-  --surface: #121215;
-  --surface-raised: #18181b;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.15);
-  --highlight: rgba(255, 255, 255, 0.04);
+  /* Warm Editorial Light Palette (Default — Papel Algodão & Terracota) */
+  --bg-canvas: #faf7f2;
+  --bg-subtle: #f2ece1;
+  --surface: #ffffff;
+  --surface-muted: #f7f3ec;
+  --surface-hover: #fcfaf7;
 
-  --text-primary: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-tertiary: #71717a;
+  --border: #e6dfd3;
+  --border-strong: #cfc4b2;
 
-  /* Default Technical Emerald Accent (#10B981) */
-  --accent: #10b981;
-  --accent-hover: #34d399;
-  --accent-muted: rgba(16, 185, 129, 0.12);
-  --accent-border: rgba(16, 185, 129, 0.34);
-  --accent-glow: rgba(16, 185, 129, 0.09);
+  --ink: #1c1917;
+  --ink-secondary: #57524b;
+  --ink-muted: #857d72;
+
+  /* Signature Warm Terracotta Accent */
+  --accent: #c84b31;
+  --accent-hover: #a83a22;
+  --accent-soft: #fceee9;
+  --accent-border: #f1c3b5;
+
+  /* Supporting Editorial Inks */
+  --cobalt: #1d4ed8;
+  --cobalt-soft: #eef4ff;
+  --cobalt-border: #c7d9fe;
+
+  --sage: #15803d;
+  --sage-soft: #eaf8ef;
+  --sage-border: #bbe5ca;
+
+  --amber: #b45309;
+  --amber-soft: #fef6e7;
+  --amber-border: #f7d9a4;
+
+  --shadow-card: 0 1px 2px rgba(28, 25, 23, 0.04),
+    0 10px 28px -12px rgba(28, 25, 23, 0.07);
+  --shadow-card-hover: 0 4px 12px rgba(28, 25, 23, 0.06),
+    0 20px 38px -16px rgba(28, 25, 23, 0.12);
 }
 
-[data-accent="cobalt"] {
-  --accent: #3b82f6;
-  --accent-hover: #60a5fa;
-  --accent-muted: rgba(59, 130, 246, 0.13);
-  --accent-border: rgba(59, 130, 246, 0.38);
-  --accent-glow: rgba(59, 130, 246, 0.1);
+[data-theme="dark"] {
+  /* Warm Espresso Night Reading Mode (Optional Toggle) */
+  --bg-canvas: #161412;
+  --bg-subtle: #1e1b18;
+  --surface: #211e1b;
+  --surface-muted: #1a1715;
+  --surface-hover: #26221e;
+
+  --border: #332e29;
+  --border-strong: #49423a;
+
+  --ink: #f5f1ea;
+  --ink-secondary: #c2b9ad;
+  --ink-muted: #8f8679;
+
+  --accent: #e56b4e;
+  --accent-hover: #f08268;
+  --accent-soft: rgba(229, 107, 78, 0.14);
+  --accent-border: rgba(229, 107, 78, 0.34);
+
+  --cobalt: #60a5fa;
+  --cobalt-soft: rgba(96, 165, 250, 0.14);
+  --cobalt-border: rgba(96, 165, 250, 0.32);
+
+  --sage: #4ade80;
+  --sage-soft: rgba(74, 222, 128, 0.14);
+  --sage-border: rgba(74, 222, 128, 0.32);
+
+  --amber: #fbbf24;
+  --amber-soft: rgba(251, 191, 36, 0.14);
+  --amber-border: rgba(251, 191, 36, 0.32);
+
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.25),
+    0 14px 30px -14px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 20px rgba(0, 0, 0, 0.35),
+    0 24px 44px -16px rgba(0, 0, 0, 0.55);
 }
 
 * {
@@ -35,8 +88,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 72px;
-  color-scheme: dark;
+  scroll-padding-top: 84px;
   background-color: var(--bg-canvas);
 }
 
@@ -44,12 +96,17 @@ body {
   margin: 0;
   min-height: 100vh;
   background-color: var(--bg-canvas);
-  color: var(--text-primary);
+  color: var(--ink);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.font-serif-editorial {
+  font-family: "Instrument Serif", Georgia, Cambria, "Times New Roman", Times,
+    serif;
 }
 
 code,
@@ -61,61 +118,52 @@ pre,
 }
 
 ::selection {
-  background-color: var(--accent-muted);
-  color: #ffffff;
+  background-color: var(--accent-soft);
+  color: var(--accent);
 }
 
-/* Architectural 64px background grid with radial fade */
-.bg-architectural-grid {
-  background-size: 64px 64px;
-  background-image: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0.028) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+/* Subtle Notebook Dot Matrix on Hero Paper */
+.bg-notebook-dots {
+  background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+  background-size: 24px 24px;
   mask-image: radial-gradient(
-    ellipse 85% 65% at 50% 18%,
-    #000 45%,
+    ellipse 80% 65% at 50% 25%,
+    #000 35%,
     transparent 100%
   );
 }
 
-/* Spotlight Card Micro-interaction */
-.spotlight-card {
-  --spotlight-x: 50%;
-  --spotlight-y: 50%;
-  box-shadow: inset 0 1px 0 var(--highlight);
+/* Tactile Editorial Card */
+.editorial-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
 }
 
-.spotlight-overlay {
-  background: radial-gradient(
-    460px circle at var(--spotlight-x) var(--spotlight-y),
-    var(--accent-glow),
-    transparent 65%
-  );
+.editorial-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card-hover);
 }
 
-.spotlight-border {
-  padding: 1px;
-  background: radial-gradient(
-    300px circle at var(--spotlight-x) var(--spotlight-y),
-    var(--accent-border),
-    transparent 70%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+/* Blueprint Sketch Surface inside Cards */
+.blueprint-surface {
+  background-color: var(--surface-muted);
+  background-image: linear-gradient(
+      to right,
+      rgba(133, 125, 114, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(133, 125, 114, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
-/* Focus visibility for keyboard accessibility */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
-/* Reduced motion compliance */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

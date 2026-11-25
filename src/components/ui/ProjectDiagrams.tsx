@@ -12,80 +12,133 @@ export function ProjectDiagram({
     case "p2p-mesh":
       return (
         <svg
-          viewBox="0 0 420 110"
-          className="h-24 w-full select-none text-zinc-400"
+          viewBox="0 0 420 104"
+          className="h-24 w-full select-none"
           role="img"
-          aria-label="Topologia P2P CaronaJu"
+          aria-label="Esquema P2P CaronaJu"
         >
-          <defs>
-            <linearGradient id="p2pGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.15" />
-              <stop offset="50%" stopColor="var(--accent)" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.15" />
-            </linearGradient>
-          </defs>
-          {/* Background grid lines */}
-          <line x1="20" y1="55" x2="400" y2="55" stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
-          {/* Connections */}
           <path
-            d="M 68 32 C 125 32, 135 55, 195 55"
+            d="M 102 30 C 132 30, 134 52, 154 52"
             fill="none"
-            stroke="url(#p2pGrad)"
+            stroke="var(--cobalt)"
             strokeWidth="1.5"
           />
           <path
-            d="M 68 78 C 125 78, 135 55, 195 55"
-            fill="none"
-            stroke="url(#p2pGrad)"
-            strokeWidth="1.5"
-          />
-          <path
-            d="M 235 55 L 325 55"
+            d="M 102 74 C 132 74, 134 52, 154 52"
             fill="none"
             stroke="var(--accent)"
             strokeWidth="1.5"
-            strokeDasharray="3 3"
           />
-          {/* Left peer nodes */}
-          <g transform="translate(16, 18)">
-            <rect width="84" height="28" rx="6" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <circle cx="14" cy="14" r="3.5" fill="var(--accent)" />
-            <text x="24" y="17" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              peer.driver
-            </text>
-          </g>
-          <g transform="translate(16, 64)">
-            <rect width="84" height="28" rx="6" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <circle cx="14" cy="14" r="3.5" fill="#3B82F6" />
-            <text x="24" y="17" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              peer.rider
-            </text>
-          </g>
-          {/* Center matching node */}
-          <g transform="translate(154, 33)">
+          <line
+            x1="274"
+            y1="52"
+            x2="310"
+            y2="52"
+            stroke="var(--cobalt)"
+            strokeWidth="1.5"
+            strokeDasharray="4 3"
+          />
+
+          <g transform="translate(14, 15)">
             <rect
-              width="116"
-              height="44"
+              width="88"
+              height="30"
               rx="8"
-              fill="#141918"
-              stroke="var(--accent-border)"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <circle cx="14" cy="15" r="3.5" fill="var(--cobalt)" />
+            <text
+              x="24"
+              y="18"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontFamily="var(--font-geist-mono)"
+            >
+              Motorista
+            </text>
+          </g>
+
+          <g transform="translate(14, 59)">
+            <rect
+              width="88"
+              height="30"
+              rx="8"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <circle cx="14" cy="15" r="3.5" fill="var(--accent)" />
+            <text
+              x="24"
+              y="18"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontFamily="var(--font-geist-mono)"
+            >
+              Caroneiro
+            </text>
+          </g>
+
+          <g transform="translate(154, 29)">
+            <rect
+              width="120"
+              height="46"
+              rx="10"
+              fill="var(--cobalt-soft)"
+              stroke="var(--cobalt-border)"
               strokeWidth="1.2"
             />
-            <text x="58" y="19" textAnchor="middle" fill="var(--accent)" fontSize="8.5" fontFamily="var(--font-geist-mono)">
-              MATCH ENGINE
+            <text
+              x="60"
+              y="19"
+              textAnchor="middle"
+              fill="var(--cobalt)"
+              fontSize="8.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
+              VÍNCULO + ROTAS
             </text>
-            <text x="58" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              Geo + Schedule
+            <text
+              x="60"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Campus &amp; Horário
             </text>
           </g>
-          {/* Right verified campus node */}
-          <g transform="translate(310, 33)">
-            <rect width="94" height="44" rx="8" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <text x="47" y="19" textAnchor="middle" fill="#A1A1AA" fontSize="8.5" fontFamily="var(--font-geist-mono)">
-              CLIHC / SBC
+
+          <g transform="translate(310, 29)">
+            <rect
+              width="96"
+              height="46"
+              rx="10"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="48"
+              y="19"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
+              CLIHC 2026
             </text>
-            <text x="47" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              Verified P2P
+            <text
+              x="48"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Artigo SBC
             </text>
           </g>
         </svg>
@@ -94,68 +147,156 @@ export function ProjectDiagram({
     case "kafka-cqrs":
       return (
         <svg
-          viewBox="0 0 420 110"
+          viewBox="0 0 420 104"
           className="h-24 w-full select-none"
           role="img"
-          aria-label="Arquitetura Kafka CQRS"
+          aria-label="Esquema Kafka e CQRS"
         >
-          {/* Command -> Kafka */}
-          <line x1="92" y1="55" x2="146" y2="55" stroke="var(--accent)" strokeWidth="1.5" />
-          {/* Kafka -> Redis & Postgres */}
-          <path d="M 262 42 C 290 42, 295 28, 318 28" fill="none" stroke="var(--accent)" strokeWidth="1.4" />
-          <path d="M 262 68 C 290 68, 295 82, 318 82" fill="none" stroke="rgba(255,255,255,0.28)" strokeWidth="1.4" />
+          <line
+            x1="96"
+            y1="52"
+            x2="144"
+            y2="52"
+            stroke="var(--accent)"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M 264 38 C 290 38, 294 26, 316 26"
+            fill="none"
+            stroke="var(--sage)"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M 264 66 C 290 66, 294 78, 316 78"
+            fill="none"
+            stroke="var(--border-strong)"
+            strokeWidth="1.5"
+          />
 
-          {/* Command Node */}
-          <g transform="translate(12, 35)">
-            <rect width="80" height="40" rx="7" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <text x="40" y="17" textAnchor="middle" fill="#A1A1AA" fontSize="8" fontFamily="var(--font-geist-mono)">
+          <g transform="translate(12, 31)">
+            <rect
+              width="84"
+              height="42"
+              rx="9"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="42"
+              y="18"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
               SPRING API
             </text>
-            <text x="40" y="30" textAnchor="middle" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              POST /tx
+            <text
+              x="42"
+              y="32"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
+              Comando
             </text>
           </g>
 
-          {/* Kafka 6 partitions block */}
-          <g transform="translate(146, 22)">
-            <rect width="116" height="66" rx="8" fill="#141918" stroke="var(--accent-border)" strokeWidth="1.2" />
-            <text x="58" y="16" textAnchor="middle" fill="var(--accent)" fontSize="8.5" fontFamily="var(--font-geist-mono)">
-              KAFKA · 6 PARTITIONS
+          <g transform="translate(144, 20)">
+            <rect
+              width="120"
+              height="64"
+              rx="10"
+              fill="var(--accent-soft)"
+              stroke="var(--accent-border)"
+              strokeWidth="1.2"
+            />
+            <text
+              x="60"
+              y="16"
+              textAnchor="middle"
+              fill="var(--accent)"
+              fontSize="8"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
+              KAFKA · 6 PARTIÇÕES
             </text>
-            {/* Partition bars */}
             {[0, 1, 2, 3, 4, 5].map((p) => (
               <rect
                 key={p}
-                x={14 + p * 15}
-                y={25}
+                x={15 + p * 15.5}
+                y={24}
                 width="11"
                 height="28"
-                rx="2"
-                fill={p % 2 === 0 ? "rgba(16,185,129,0.28)" : "rgba(255,255,255,0.08)"}
-                stroke="rgba(255,255,255,0.12)"
+                rx="3"
+                fill={p % 2 === 0 ? "var(--accent)" : "var(--surface)"}
+                fillOpacity={p % 2 === 0 ? "0.75" : "1"}
+                stroke="var(--accent-border)"
               />
             ))}
           </g>
 
-          {/* Redis Read Projection */}
-          <g transform="translate(318, 11)">
-            <rect width="90" height="34" rx="6" fill="#18181B" stroke="var(--accent-border)" />
-            <text x="45" y="14" textAnchor="middle" fill="var(--accent)" fontSize="8" fontFamily="var(--font-geist-mono)">
+          <g transform="translate(316, 9)">
+            <rect
+              width="92"
+              height="34"
+              rx="8"
+              fill="var(--sage-soft)"
+              stroke="var(--sage-border)"
+            />
+            <text
+              x="46"
+              y="14"
+              textAnchor="middle"
+              fill="var(--sage)"
+              fontSize="8"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
               REDIS CACHE
             </text>
-            <text x="45" y="26" textAnchor="middle" fill="#FAFAFA" fontSize="9" fontFamily="var(--font-geist-mono)">
-              Read &lt; 1ms
+            <text
+              x="46"
+              y="26"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9"
+              fontFamily="var(--font-geist-mono)"
+            >
+              Saldo &lt; 1ms
             </text>
           </g>
 
-          {/* PostgreSQL Write Ledger */}
-          <g transform="translate(318, 63)">
-            <rect width="90" height="34" rx="6" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <text x="45" y="14" textAnchor="middle" fill="#A1A1AA" fontSize="8" fontFamily="var(--font-geist-mono)">
+          <g transform="translate(316, 61)">
+            <rect
+              width="92"
+              height="34"
+              rx="8"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="46"
+              y="14"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
               POSTGRESQL
             </text>
-            <text x="45" y="26" textAnchor="middle" fill="#FAFAFA" fontSize="9" fontFamily="var(--font-geist-mono)">
-              ACID Ledger
+            <text
+              x="46"
+              y="26"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9"
+              fontFamily="var(--font-geist-mono)"
+            >
+              Livro Razão
             </text>
           </g>
         </svg>
@@ -164,44 +305,130 @@ export function ProjectDiagram({
     case "doc-pipeline":
       return (
         <svg
-          viewBox="0 0 420 110"
+          viewBox="0 0 420 104"
           className="h-24 w-full select-none"
           role="img"
-          aria-label="Pipeline de Compilação PrintWeb"
+          aria-label="Esquema PrintWeb"
         >
-          <line x1="104" y1="55" x2="152" y2="55" stroke="rgba(255,255,255,0.22)" strokeWidth="1.4" />
-          <line x1="268" y1="55" x2="316" y2="55" stroke="var(--accent)" strokeWidth="1.5" />
+          <line
+            x1="106"
+            y1="52"
+            x2="150"
+            y2="52"
+            stroke="var(--border-strong)"
+            strokeWidth="1.5"
+          />
+          <line
+            x1="270"
+            y1="52"
+            x2="314"
+            y2="52"
+            stroke="var(--sage)"
+            strokeWidth="1.5"
+          />
 
-          <g transform="translate(14, 33)">
-            <rect width="90" height="44" rx="7" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <text x="45" y="19" textAnchor="middle" fill="#A1A1AA" fontSize="8" fontFamily="var(--font-geist-mono)">
-              INPUT NOTES
+          <g transform="translate(14, 29)">
+            <rect
+              width="92"
+              height="46"
+              rx="9"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="46"
+              y="19"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
+              RASCUNHO
             </text>
-            <text x="45" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              Markdown/Prompt
+            <text
+              x="46"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="500"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Notas de Estudo
             </text>
           </g>
 
-          <g transform="translate(152, 28)">
-            <rect width="116" height="54" rx="8" fill="#141918" stroke="var(--accent-border)" />
-            <text x="58" y="19" textAnchor="middle" fill="var(--accent)" fontSize="8.5" fontFamily="var(--font-geist-mono)">
-              SPRING + REACT AST
+          <g transform="translate(150, 25)">
+            <rect
+              width="120"
+              height="54"
+              rx="10"
+              fill="var(--sage-soft)"
+              stroke="var(--sage-border)"
+            />
+            <text
+              x="60"
+              y="19"
+              textAnchor="middle"
+              fill="var(--sage)"
+              fontSize="8"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
+              SPRING + REACT
             </text>
-            <text x="58" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              Design Tokens
+            <text
+              x="60"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Design Editorial
             </text>
-            <text x="58" y="45" textAnchor="middle" fill="#71717A" fontSize="8" fontFamily="var(--font-geist-mono)">
-              Bucket4j Rate-Limit
+            <text
+              x="60"
+              y="46"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
+              Bucket4j + IA
             </text>
           </g>
 
-          <g transform="translate(316, 33)">
-            <rect width="90" height="44" rx="7" fill="#18181B" stroke="rgba(255,255,255,0.16)" />
-            <text x="45" y="19" textAnchor="middle" fill="var(--accent)" fontSize="8" fontFamily="var(--font-geist-mono)">
+          <g transform="translate(314, 29)">
+            <rect
+              width="92"
+              height="46"
+              rx="9"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="46"
+              y="19"
+              textAnchor="middle"
+              fill="var(--sage)"
+              fontSize="8"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
               PRINTWEB.ME
             </text>
-            <text x="45" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              Vector PDF
+            <text
+              x="46"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Apostila PDF
             </text>
           </g>
         </svg>
@@ -210,44 +437,130 @@ export function ProjectDiagram({
     case "inclusive-engine":
       return (
         <svg
-          viewBox="0 0 420 110"
+          viewBox="0 0 420 104"
           className="h-24 w-full select-none"
           role="img"
-          aria-label="Arquitetura IncluEdu Engine"
+          aria-label="Esquema IncluEdu Engine"
         >
-          <line x1="106" y1="55" x2="150" y2="55" stroke="rgba(255,255,255,0.22)" strokeWidth="1.4" />
-          <line x1="274" y1="55" x2="314" y2="55" stroke="var(--accent)" strokeWidth="1.5" />
+          <line
+            x1="106"
+            y1="52"
+            x2="148"
+            y2="52"
+            stroke="var(--border-strong)"
+            strokeWidth="1.5"
+          />
+          <line
+            x1="272"
+            y1="52"
+            x2="314"
+            y2="52"
+            stroke="var(--amber)"
+            strokeWidth="1.5"
+          />
 
-          <g transform="translate(14, 33)">
-            <rect width="92" height="44" rx="7" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <text x="46" y="19" textAnchor="middle" fill="#A1A1AA" fontSize="8" fontFamily="var(--font-geist-mono)">
-              PEI / PDI DOCS
+          <g transform="translate(14, 29)">
+            <rect
+              width="92"
+              height="46"
+              rx="9"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="46"
+              y="19"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
+              PLANO PEI / PDI
             </text>
-            <text x="46" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              Perfil Cognitivo
+            <text
+              x="46"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="500"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Perfil do Aluno
             </text>
           </g>
 
-          <g transform="translate(150, 28)">
-            <rect width="124" height="54" rx="8" fill="#141918" stroke="var(--accent-border)" />
-            <text x="62" y="19" textAnchor="middle" fill="var(--accent)" fontSize="8.5" fontFamily="var(--font-geist-mono)">
+          <g transform="translate(148, 25)">
+            <rect
+              width="124"
+              height="54"
+              rx="10"
+              fill="var(--amber-soft)"
+              stroke="var(--amber-border)"
+            />
+            <text
+              x="62"
+              y="19"
+              textAnchor="middle"
+              fill="var(--amber)"
+              fontSize="8"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
               INCLUEDU ENGINE
             </text>
-            <text x="62" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              Spring Boot + AI
+            <text
+              x="62"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Adaptação + IA
             </text>
-            <text x="62" y="45" textAnchor="middle" fill="#71717A" fontSize="8" fontFamily="var(--font-geist-mono)">
-              PostgreSQL Audit
+            <text
+              x="62"
+              y="46"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
+              Spring + Postgres
             </text>
           </g>
 
-          <g transform="translate(314, 33)">
-            <rect width="92" height="44" rx="7" fill="#18181B" stroke="rgba(255,255,255,0.16)" />
-            <text x="46" y="19" textAnchor="middle" fill="var(--accent)" fontSize="8" fontFamily="var(--font-geist-mono)">
-              ACESSIBILIDADE
+          <g transform="translate(314, 29)">
+            <rect
+              width="92"
+              height="46"
+              rx="9"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="46"
+              y="19"
+              textAnchor="middle"
+              fill="var(--amber)"
+              fontSize="8"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
+              SALA DE AULA
             </text>
-            <text x="46" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9.5" fontFamily="var(--font-geist-mono)">
-              Guia Adaptado
+            <text
+              x="46"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Guia Inclusivo
             </text>
           </g>
         </svg>
@@ -256,44 +569,130 @@ export function ProjectDiagram({
     case "oci-biometrics":
       return (
         <svg
-          viewBox="0 0 420 110"
+          viewBox="0 0 420 104"
           className="h-24 w-full select-none"
           role="img"
-          aria-label="Pipeline Biométrico OCI ARM64"
+          aria-label="Esquema Biometria OCI ARM64"
         >
-          <line x1="100" y1="55" x2="142" y2="55" stroke="var(--accent)" strokeWidth="1.4" />
-          <line x1="278" y1="55" x2="318" y2="55" stroke="var(--accent)" strokeWidth="1.4" />
+          <line
+            x1="102"
+            y1="52"
+            x2="142"
+            y2="52"
+            stroke="var(--accent)"
+            strokeWidth="1.5"
+          />
+          <line
+            x1="278"
+            y1="52"
+            x2="316"
+            y2="52"
+            stroke="var(--sage)"
+            strokeWidth="1.5"
+          />
 
-          <g transform="translate(12, 33)">
-            <rect width="88" height="44" rx="7" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <text x="44" y="19" textAnchor="middle" fill="#A1A1AA" fontSize="8" fontFamily="var(--font-geist-mono)">
+          <g transform="translate(12, 29)">
+            <rect
+              width="90"
+              height="46"
+              rx="9"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="45"
+              y="19"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
               CLOUDFLARE
             </text>
-            <text x="44" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9" fontFamily="var(--font-geist-mono)">
+            <text
+              x="45"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="500"
+              fontFamily="var(--font-geist-sans)"
+            >
               Zero-Trust WAF
             </text>
           </g>
 
-          <g transform="translate(142, 26)">
-            <rect width="136" height="58" rx="8" fill="#141918" stroke="var(--accent-border)" />
-            <text x="68" y="18" textAnchor="middle" fill="var(--accent)" fontSize="8" fontFamily="var(--font-geist-mono)">
+          <g transform="translate(142, 24)">
+            <rect
+              width="136"
+              height="56"
+              rx="10"
+              fill="var(--accent-soft)"
+              stroke="var(--accent-border)"
+            />
+            <text
+              x="68"
+              y="18"
+              textAnchor="middle"
+              fill="var(--accent)"
+              fontSize="8"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
               OCI ARM64 · ONNX PURO
             </text>
-            <text x="68" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9" fontFamily="var(--font-geist-mono)">
-              YuNet → MiniFASNetV2
+            <text
+              x="68"
+              y="33"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
+              YuNet → MiniFASNet
             </text>
-            <text x="68" y="47" textAnchor="middle" fill="#71717A" fontSize="8" fontFamily="var(--font-geist-mono)">
-              SFace 128D · 864MB
+            <text
+              x="68"
+              y="46"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
+              SFace 128D · 864 MB
             </text>
           </g>
 
-          <g transform="translate(318, 33)">
-            <rect width="90" height="44" rx="7" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <text x="45" y="19" textAnchor="middle" fill="var(--accent)" fontSize="8" fontFamily="var(--font-geist-mono)">
-              LIVENESS OK
+          <g transform="translate(316, 29)">
+            <rect
+              width="92"
+              height="46"
+              rx="9"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="46"
+              y="19"
+              textAnchor="middle"
+              fill="var(--sage)"
+              fontSize="8"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
+              PROVA DE VIDA
             </text>
-            <text x="45" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9" fontFamily="var(--font-geist-mono)">
-              Signed JWT
+            <text
+              x="46"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Token Seguro
             </text>
           </g>
         </svg>
@@ -302,44 +701,129 @@ export function ProjectDiagram({
     case "mobile-sync":
       return (
         <svg
-          viewBox="0 0 420 110"
+          viewBox="0 0 420 104"
           className="h-24 w-full select-none"
           role="img"
-          aria-label="Arquitetura NeuroFlow Flutter e Node.js"
+          aria-label="Esquema NeuroFlow Mobile e API"
         >
-          <line x1="104" y1="55" x2="152" y2="55" stroke="var(--accent)" strokeWidth="1.4" />
-          <line x1="270" y1="55" x2="316" y2="55" stroke="rgba(255,255,255,0.22)" strokeWidth="1.4" />
+          <line
+            x1="104"
+            y1="52"
+            x2="150"
+            y2="52"
+            stroke="var(--sage)"
+            strokeWidth="1.5"
+          />
+          <line
+            x1="270"
+            y1="52"
+            x2="316"
+            y2="52"
+            stroke="var(--border-strong)"
+            strokeWidth="1.5"
+          />
 
-          <g transform="translate(14, 33)">
-            <rect width="90" height="44" rx="7" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <text x="45" y="19" textAnchor="middle" fill="#A1A1AA" fontSize="8" fontFamily="var(--font-geist-mono)">
-              FLUTTER APP
+          <g transform="translate(14, 29)">
+            <rect
+              width="90"
+              height="46"
+              rx="9"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="45"
+              y="19"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
+              APP FLUTTER
             </text>
-            <text x="45" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9" fontFamily="var(--font-geist-mono)">
-              State + Cache
+            <text
+              x="45"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="500"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Rotina Calma
             </text>
           </g>
 
-          <g transform="translate(152, 28)">
-            <rect width="118" height="54" rx="8" fill="#141918" stroke="var(--accent-border)" />
-            <text x="59" y="19" textAnchor="middle" fill="var(--accent)" fontSize="8" fontFamily="var(--font-geist-mono)">
+          <g transform="translate(150, 25)">
+            <rect
+              width="120"
+              height="54"
+              rx="10"
+              fill="var(--sage-soft)"
+              stroke="var(--sage-border)"
+            />
+            <text
+              x="60"
+              y="19"
+              textAnchor="middle"
+              fill="var(--sage)"
+              fontSize="8"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
               NODE.JS + EXPRESS
             </text>
-            <text x="59" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9" fontFamily="var(--font-geist-mono)">
+            <text
+              x="60"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-mono)"
+            >
               JWT + Bcrypt 10r
             </text>
-            <text x="59" y="45" textAnchor="middle" fill="#71717A" fontSize="8" fontFamily="var(--font-geist-mono)">
-              REST Controllers
+            <text
+              x="60"
+              y="46"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
+              API Desacoplada
             </text>
           </g>
 
-          <g transform="translate(316, 33)">
-            <rect width="90" height="44" rx="7" fill="#18181B" stroke="rgba(255,255,255,0.12)" />
-            <text x="45" y="19" textAnchor="middle" fill="#A1A1AA" fontSize="8" fontFamily="var(--font-geist-mono)">
-              SEQUELIZE ORM
+          <g transform="translate(316, 29)">
+            <rect
+              width="90"
+              height="46"
+              rx="9"
+              fill="var(--surface)"
+              stroke="var(--border-strong)"
+            />
+            <text
+              x="45"
+              y="19"
+              textAnchor="middle"
+              fill="var(--ink-muted)"
+              fontSize="8"
+              fontFamily="var(--font-geist-mono)"
+            >
+              MYSQL + ORM
             </text>
-            <text x="45" y="33" textAnchor="middle" fill="#FAFAFA" fontSize="9" fontFamily="var(--font-geist-mono)">
-              MySQL Schema
+            <text
+              x="45"
+              y="34"
+              textAnchor="middle"
+              fill="var(--ink)"
+              fontSize="9.5"
+              fontWeight="600"
+              fontFamily="var(--font-geist-sans)"
+            >
+              Migrations
             </text>
           </g>
         </svg>
