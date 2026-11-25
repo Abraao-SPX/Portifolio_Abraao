@@ -243,7 +243,7 @@ export const portfolioContent: Record<Locale, PortfolioDictionary> = {
         basedInLabel: "Base & Atuação",
         basedInValue: "Aracaju, SE · Remoto / Brasil & Exterior",
         educationLabel: "Formação",
-        educationValue: "ADS (UNINASSAU) · Candidato ao Mestrado CC (UFS)",
+        educationValue: "Análise e Desenvolvimento de Sistemas (UNINASSAU)",
         researchLabel: "Publicação Científica",
         researchValue: "Autor publicado na CLIHC 2026 / SBC",
         currentlyNote:
@@ -278,7 +278,7 @@ export const portfolioContent: Record<Locale, PortfolioDictionary> = {
       quoteHighlight: "continue sereno, rápido e seguro",
       quoteEnd: "quando alguém realmente precisa dele.",
       paragraphs: [
-        "Sou graduando em Análise e Desenvolvimento de Sistemas pela UNINASSAU e pesquisador candidato ao Mestrado em Ciência da Computação na UFS. Minha casa natural é o back-end e a arquitetura distribuída, mas gosto de acompanhar o produto inteiro: do banco de dados e mensageria até a tela React ou Flutter na mão do usuário.",
+        "Sou graduando em Análise e Desenvolvimento de Sistemas pela UNINASSAU e pesquisador publicado pela Sociedade Brasileira de Computação (SBC). Minha casa natural é o back-end e a arquitetura distribuída, mas gosto de acompanhar o produto inteiro: do banco de dados e mensageria até a tela React ou Flutter na mão do usuário.",
         "Nos últimos anos, percebi que meus melhores projetos nascem quando rigor técnico encontra impacto humano direto — como validar identidade facial sem exigir celulares caros, organizar rotinas para mentes neurodivergentes ou transformar notas de estudo em apostilas prontas para impressão.",
       ],
       pillars: [
@@ -385,7 +385,7 @@ export const portfolioContent: Record<Locale, PortfolioDictionary> = {
   url       = {https://abraao-dev.tech/#pesquisa}
 }`,
       },
-      researchFocusTitle: "Interesses de Pesquisa · Mestrado em Ciência da Computação (UFS)",
+      researchFocusTitle: "Linhas & Interesses de Pesquisa",
       researchLines: [
         {
           number: "01",
@@ -411,13 +411,6 @@ export const portfolioContent: Record<Locale, PortfolioDictionary> = {
       ],
       journeyTitle: "Caminhada Acadêmica",
       journey: [
-        {
-          period: "2026 — Atual",
-          role: "Candidato ao Mestrado em Ciência da Computação",
-          place: "Universidade Federal de Sergipe (PROCC / UFS)",
-          tag: "Pesquisa de Pós-Graduação",
-          note: "Foco em Engenharia de Software e Desenvolvimento Assistido por IA.",
-        },
         {
           period: "2026",
           role: "Autor Publicado — CLIHC 2026",
@@ -848,7 +841,7 @@ export const portfolioContent: Record<Locale, PortfolioDictionary> = {
         basedInLabel: "Location & Work",
         basedInValue: "Aracaju, Brazil · Remote Worldwide",
         educationLabel: "Academic Path",
-        educationValue: "ADS (UNINASSAU) · CS M.Sc. Candidate (UFS)",
+        educationValue: "Systems Analysis and Development (UNINASSAU)",
         researchLabel: "Scientific Output",
         researchValue: "Published Author at CLIHC 2026 / SBC",
         currentlyNote:
@@ -883,7 +876,7 @@ export const portfolioContent: Record<Locale, PortfolioDictionary> = {
       quoteHighlight: "calm, fast, and trustworthy",
       quoteEnd: "when someone genuinely relies on it.",
       paragraphs: [
-        "I'm finishing my degree in Systems Analysis and Development at UNINASSAU and pursuing my M.Sc. in Computer Science at the Federal University of Sergipe (UFS). Back-end and distributed systems are where I feel most at home, yet I love owning the whole journey from database schema and Kafka topics up to a clean React or Flutter interface.",
+        "I'm finishing my degree in Systems Analysis and Development at UNINASSAU and am a published researcher with the Brazilian Computer Society (SBC). Back-end and distributed systems are where I feel most at home, yet I love owning the whole journey from database schema and Kafka topics up to a clean React or Flutter interface.",
         "My favorite projects sit where rigorous software engineering meets tangible human value — verifying facial identity without costly GPUs, helping neurodivergent users keep calm routines, or turning study notes into printable handouts.",
       ],
       pillars: [
@@ -990,7 +983,7 @@ export const portfolioContent: Record<Locale, PortfolioDictionary> = {
   url       = {https://abraao-dev.tech/#pesquisa}
 }`,
       },
-      researchFocusTitle: "Research Interests · Computer Science M.Sc. (UFS)",
+      researchFocusTitle: "Research Lines & Interests",
       researchLines: [
         {
           number: "01",
@@ -1016,13 +1009,6 @@ export const portfolioContent: Record<Locale, PortfolioDictionary> = {
       ],
       journeyTitle: "Academic Journey",
       journey: [
-        {
-          period: "2026 — Present",
-          role: "M.Sc. Candidate in Computer Science",
-          place: "Federal University of Sergipe (PROCC / UFS)",
-          tag: "Graduate Research",
-          note: "Researching Software Engineering and AI-Assisted Software Development.",
-        },
         {
           period: "2026",
           role: "Published Author — CLIHC 2026",
